@@ -1,11 +1,17 @@
-# Weightsift's native runtime (Phase 6A, decision 0012): a model-agnostic I/O core in Rust and its Python binding.
+# Weightsift's native runtime (Phase 6A, decision 0012; Phase 7A, decision 0014): model-agnostic systems code in Rust.
 #
-#   core    weightsift-io: read planning, positioned (direct) reads on a worker pool, a host-RAM row cache, transfer
-#           jobs into caller-owned staging buffers, byte accounting. No Python, no CUDA, no model knowledge.
-#   python  weightsift-native: the PyO3 module `weightsift_native` that Python's `awpmi.storage.native` wraps.
+#   core     weightsift-io: read planning, positioned (direct) reads on a worker pool, a host-RAM row cache with leases,
+#            transfer jobs into caller-owned staging buffers, byte accounting. No Python, no CUDA, no model knowledge.
+#   python   weightsift-native: the PyO3 module `weightsift_native` that Python's `awpmi.storage.native` wraps.
+#   store    weightsift-store: the weight storage backend of the flagship runtime: experts described by a catalog,
+#            leased from the host cache, served to execution engines through a versioned C ABI.
+#   runtime  weightsift-runtime: the runtime planner (memory budgets across execution and storage) and the execution
+#            backend interface.
+#   colibri  weightsift-colibri: the bridge to Colibrì's engines (its expert-store lease contract served by the store,
+#            its segment runtime ABI driven from Rust), built only from pinned, fetched upstream sources.
 [workspace]
 resolver = "2"
-members = ["core", "python"]
+members = ["core", "python", "store", "runtime", "colibri"]
 
 [workspace.package]
 version = "0.1.0"
@@ -15,9 +21,15 @@ publish = false
 
 [workspace.dependencies]
 weightsift-io = { path = "core" }
+weightsift-store = { path = "store" }
+weightsift-runtime = { path = "runtime" }
 lru = "0.18"
 libc = "0.2"
 pyo3 = { version = "0.29", features = ["abi3-py311"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+cc = "1.2"
+sha2 = "0.10"
 
 [profile.release]
 debug = "line-tables-only"

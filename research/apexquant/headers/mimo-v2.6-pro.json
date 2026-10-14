@@ -1,0 +1,68 @@
+{
+ "model": "mimo-v2.6-pro",
+ "repository": "XiaomiMiMo/MiMo-V2.6-Pro-MOPD",
+ "revision": "6a7f202e8dbd0e57b3fe1da03917d08d75abc4b8",
+ "layer": 10,
+ "tensors": [
+  {
+   "tensor": "model.layers.10.mlp.experts.0.down_proj.weight",
+   "dtype": "U8",
+   "shape": [
+    6144,
+    1024
+   ],
+   "bytes": 6291456,
+   "file": "model_pp0_ep0_shard0.safetensors"
+  },
+  {
+   "tensor": "model.layers.10.mlp.experts.0.down_proj.weight_scale",
+   "dtype": "U8",
+   "shape": [
+    6144,
+    64
+   ],
+   "bytes": 393216,
+   "file": "model_pp0_ep0_shard0.safetensors"
+  },
+  {
+   "tensor": "model.layers.10.mlp.experts.0.gate_proj.weight",
+   "dtype": "U8",
+   "shape": [
+    2048,
+    3072
+   ],
+   "bytes": 6291456,
+   "file": "model_pp0_ep0_shard0.safetensors"
+  },
+  {
+   "tensor": "model.layers.10.mlp.experts.0.gate_proj.weight_scale",
+   "dtype": "U8",
+   "shape": [
+    2048,
+    192
+   ],
+   "bytes": 393216,
+   "file": "model_pp0_ep0_shard0.safetensors"
+  },
+  {
+   "tensor": "model.layers.10.mlp.experts.0.up_proj.weight",
+   "dtype": "U8",
+   "shape": [
+    2048,
+    3072
+   ],
+   "bytes": 6291456,
+   "file": "model_pp0_ep0_shard0.safetensors"
+  },
+  {
+   "tensor": "model.layers.10.mlp.experts.0.up_proj.weight_scale",
+   "dtype": "U8",
+   "shape": [
+    2048,
+    192
+   ],
+   "bytes": 393216,
+   "file": "model_pp0_ep0_shard0.safetensors"
+  }
+ ]
+}

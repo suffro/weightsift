@@ -26,6 +26,10 @@ pub enum Error {
         wanted: u64,
         got: u64,
     },
+    /// Rows cannot be leased now (Phase 7A, `Engine::acquire`): no room without evicting a leased row, a row larger
+    /// than the cache, admission frozen, or a row a transfer is loading. Nothing is held; the caller may release leases
+    /// and retry.
+    Unavailable(String),
     /// The job was cancelled before it finished.
     Cancelled,
     /// The engine was closed.
@@ -72,6 +76,7 @@ impl fmt::Display for Error {
             } => {
                 write!(f, "short read of {path} at {offset}: {got} of {wanted} bytes")
             }
+            Error::Unavailable(message) => write!(f, "cannot lease now: {message}"),
             Error::Cancelled => write!(f, "the transfer was cancelled"),
             Error::Closed => write!(f, "the engine is closed"),
             Error::Internal(message) => write!(f, "internal error of the native core: {message}"),

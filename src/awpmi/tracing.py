@@ -66,7 +66,9 @@ def source_tree_sha256(repo_root: Path) -> str:
 
 
 def native_tree_sha256(repo_root: Path) -> str | None:
-    """Hash of the native core's sources (`native/` without its build directory `target`), by the same rule.
+    """Hash of the native core's sources (`native/` without its build directory `target` and, since Phase 7A, without
+    `third_party`: upstream sources fetched at the commits `native/upstream.json` pins, which is hashed), by the same
+    rule.
 
     Kept apart from `source_tree_sha256`, whose rule other tools repeat; None without a `native/` directory.
     """
@@ -74,7 +76,12 @@ def native_tree_sha256(repo_root: Path) -> str | None:
     if not root.is_dir():
         return None
     return _files_sha256(
-        repo_root, (path for path in root.rglob("*") if path.is_file() and path.relative_to(root).parts[0] != "target")
+        repo_root,
+        (
+            path
+            for path in root.rglob("*")
+            if path.is_file() and path.relative_to(root).parts[0] not in ("target", "third_party")
+        ),
     )
 
 

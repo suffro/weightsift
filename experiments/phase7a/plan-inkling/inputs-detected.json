@@ -1,0 +1,38 @@
+{
+ "hardware": {
+  "host_total_bytes": 34280267776,
+  "host_available_bytes": 22383517696,
+  "device": {
+   "name": "NVIDIA GeForce RTX 4060 Ti",
+   "total_bytes": 8585740288,
+   "free_bytes": 8002732032
+  }
+ },
+ "footprint": {
+  "dense_host_bytes": 15300000000,
+  "dense_device_bytes": 0,
+  "state_host_bytes": 1073741824,
+  "state_device_bytes": 0,
+  "workspace_host_bytes": 536870912,
+  "workspace_device_bytes": 0,
+  "expert_bytes": 28360704,
+  "experts_per_token": 384,
+  "total_experts": 16384
+ },
+ "policy": {
+  "host_reserve_bytes": 2147483648,
+  "device_reserve_bytes": 536870912,
+  "max_expert_cache_bytes": null
+ },
+ "sources": {
+  "hardware": "awpmi.hardware.detect() on this machine, 2026-10-12 (other applications open)",
+  "dense_host_bytes": "Colibri docs/inkling.md at the pinned commit: the dense set in int4-gs64, 15.3 GB (documented, not measured here)",
+  "state_host_bytes": "assumed: 1 GiB of KV and convolution state at a few thousand tokens of context",
+  "workspace_host_bytes": "assumed: 0.5 GiB of activations and scratch",
+  "expert_bytes": "measured from the int4 container's safetensors headers (research/apexquant/headers): 28,360,704 bytes per expert",
+  "experts_per_token": "top-6 routed experts x 64 MoE layers (config.json and the index at the pinned revision)",
+  "total_experts": "256 routed experts x 64 MoE layers",
+  "engine": "the CPU build: nothing on the device",
+  "policy": "2 GiB kept free beside what is already in use"
+ }
+}

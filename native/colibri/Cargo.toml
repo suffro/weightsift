@@ -1,0 +1,20 @@
+[package]
+name = "weightsift-colibri"
+description = "The bridge between Weightsift's runtime and Colibrì's engines: Colibrì's expert-store lease contract served by Weightsift's store, Colibrì's segment runtime ABI driven from Rust"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+build = "build.rs"
+
+[dependencies]
+weightsift-store.workspace = true
+weightsift-runtime.workspace = true
+
+[build-dependencies]
+cc.workspace = true
+serde_json.workspace = true
+sha2.workspace = true
+
+[dev-dependencies]
+serde_json.workspace = true

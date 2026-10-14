@@ -10,7 +10,7 @@ PCIe 3.0 x8), the transformer's Python and 5,195 kernel launches (about 260 ms),
 ms, attributed to freeing and allocating entries of different sizes inline). Phase 5C (decision 0011) had found exact
 independent compression at 0.661 of BF16 (bit planes with zstd) but no fast reconstruction.
 
-The user's Phase 6B brief (2026-10-09, `state/phase_6B.md`):
+The user's Phase 6B brief (2026-10-09; committed in 4a70869, since replaced by the Phase 7A brief):
 
 - move fewer bytes to the GPU, remove runtime overhead and speed up decode, bit for bit equal to `BF16_REFERENCE` (no
   change to roundings, GEMM algorithms or batching, routing, the combine, normalization, attention and the KV cache,

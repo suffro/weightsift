@@ -80,6 +80,41 @@ Implemented so far:
   model's static decode pieces from CUDA Graphs. Configurations choose `experts: encoded`, `device_cache_bytes`,
   `decode_graphs` and `fill_uninitialized_memory` (PyTorch's NaN fill of uninitialized memory in deterministic mode); the
   BF16 paths, the eager forward and the fills stay the defaults, and the reference process uses only them.
+- **Phase 7A**: the foundation of the independent flagship runtime (decision 0014; below). It adds:
+  - leases in the native core;
+  - an expert store (`native/store`) with a versioned C ABI, for execution engines written in C;
+  - the runtime planner and the execution interface (`native/runtime`);
+  - the bridge to Colibrì (`native/colibri`): its expert-store lease contract served by the store, and its segment
+    runtime driven from Rust, built from pinned, fetched sources;
+  - the Quality Budget (`awpmi.quality`), hardware detection, expert catalogs and the Colibrì baseline's specification.
+
+  No flagship has run: the checkpoints need the user's approval to download, and Colibrì's engines need gcc.
+
+## Target architecture: the independent flagship runtime (Phase 7A, decision 0014)
+
+Phase 7A turns Weightsift toward MoE flagships of about a trillion parameters (Inkling 975B first, MiMo-V2.6 Pro 1.02T
+second) on constrained consumer hardware. Weightsift stays independent: it does not fork or vendor an engine, and it
+reuses proven native technology through pinned dependencies and narrow C ABIs. Three parts, kept separate:
+
+| Part | Owns | Where it comes from |
+| --- | --- | --- |
+| Model execution backend | forward computation, attention, routing, quantized kernels, KV and sequence state | Colibrì's engines (Inkling, MiMo), unmodified, driven through Colibrì's engine-neutral segment runtime ABI; PyTorch for the existing BF16 runtime |
+| Weight storage backend | page and row access, file I/O, admission and eviction, prefetch, leases and reservations, budgets, statistics | Weightsift's Rust core (`weightsift-io`) and a model-neutral expert store over it, exposed through Weightsift's own versioned C ABI; Colibrì's expert-store lease contract served by a thin shim |
+| Runtime planner | memory limits across both, expert requests, placement, later precision policies | Weightsift (Rust) |
+
+Model knowledge stays out of Weightsift's Rust: an engine knows its model, and a model adapter describes a checkpoint's
+experts to the store as data (a catalog written from headers). Exactness keeps its meaning for the exact paths (decision
+0007's reference profiles); new quantized modes are judged by the Quality Budget. The existing PyTorch runtime and the
+Python storage backend stay, and remain the fallback.
+
+What exists (Phase 7A):
+
+| Crate (`native/`) | Role |
+| --- | --- |
+| `core/` `weightsift-io` | Phase 6A/6B's I/O core. **Leases:** `Engine::acquire(requests, slots) -> Leased` (entries, and how each was served: hit, waited, loaded) holds rows in the host cache, unmoved, until the caller drops them. A missing row is admitted and loaded like a prefetch (pieces that release their own slots), at foreground priority, through the caller's staging. `Loader { Transfer, Prefetch, Lease }`: loads by prefetches and leases are waited for; a transfer's is not (waiting for it could close a cycle with its caller). A row that cannot be admitted, or that a transfer is loading, makes the call fail `Unavailable` and hold nothing. `Entry::contiguous` gives a row's bytes in place when they are one piece. |
+| `store/` `weightsift-store` | The weight storage backend. `Catalog` (`weightsift-expert-catalog` v1: files, segments, layers of parts and views). `ExpertStore`: `acquire`/`acquire_many` (all or nothing) return `Lease`s whose parts and views are read in place; advisory `prefetch`; `stats`. Staging sets are allocated at open and taken whole before any lookup; the cache's block is set to the largest part, so every part is one piece. C ABI v1 (`include/weightsift_store.h`, `ffi`): store and lease handles in registries (never pointers, never reused), a close gate, versioned structs, panics caught. |
+| `runtime/` `weightsift-runtime` | `plan(hardware, footprint, policy)`: the host budget split into named reservations (dense weights, state, workspace, the store's staging, the expert cache) and checked against the device's; the store's options. `ExecutionBackend` and `ExecutionSession`: a layer range, sessions, run, snapshot, restore. |
+| `colibri/` `weightsift-colibri` | `csrc/ws_colibri_store.c`: Colibrì's `ColiExpertStoreOps` (lookup, release, prefetch, stats, destroy) over the store's C ABI, compiled against Colibrì's pinned header. `segment`: Colibrì's segment runtime ABI v1 mirrored in Rust as an `ExecutionBackend`. Built only when `native/third_party/colibri/` holds the pinned, hash-verified files (`native/upstream.json`, `native/fetch_upstream.py`). |
 
 ## Major components (`src/awpmi/`)
 
@@ -118,7 +153,11 @@ Implemented so far:
 | `models/streamed.py` | Phase 4B `StreamedParameters`: chosen dense parameters (e.g. shared experts) served whole from a `WeightStore` at every call of their module, `None` between calls; `remove(restore=True)` makes them resident again. |
 | `streaming_reference.py` | Phase 4B independent reference, `StreamingReference`: transformers' model built on `meta` with the declared kernels; every non-expert weight loaded by transformers' own `convert_and_load_state_dict_in_model` (safetensors slices opened as `from_pretrained` opens them, its dtype plan and mapping, its finalization); each experts layer loaded by the same function in a pre-hook and released after the module ran (`None` between calls); `resident` and `set_resident` for the residency check; `ReferenceCall.per_assignment_outputs`. Imports nothing of Weightsift's path (layering test). |
 | `profiles.py` | Phase 4A reference profiles: `ReferenceProfile` (kind, stored weight dtype, compute dtype, kernels, numerics, quantization), `BF16_REFERENCE`, `FP16_REFERENCE`, `native_quantized_reference` (declared, refused by `check_model`); `check_model`, `check_weights`. |
-| `cli.py` | `weightsift pack lm-head`, `weightsift pack experts` (roadmap §3.2) and `weightsift pack expert-index` (Phase 4A: the composed-segment index of a split checkpoint, from headers only). |
+| `cli.py` | `weightsift pack lm-head`, `weightsift pack experts` (roadmap §3.2) and `weightsift pack expert-index` (Phase 4A: the composed-segment index of a split checkpoint, from headers only). Phase 7A: `weightsift quality check` (a budget's validity and what keeps it from running) and `weightsift quality compare` (a candidate against the strongest given baseline; exit 0 only for PASS). |
+| `models/catalog.py` | Phase 7A (decision 0014): `expert_catalog` writes the expert store's catalog (`weightsift-expert-catalog` v1) from an expert index pack. Segments are translated as they are (plain or composed); a layer's parts are the segments a pattern assigns to it; views are row ranges of a part (`ViewSpec`) with a format. The model knowledge (pattern, parts, views) is the caller's. |
+| `quality/` | Phase 7A: the Quality Budget. **`spec`** (`weightsift-quality-budget` v1): six categories with absolute thresholds, benchmarks at pinned revisions with minimum samples, baselines in order of strength (original, released-quantized, derived-quantized); `problems()` lists what keeps it from running. **`results`** (`weightsift-quality-results` v1, `RESULTS_SCHEMA`, committed as `configs/quality-results.schema.json`): a subject's measured, unavailable or skipped results; anything not measured carries a reason and no number. **`compare`**: regression = baseline − candidate, with a paired bootstrap over common items or Newcombe's interval for binary aggregates; verdicts PASS, FAIL, INCONCLUSIVE, PENDING, INVALID or SKIPPED per benchmark, the worst per category, never averaged. |
+| `hardware.py` | Phase 7A: the machine as detected (host memory from the OS; GPUs, memory, driver and PCIe link from `nvidia-smi` or PyTorch; the storage volume). Missing values are None, never assumed. |
+| `baseline.py` | Phase 7A: the Colibrì baseline's specification (`weightsift-baseline-benchmark` v1): `load_spec` (pins and completeness), `plan` (every process: configuration, cold or warm, repeat, command, environment), `blockers`, `parse_output` (the metrics Inkling's engine prints at the pinned commit). |
 | `stores/suffix.py` | Phase 2: `MLPStore`, neuron-major pages of the last MLP (gate row, up row, down column of each neuron, one contiguous run each), served only for the stage's adaptive roles, every read logged; resident metadata: down column norms, down row norms (L2, L∞), up row norms. |
 | `refinement_head.py` | Phase 1C runtime `RefinementLMHead.run`: binary32 coarse pass over every row → certificate → elimination → float64 refinement of the contenders (the oracle's realistic arithmetic) → exact rows → certificate or fallback (`FallbackMode.MASKED`, the default since decision 0005, self-tested and guarded, else `FULL`). Phase 2: `run_enclosure` runs the same states on an `Enclosure` of h (input spread \|L\|·ρ added to every radius, no fallback, optional row limits), and `HeldReads` lets one token's passes share their reads. Optional `RunTrace` and `StageTimer` (Phase 3 adds `*:read` stages around every store read; timing only). |
 | `suffix_runtime.py` | Phase 2 runtime `AdaptiveSuffixRuntime.run` for a `SuffixStage` (lm_head, down, mlp): read a budgeted share of the suffix's neuron pages (largest bound contribution first) → enclosures through the suffix → LM-head pass on the enclosure → pairwise certificate → else exact recomputation of the suffix (the reference's operations and shapes, bitwise) and the Phase 1C LM head on the exact h, reusing the reads. Experimental rounding models report `would_certify` only. |
@@ -215,6 +254,24 @@ against a replay, the frozen gates, the brief's metrics); `moonlight_runtime.py`
 decoded on the GPU before any configuration), encoded experts, device slot caches, `decode_graphs` and
 `fill_uninitialized_memory` per configuration, and `moonlight_profile.py` the same plus graph launches in its traces;
 `weightsift pack encoded-experts`; `configs/phase6b-gpu.yaml` (with its frozen `gates`) and `experiments/phase6b/<run>/`.
+
+Phase 7A adds:
+
+- **`native/store`, `native/runtime`, `native/colibri`** (above), and `native/upstream.json` with
+  `native/fetch_upstream.py`. Upstream sources go into `native/third_party/`, which is gitignored and excluded from
+  `native_tree_sha256`; the pins are hashed in their place.
+- **`benchmarks/store_check.py`** with `native/store/examples/store_check.rs`: the store on a real checkpoint's experts
+  (a catalog from an index pack; reference digests through the Python store; cold, warm and batched leases;
+  verification). Outputs go to `experiments/phase7a/store-moonlight*/`.
+- **`native/runtime/examples/plan.rs`**: the planner on JSON inputs (`experiments/phase7a/plan-inkling/`).
+- **`benchmarks/colibri_baseline.py`**, with `configs/phase7a-baseline.yaml` and its prompts: the baseline's dry run and
+  the engine-log parser.
+- **The Quality Budget's configuration and schema** (`configs/quality-budget.yaml`, `configs/quality-results.schema.json`).
+- **`research/apexquant/`** (standard library only; no ApexQuant code):
+  - `fetch_headers.py`: safetensors headers of one layer's experts, without tensor data, into `headers/`;
+  - `geometry.json`;
+  - `feasibility.py`: the screening, written to `feasibility.json`;
+  - its tests, and the study in its README.
 
 ## Data flow (one input)
 
@@ -339,6 +396,21 @@ Phase 6B, an experts call through encoded rows (a `RowDecoder` on the backend; o
 5. with decode graphs, the router and shared experts already ran in the layer's "post" graph, and the routed experts'
    call is the eager part between that graph and the block's sums.
 
+Phase 7A, an expert leased by a C engine. Colibrì's contract is served by Weightsift's store; no Colibrì engine is
+patched to call it yet.
+
+1. The engine calls `coli_expert_lookup(store, {layer, expert}, &view)`. The shim calls `ws_store_acquire`.
+2. The ABI looks up the store's handle, takes the close gate for reading, and calls `ExpertStore::acquire`. That takes a
+   staging set and asks the core's `Engine::acquire` for the expert's rows (one per part).
+3. The core probes every row: hits are leased; rows a prefetch or another lease is loading are waited for. It then admits
+   the misses (room made by evicting unleased least recently used rows), plans their reads as Python plans them, reads
+   them into the staging and copies them into their entries. It returns once every row is in and no task touches the
+   staging.
+4. The store records the lease in its table and returns its handle. The shim fills the view's gate, up and down tensors
+   with pointers into the leased entries (`ws_lease_view`), in the formats the catalog names.
+5. The engine computes on those bytes. `coli_expert_release` calls `ws_store_release`, which drops the lease; the rows
+   become evictable again.
+
 ## Important constraints
 
 - The certificate bounds the **floating-point reference logits** (after accumulation
@@ -431,3 +503,20 @@ Phase 6B, an experts call through encoded rows (a `RowDecoder` on the backend; o
   when the weight's input is exact; when the input is uncertain, its default interval mode gives unsound bounds (an L2
   root's interval bounds are its centre), and only the experimental `AUTOLIRPA_L2_DEBUG=1` mode is sound, on a graph
   with no IBP through the L2 weights. A weight concatenated from L2 parameters is not supported.
+- **Leases (decision 0014)** hold rows unmoved and unevicted while held, and never block for room. An acquire that needs
+  to evict a leased row fails at once with `Unavailable`, holds nothing, and leaves the caller to release and retry.
+  - An acquire waits only for loads that progress without any caller: those of prefetches and other leases. A
+    transfer's row makes it fail.
+  - Each acquire has its own staging, taken before its first lookup. Its loads therefore never wait for anyone's.
+  - A multi-part expert is all or nothing. A part that cannot be admitted gives back the parts already admitted, before
+    any read.
+  - Eviction is per row: an expert can be partly cached.
+- **The store's C ABI** never hands out pointers to Rust objects. Stores and leases are handles in tables, so misuse is
+  an error code. Leased bytes are valid exactly until the release. Close is refused while leases live.
+- **Upstream sources** are pinned (`native/upstream.json`), fetched and verified by sha256; builds re-hash them before
+  compiling. They are never committed. Colibrì's model engines are not built here.
+- **Weightsift's Rust and C**, store, runtime and bridge included, name no model (layering test). A catalog carries a
+  checkpoint's layout as data, and its formats are strings only the engine interprets.
+- **Quality claims about quantized modes** come only from the Quality Budget's comparisons, with intervals and per
+  category. Results that were not measured are `unavailable`, never estimated. Weight-space error is never quality
+  evidence.

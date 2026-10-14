@@ -577,6 +577,7 @@ PyTorch / Transformers
 safetensors
 auto_LiRPA
 DwarfStar / ds4
+Colibrì
 Soup
 llama.cpp / GGML
 TorchAO
@@ -720,3 +721,43 @@ so that a large model can execute on constrained hardware while moving only the 
 That is the direction.
 
 The exact mechanisms should remain evidence-driven.
+
+---
+
+# 24. Flagship runtime and reuse policy (decision 0014)
+
+From Phase 7A the runtime targets MoE flagships of about a trillion parameters on consumer hardware. The principles:
+
+```text
+independent project       its own architecture and a Rust-native systems core
+reuse, not rebuild        proven engines and kernels through pinned dependencies and narrow C ABIs
+no fork, no vendoring     upstream sources pinned, fetched, verified, never committed
+licensing gate            no use of code without a license that allows it
+model-neutral core        engines know models; adapters describe checkpoints as data
+```
+
+Keep three parts separate:
+
+```text
+Runtime planner           memory limits, expert requests, placement, precision policies
+      ↓
+Weight storage backend    I/O, caches, leases, budgets, statistics   (Weightsift, Rust)
+      ↓
+Model execution backend   forward pass, routing, kernels, KV state   (reused engines)
+```
+
+Rust is the default for storage, caching, I/O, concurrency and scheduling. Optimized C, CUDA, Vulkan or Metal is not
+rewritten because of its language; a Rust replacement of a component is first validated for correctness and resource
+ownership, then measured against the original.
+
+Two kinds of claims:
+
+```text
+exact path         bit for bit against a declared ReferenceProfile      (sections 2, 19, 20)
+quantized mode     a Quality Budget against the strongest baseline      (per category, with uncertainty)
+```
+
+A quantized mode is never certified by weight-space error, and a model's original checkpoint is kept apart from a
+quantized release of it. Every result says whether it was measured, extrapolated, or is a hypothesis; a microbenchmark is
+never reported as an end-to-end result; a baseline is measured on the same hardware, checkpoint, precision, budget and
+workload before any optimization is claimed.

@@ -1,0 +1,91 @@
+# Weightsift Phase 7A (decision 0014): the reproducible Colibri baseline every flagship runtime claim is compared with.
+#
+# Before any optimization is claimed, Colibri runs the flagship on the same machine, checkpoint, precision, cache budget
+# and workload as the candidate (benchmarks/colibri_baseline.py). This file is the specification; it was NOT run in Phase
+# 7A: the checkpoint is not on this machine (downloading it needs the user's approval) and Colibri's engines need gcc
+# and POSIX headers (MSYS2 on Windows, or Linux), which this machine does not have. `colibri_baseline.py --dry-run`
+# prints the plan and the detected machine; a run refuses until the engine and the artifacts exist.
+#
+# Colibri's own benchmarking protocol (docs/benchmarking.md at the pinned commit: cache state, request size and queue
+# depth, the engine's access pattern, an independent control, model and cache state, one variable at a time) applies in
+# full; this file adds what Weightsift compares.
+format: weightsift-baseline-benchmark
+version: 1
+
+engine:
+  name: colibri
+  repository: https://github.com/JustVugg/colibri
+  commit: bf2442915d6e3dd4cdfd2eb9c2a3d2aa44a25850
+  license: Apache-2.0
+  target: inkling
+  # Built from a full checkout at the commit (not the sparse one native/fetch_upstream.py makes for Weightsift's build).
+  build: make -C c inkling
+  toolchain: gcc and POSIX headers (Linux; on Windows MSYS2's MinGW-w64 gcc and make)
+  binary: c/inkling
+
+model:
+  name: Inkling 975B
+  original:
+    repository: thinkingmachines/Inkling
+    revision: 828496eeae4c243ff1a22f7f28ff83694f2f7bc9
+    bytes: 1909218968769
+    license: apache-2.0
+  artifact:
+    # The baseline's representation: int4 routed experts (packed nibbles, one f32 scale per row) and BF16 dense weights,
+    # a quantization derived by a third party (its kind in the Quality Budget: derived-quantized).
+    repository: nbeerbower/Inkling-colibri-int4
+    revision: 3981e658ed68ec681554d48a62f9a29dd9e61543
+    bytes: 514051916125
+    kind: derived-quantized
+  # On 32 GB the BF16 dense set does not fit (49.4 GB, about 99 GB while loading, per Colibri's docs/inkling.md): the
+  # dense weights are converted to int4 with groups of 64 (about 15.3 GB) by the pinned commit's own tool, once.
+  dense_conversion: python3 c/tools/convert_inkling_dense_int4.py --dir {snapshot}
+  geometry: {hidden: 6144, moe_intermediate: 3072, layers: 66, routed_experts: 256, experts_per_token: 6, shared_experts: 2}
+
+# Every field the run records about the machine is detected (awpmi.hardware), never assumed; this is the machine the
+# first run is planned for.
+reference_machine: {host_memory_gib: 32, gpu: RTX 4060 Ti 8 GB, pcie: 3.0 x8, storage: NVMe}
+
+configurations:
+  # cap: experts each layer keeps in RAM (Colibri's first positional argument); about 28 MB each on the 975B.
+  - name: cpu-cap2
+    args: ["2"]
+    env: {PIN: "off", USAGE_SAVE: "0", OMP_NUM_THREADS: "{physical_cores}"}
+  - name: cpu-auto
+    args: ["0"]
+    env: {PIN: "off", USAGE_SAVE: "0", OMP_NUM_THREADS: "{physical_cores}"}
+
+workload:
+  # Rotating, diverse prompts: each used once per run, in a fixed order; none of them trains the usage history (PIN off,
+  # USAGE_SAVE 0). The list is fixed in a file whose sha256 the run records.
+  prompts: configs/phase7a-baseline-prompts.txt
+  chat_template: true
+  decode_tokens: 64
+  states:
+    cold: a fresh process after the OS cache of the snapshot's volume was emptied, or direct I/O, stated with the result
+    warm: the same prompts again in the same process (-f prompts file)
+  repeats: 2
+
+metrics:
+  - decode_tokens_per_second        # TUNE decode: tokens and seconds (the ratio derived at full precision)
+  - prefill_seconds                 # [prefill ...]
+  - time_to_first_token_seconds     # prefill plus the first token's step
+  - ssd_bytes_per_token             # the OS's per-process read counters around the run, divided by generated tokens
+  - host_to_device_bytes_per_token  # 0 for the CPU build; the CUDA build's from a profiler
+  - expert_cache_hit_ratio          # [cache] hit / (hit + load)
+  - peak_ram_bytes                  # PEAK RSS
+  - peak_vram_bytes
+  - cpu_utilization
+  - gpu_utilization
+  - expert_fill_seconds             # [phases] fill: time spent reading experts (the I/O wait the engine reports)
+  - phase_seconds                   # [phases] expert-mm, shared, attn, other
+  - output_tokens                   # every prompt's generated text, to compare outputs across configurations
+
+rules:
+  - Compared configurations share the machine, the checkpoint and its revision, the precision, the cache budget and
+    the workload; one variable changes at a time, interleaved when the effect is small.
+  - Every number says how it was obtained (measured, extrapolated, hypothesis) and carries the machine, the revisions
+    (Colibri's commit, Weightsift's source and native tree hashes), the exact commands and the configuration.
+  - A microbenchmark (the expert store alone, a kernel) is never reported as an end-to-end result.
+  - A Rust replacement of a Colibri component is first validated for correctness and resource ownership, then compared
+    with the original component for throughput and tail latency, before anything end to end is claimed.

@@ -10,8 +10,9 @@ SRC = Path(__file__).resolve().parents[1] / "src" / "awpmi"
 CORE = ("storage", "streaming", "materialization")
 # Names that would tie the core to one model, one tensor layout or one routing implementation.
 MODEL_WORDS = re.compile(
-    r"smollm|granite|llama|mixtral|qwen|deepseek|olmoe|moonlight|kimi|gpt.?oss|lm_head|embed_tokens|gate_up_proj|down_proj|"
-    r"gate_proj|up_proj|block_sparse_moe|router|top_k_index|num_experts|shared_expert|e_score|safetensors\.index",
+    r"smollm|granite|llama|mixtral|qwen|deepseek|olmoe|moonlight|kimi|gpt.?oss|inkling|mimo|lm_head|embed_tokens|"
+    r"gate_up_proj|down_proj|gate_proj|up_proj|block_sparse_moe|router|top_k_index|num_experts|shared_expert|e_score|"
+    r"safetensors\.index",
     re.IGNORECASE,
 )
 CORE_FORBIDDEN_IMPORTS = re.compile(
@@ -42,10 +43,17 @@ NATIVE = Path(__file__).resolve().parents[1] / "native"
 
 
 def test_the_native_core_knows_no_model():
-    """Phase 6A (decision 0012): the Rust core and its binding are model-agnostic like the Python storage core."""
-    files = sorted(path for path in NATIVE.rglob("*.rs") if "target" not in path.relative_to(NATIVE).parts)
-    assert len(files) >= 8
-    for path in files:
+    """Phase 6A (decision 0012): the Rust core and its binding are model-agnostic like the Python storage core. Phase 7A
+    (decision 0014): so are the expert store, the runtime planner and the bridge to Colibri, their C header, shim and C
+    tests included; model knowledge is the engines' and the catalogs'. Fetched upstream sources are not Weightsift's."""
+    own = [
+        path
+        for pattern in ("*.rs", "*.c", "*.h")
+        for path in NATIVE.rglob(pattern)
+        if not {"target", "third_party"} & set(path.relative_to(NATIVE).parts)
+    ]
+    assert len([p for p in own if p.suffix == ".rs"]) >= 20 and len([p for p in own if p.suffix != ".rs"]) >= 5
+    for path in sorted(own):
         text = path.read_text(encoding="utf-8")
         assert not MODEL_WORDS.search(text), f"{path.name}: {MODEL_WORDS.search(text).group(0)!r}"
 

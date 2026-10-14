@@ -19,7 +19,11 @@
 //!     and its request reads it without caching it;
 //!   * `admit = false` freezes the contents (DwarfStar's fix for long prefills): hits are served, misses bypass;
 //!   * a prefetch (`prefetch_probe`, `prefetch_fill`) loads rows a request will ask for soon without counting as a
-//!     lookup; every row it loads is counted once used by a request, or as wasted if evicted (or cleared) unused.
+//!     lookup; every row it loads is counted once used by a request, or as wasted if evicted (or cleared) unused;
+//!   * a lease (Phase 7A, decision 0014: `Engine::acquire`) holds rows for a caller that reads them in place: its loads
+//!     (`fill_as` with `Loader::Lease`) are carried out by the engine's pool for a caller that only waits, so, like a
+//!     prefetch's, other requests wait for them. Only a transfer's load is `Busy` (it progresses as its caller consumes
+//!     pieces, so waiting for it could close a cycle).
 //!
 //! Memory (Phase 6B, decision 0013). A row's bytes are held in blocks of the cache's block size, the last part (the
 //! row's tail) possibly shorter. An evicted row's whole blocks go to a pool, and the rows admitted next take their
@@ -191,6 +195,14 @@ impl RowMemory {
         out
     }
 
+    /// The row's bytes as one slice, when they are held in one part (a row no longer than the block).
+    fn contiguous(&self) -> Option<&[u8]> {
+        match &self.parts[..] {
+            [part] if part.len() as u64 == self.len => Some(part),
+            _ => None,
+        }
+    }
+
     fn views(&mut self) -> RowViews {
         RowViews {
             parts: self.parts.iter_mut().map(|p| RawBuffer::from_slice(p)).collect(),
@@ -250,6 +262,25 @@ impl Entry {
     pub fn to_vec(&self) -> Vec<u8> {
         self.memory.to_vec()
     }
+
+    /// The row's bytes in place, when the cache holds them in one part: always for a row no longer than the cache's
+    /// block (`HostCache::block_bytes`). They stay where they are, unchanged, while the entry lives (a lease: an `Arc`
+    /// the caller holds keeps the row from being evicted or cleared).
+    pub fn contiguous(&self) -> Option<&[u8]> {
+        self.memory.contiguous()
+    }
+}
+
+/// Who loads a row into the cache, which decides whether other requests may wait for the load.
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub enum Loader {
+    /// A transfer job (`Engine::submit`): its load progresses only as its caller consumes and releases pieces, so a
+    /// request never waits for it (`Probe::Busy`): the waiter could be that caller.
+    Transfer,
+    /// A prefetch: loaded by the engine's pool alone; requests wait for it, and it is counted as used or wasted.
+    Prefetch,
+    /// A lease (`Engine::acquire`): loaded by the pool for a caller that only waits; requests wait for it.
+    Lease,
 }
 
 type Waiter = Box<dyn FnOnce(Result<Arc<Entry>>) + Send>;
@@ -262,18 +293,30 @@ enum PendingState {
 /// A row being loaded by some request; others wait for its outcome.
 pub struct Pending {
     state: Mutex<PendingState>,
+    loader: Loader,
     /// Loaded by a prefetch; `claimed` once a request waits for it.
     prefetch: bool,
     claimed: AtomicBool,
 }
 
 impl Pending {
-    fn new(prefetch: bool) -> Arc<Self> {
+    fn new(loader: Loader) -> Arc<Self> {
         Arc::new(Pending {
             state: Mutex::new(PendingState::Loading(Vec::new())),
-            prefetch,
+            loader,
+            prefetch: loader == Loader::Prefetch,
             claimed: AtomicBool::new(false),
         })
+    }
+
+    /// Who loads the row.
+    pub fn loader(&self) -> Loader {
+        self.loader
+    }
+
+    /// Whether other requests may wait for this load (see `Loader`).
+    pub fn waitable(&self) -> bool {
+        self.loader != Loader::Transfer
     }
 
     /// Run `waiter` with the load's outcome: now if it is known, else when it is (on the completing thread).
@@ -326,9 +369,9 @@ fn claim(stats: &mut CacheStats, slot: &Slot) {
 pub enum Probe {
     /// The row's bytes (a lease: the entry is not evicted while this `Arc` lives).
     Hit(Arc<Entry>),
-    /// A prefetch is loading the row.
+    /// A prefetch or a lease is loading the row.
     Wait(Arc<Pending>),
-    /// Another request is loading the row: read it, and do not admit it (a miss and a bypass).
+    /// A transfer is loading the row: read it, and do not admit it (a miss and a bypass).
     Busy,
     /// Not cached: admit it with `fill` once every row of the request was probed.
     Miss,
@@ -417,7 +460,7 @@ impl HostCache {
                 state.stats.hit_bytes += nbytes;
                 Probe::Hit(entry)
             }
-            Some(slot @ Slot::Loading(pending)) if pending.prefetch => {
+            Some(slot @ Slot::Loading(pending)) if pending.waitable() => {
                 let pending = Arc::clone(pending);
                 claim(&mut state.stats, slot);
                 state.stats.waits += 1;
@@ -451,9 +494,15 @@ impl HostCache {
 
     /// Admit a row a probe missed: room is reserved (evicting least recently used rows nobody leases) and the caller
     /// gets the duty to load it (`Fill`), or `Bypass` when it is not admitted (no room, too large, admission frozen).
-    /// If it was admitted since the probe: its `Hit`, or `Wait` for a prefetch's load (the probe's miss is counted as
-    /// such), or `Bypass` for another request's load (the miss stands).
+    /// If it was admitted since the probe: its `Hit`, or `Wait` for a prefetch's or a lease's load (the probe's miss is
+    /// counted as such), or `Bypass` for a transfer's load (the miss stands). The caller loads as a transfer.
     pub fn fill(self: &Arc<Self>, key: Key, nbytes: u64) -> Lookup {
+        self.fill_as(key, nbytes, Loader::Transfer)
+    }
+
+    /// `fill`, the caller loading the row as `loader` (a transfer or a lease; prefetches use `prefetch_fill`).
+    pub fn fill_as(self: &Arc<Self>, key: Key, nbytes: u64, loader: Loader) -> Lookup {
+        assert!(loader != Loader::Prefetch, "prefetches admit through `prefetch_fill`");
         let mut guard = self.state.lock().unwrap();
         let state = &mut *guard;
         let found = match state.lru.get(&key) {
@@ -462,7 +511,7 @@ impl HostCache {
                 claim(&mut state.stats, slot);
                 Some(found)
             }
-            Some(slot @ Slot::Loading(pending)) if pending.prefetch => {
+            Some(slot @ Slot::Loading(pending)) if pending.waitable() => {
                 let found = Lookup::Wait(Arc::clone(pending));
                 claim(&mut state.stats, slot);
                 Some(found)
@@ -487,7 +536,7 @@ impl HostCache {
             }
             return found;
         }
-        match self.admit_row(state, key, nbytes, false) {
+        match self.admit_row(state, key, nbytes, loader) {
             Some(fill) => Lookup::Fill(fill),
             None => {
                 state.stats.bypassed += 1;
@@ -499,7 +548,7 @@ impl HostCache {
 
     /// Reserve room for an absent row and hand out the duty to load it (None: not admitted). The row's memory starts
     /// with blocks from the pool (evicted rows'); the fill allocates the rest when it starts writing.
-    fn admit_row(self: &Arc<Self>, state: &mut State, key: Key, nbytes: u64, prefetch: bool) -> Option<Fill> {
+    fn admit_row(self: &Arc<Self>, state: &mut State, key: Key, nbytes: u64, loader: Loader) -> Option<Fill> {
         if !self.make_room(state, nbytes) {
             return None;
         }
@@ -514,7 +563,7 @@ impl HostCache {
         self.trim(state);
         state.peak = state.peak.max(state.used);
         state.peak_held = state.peak_held.max(state.used + state.pool_bytes(self.block));
-        let pending = Pending::new(prefetch);
+        let pending = Pending::new(loader);
         state.lru.push(key, Slot::Loading(Arc::clone(&pending)));
         Some(Fill {
             cache: Arc::clone(self),
@@ -555,7 +604,7 @@ impl HostCache {
             state.stats.prefetch_skipped += 1;
             return None;
         }
-        let fill = self.admit_row(state, key, nbytes, true);
+        let fill = self.admit_row(state, key, nbytes, Loader::Prefetch);
         if fill.is_some() {
             state.stats.prefetch_fills += 1;
             state.stats.prefetch_fill_bytes += nbytes;
@@ -784,6 +833,11 @@ impl Fill {
         self.pending.prefetch
     }
 
+    /// The load's outcome, for callers that want the entry once complete (`Pending::on_done`).
+    pub fn pending(&self) -> Arc<Pending> {
+        Arc::clone(&self.pending)
+    }
+
     /// Bytes of the row's memory that came from evicted rows' blocks (the rest is allocated by the fill).
     pub fn recycled_bytes(&self) -> u64 {
         self.recycled
@@ -961,6 +1015,51 @@ mod tests {
             ),
             (4, 1, 0, 3, 2, 1)
         );
+    }
+
+    #[test]
+    fn a_lease_load_is_waited_for_and_a_transfer_load_is_not() {
+        // A lease's load is carried out by the pool for a caller that only waits (decision 0014): other requests wait
+        // for it, like a prefetch's, but it is not a prefetch (no used or wasted accounting).
+        let cache = HostCache::new(100);
+        let Lookup::Fill(mut lease) = cache.fill_as((3, 1), 40, Loader::Lease) else {
+            panic!()
+        };
+        assert_eq!(lease.pending().loader(), Loader::Lease);
+        let Probe::Wait(pending) = cache.probe((3, 1), 40) else {
+            panic!("a lease's load is waited for")
+        };
+        assert!(pending.waitable() && !lease.is_prefetch());
+        let Lookup::Fill(_transfer) = cache.fill_as((3, 2), 40, Loader::Transfer) else {
+            panic!()
+        };
+        assert!(matches!(cache.probe((3, 2), 40), Probe::Busy));
+        let served = Arc::new(AtomicUsize::new(0));
+        let counter = Arc::clone(&served);
+        pending.on_done(move |outcome| {
+            assert_eq!(outcome.unwrap().to_vec(), vec![9u8; 40]);
+            counter.fetch_add(1, Ordering::SeqCst);
+        });
+        lease.write(0, &[9u8; 40]);
+        lease.complete().unwrap();
+        assert_eq!(served.load(Ordering::SeqCst), 1);
+        let stats = cache.stats();
+        assert_eq!((stats.waits, stats.prefetch_used, stats.inserts), (1, 0, 1));
+    }
+
+    #[test]
+    fn rows_no_longer_than_the_block_are_held_in_one_piece() {
+        let cache = HostCache::with_block(1000, 64);
+        let short = fill(&cache, (0, 1), 64);
+        let tail = fill(&cache, (0, 2), 40);
+        let split = fill(&cache, (0, 3), 100);
+        assert_eq!(short.contiguous(), Some(&[1u8; 64][..]));
+        assert_eq!(tail.contiguous(), Some(&[2u8; 40][..]));
+        assert!(split.contiguous().is_none());
+        // The bytes stay where they are while the entry is held.
+        let address = short.contiguous().unwrap().as_ptr();
+        drop(fill(&cache, (0, 4), 64));
+        assert_eq!(short.contiguous().unwrap().as_ptr(), address);
     }
 
     #[test]

@@ -1,0 +1,13 @@
+# Rotating prompts of the Phase 7A baseline (configs/phase7a-baseline.yaml): one per line, each used once per run, in
+# this order. Diverse on purpose (code, mathematics, reasoning, instructions, knowledge, translation, summarization), so
+# that the routed experts a run reads are not those of a single topic. Lines starting with # are skipped.
+Write a Python function that merges two sorted lists into one sorted list without using sort, and explain its complexity.
+A train leaves at 9:40 and arrives at 13:05 after covering 287 km. What was its average speed in km/h? Show the steps.
+Three boxes are labelled apples, oranges and mixed, and every label is wrong. Which single box do you open to relabel all three?
+List five practical ways to reduce the energy use of a small office, ordered from cheapest to most expensive.
+Explain why the sky is blue and sunsets are red, in terms a twelve-year-old would follow.
+Translate into Italian: "The meeting was moved to Thursday because two speakers missed their flights."
+Summarize the causes and the consequences of the 1929 stock market crash in one paragraph.
+Write a SQL query that returns, for each customer, the total of their orders in 2025, including customers with none.
+Prove that the square root of 2 is irrational.
+Give a short recipe for a vegetarian lentil soup, with quantities for four people.

@@ -1,0 +1,33 @@
+{
+  "note": "The flagships' MoE geometry, from each checkpoint's config.json and safetensors index at the pinned revision (metadata only: no tensor data was downloaded). Phase 7A, decision 0014.",
+  "models": {
+    "inkling": {
+      "name": "Inkling 975B",
+      "config": {"repository": "thinkingmachines/Inkling", "revision": "828496eeae4c243ff1a22f7f28ff83694f2f7bc9"},
+      "hidden_size": 6144,
+      "moe_intermediate_size": 3072,
+      "layers": 66,
+      "moe_layers": 64,
+      "moe_layers_source": "layers 2-65 hold mlp.experts tensors in model.safetensors.index.json; 0 and 1 are dense",
+      "routed_experts": 256,
+      "experts_per_token": 6,
+      "shared_experts": 2,
+      "native": "inkling-colibri-int4",
+      "original": "inkling-bf16"
+    },
+    "mimo-pro": {
+      "name": "MiMo-V2.6 Pro 1.02T",
+      "config": {"repository": "XiaomiMiMo/MiMo-V2.6-Pro-MOPD", "revision": "6a7f202e8dbd0e57b3fe1da03917d08d75abc4b8"},
+      "hidden_size": 6144,
+      "moe_intermediate_size": 2048,
+      "layers": 70,
+      "moe_layers": 69,
+      "moe_layers_source": "moe_layer_freq in config.json (layer 0 dense)",
+      "routed_experts": 384,
+      "experts_per_token": 8,
+      "shared_experts": 0,
+      "native": "mimo-v2.6-pro",
+      "original": null
+    }
+  }
+}

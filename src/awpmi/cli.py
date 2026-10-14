@@ -24,6 +24,14 @@ encoded-experts  an encoded pack of an expert index (Phase 6B, decision 0013): e
 
 Each writes `manifest.json` (files with sizes and sha256, segments with their location and,
 when computed, sha256; source model and revision; packing configuration) and prints a summary.
+
+    uv run weightsift quality check [--budget configs/quality-budget.yaml]
+    uv run weightsift quality compare --baseline RESULTS.json [--baseline ...] --candidate RESULTS.json
+                                      [--budget configs/quality-budget.yaml] [--output REPORT.json]
+
+quality       the Quality Budget (Phase 7A, decision 0014). `check` validates a budget and lists what keeps it from
+              being run (exit 1 if anything); `compare` judges a candidate's results against the strongest of the given
+              baselines, per benchmark and category, and writes the comparison report (exit 0 only for PASS).
 """
 
 from __future__ import annotations
@@ -130,6 +138,27 @@ def pack_encoded_experts(config_path: Path, output: Path | None) -> dict:
     return encoded.pack.manifest
 
 
+def quality(args: argparse.Namespace) -> int:
+    from awpmi.quality import compare, load_budget, load_results, strongest_baseline
+
+    budget = load_budget(args.budget)
+    if args.action == "check":
+        problems = budget.problems()
+        print(json.dumps({"benchmarks": len(budget.benchmarks), "problems": problems}, indent=2))
+        return 1 if problems else 0
+    if not args.baseline or not args.candidate:
+        raise SystemExit("compare needs --baseline (one or more) and --candidate")
+    baseline = strongest_baseline(budget, [load_results(path) for path in args.baseline])
+    if baseline is None:
+        raise SystemExit(f"no baseline of a kind the budget accepts ({', '.join(budget.baselines)})")
+    report = compare(budget, baseline, load_results(args.candidate)).to_dict()
+    text = json.dumps(report, indent=2)
+    if args.output:
+        Path(args.output).write_text(text + "\n", encoding="utf-8")
+    print(text)
+    return 0 if report["verdict"] == "PASS" else 1
+
+
 def main(argv: list[str] | None = None) -> int:
     prog = Path(sys.argv[0]).stem
     parser = argparse.ArgumentParser(
@@ -141,7 +170,15 @@ def main(argv: list[str] | None = None) -> int:
     pack.add_argument("kind", choices=["lm-head", "experts", "expert-index", "encoded-experts"])
     pack.add_argument("--config", default=None)
     pack.add_argument("--output", default=None, help="pack directory (default: the config's)")
+    budget = commands.add_parser("quality", help="check a Quality Budget, or compare results under it")
+    budget.add_argument("action", choices=["check", "compare"])
+    budget.add_argument("--budget", default=str(REPO_ROOT / "configs" / "quality-budget.yaml"))
+    budget.add_argument("--baseline", action="append", default=[], help="a baseline's results (repeatable)")
+    budget.add_argument("--candidate", default=None, help="the candidate's results")
+    budget.add_argument("--output", default=None, help="where to write the comparison report")
     args = parser.parse_args(argv)
+    if args.command == "quality":
+        return quality(args)
     default = {"lm-head": "phase3-storage.yaml", "experts": "phase3-moe.yaml", "expert-index": "phase4a-olmoe.yaml",
                "encoded-experts": "phase6b-gpu.yaml"}[args.kind]
     config = Path(args.config) if args.config else REPO_ROOT / "configs" / default

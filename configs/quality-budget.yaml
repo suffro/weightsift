@@ -1,0 +1,54 @@
+# Weightsift Quality Budget (Phase 7A, decision 0014): how a quantized inference mode of a flagship is judged against
+# the strongest available baseline of the same model (`awpmi.quality`).
+#
+# - Six categories, each with its own benchmarks and threshold; regressions are reported per benchmark and per category,
+#   never averaged across categories.
+# - max_regression is an absolute drop in the metric's units (0.02 = two points of accuracy). It is configuration, not a
+#   statistical argument: a verdict compares the regression's confidence interval with it (PASS only when the interval's
+#   upper bound is within it; INCONCLUSIVE when the interval straddles it). These values are starting points to revisit
+#   once the baselines' own variance is measured.
+# - Evaluation data is held out: a candidate's calibration data may not include any (dataset, config, split) evaluated
+#   here (the comparison marks such a benchmark INVALID).
+# - Datasets are named by their published homes as of 2026-10. None was downloaded in Phase 7A and no revision is pinned
+#   yet: before a first run each dataset, config and split is confirmed and its revision pinned here; until then every
+#   comparison is PENDING (`weightsift quality check` lists what is missing).
+# - min_samples: the items both sides must score. A fixed subset is allowed when it is the same item ids on both sides
+#   (paired comparison; different items are INVALID); the long-context and coding suites are expensive at a flagship's
+#   speed on constrained hardware, which is a reason to measure fewer items, not to skip the category.
+format: weightsift-quality-budget
+version: 1
+confidence: 0.95
+bootstrap_samples: 10000
+seed: 20261012
+# Strongest first: the publisher's original-precision checkpoint, a quantization the publisher released (for MiMo-V2.6
+# the MXFP4 experts are the release itself), a quantization derived by someone else (Colibri's int4 container of Inkling).
+baselines: [original, released-quantized, derived-quantized]
+
+categories:
+  coding: {max_regression: 0.02, required: true}
+  mathematical_reasoning: {max_regression: 0.02, required: true}
+  general_reasoning: {max_regression: 0.02, required: true}
+  instruction_following: {max_regression: 0.02, required: true}
+  long_context: {max_regression: 0.03, required: true}
+  # Optional: a model without tool calling skips it (both sides, with a reason).
+  tool_use: {max_regression: 0.03, required: false}
+
+benchmarks:
+  - {name: humaneval, category: coding, dataset: openai/openai_humaneval, revision: null, split: test,
+     metric: pass@1, min_samples: 164, binary: true}
+  - {name: mbpp-sanitized, category: coding, dataset: google-research-datasets/mbpp, config: sanitized, revision: null,
+     split: test, metric: pass@1, min_samples: 257, binary: true}
+  - {name: gsm8k, category: mathematical_reasoning, dataset: openai/gsm8k, config: main, revision: null, split: test,
+     metric: exact_match, min_samples: 500, binary: true}
+  - {name: math-500, category: mathematical_reasoning, dataset: HuggingFaceH4/MATH-500, revision: null, split: test,
+     metric: exact_match, min_samples: 500, binary: true}
+  - {name: mmlu-pro, category: general_reasoning, dataset: TIGER-Lab/MMLU-Pro, revision: null, split: test,
+     metric: accuracy, min_samples: 1000, binary: true}
+  - {name: gpqa-diamond, category: general_reasoning, dataset: Idavidrein/gpqa, config: gpqa_diamond, revision: null,
+     split: train, metric: accuracy, min_samples: 198, binary: true}
+  - {name: ifeval, category: instruction_following, dataset: google/IFEval, revision: null, split: train,
+     metric: prompt_level_strict_accuracy, min_samples: 541, binary: true}
+  - {name: longbench-v2, category: long_context, dataset: THUDM/LongBench-v2, revision: null, split: train,
+     metric: accuracy, min_samples: 200, binary: true}
+  - {name: bfcl, category: tool_use, dataset: gorilla-llm/Berkeley-Function-Calling-Leaderboard, revision: null,
+     split: train, metric: accuracy, min_samples: 400, binary: true, requires: tool-calling}

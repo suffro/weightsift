@@ -1,0 +1,312 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/suffro/weightsift/configs/quality-results.schema.json",
+  "title": "Weightsift quality results",
+  "description": "One subject (a baseline or a candidate) evaluated on a Quality Budget's benchmarks (decision 0014). A benchmark that could not be run is 'unavailable' with a reason and no score; nothing is estimated.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "format",
+    "version",
+    "run",
+    "subject",
+    "calibration",
+    "benchmarks"
+  ],
+  "properties": {
+    "format": {
+      "const": "weightsift-quality-results"
+    },
+    "version": {
+      "const": 1
+    },
+    "run": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "date",
+        "hardware",
+        "software",
+        "commands"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "date": {
+          "type": "string",
+          "minLength": 1
+        },
+        "hardware": {
+          "type": "object"
+        },
+        "software": {
+          "type": "object"
+        },
+        "commands": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    },
+    "subject": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "model",
+        "checkpoint",
+        "representation",
+        "engine"
+      ],
+      "properties": {
+        "kind": {
+          "enum": [
+            "original",
+            "released-quantized",
+            "derived-quantized",
+            "candidate"
+          ]
+        },
+        "model": {
+          "type": "string",
+          "minLength": 1
+        },
+        "checkpoint": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "repository",
+            "revision"
+          ],
+          "properties": {
+            "repository": {
+              "type": "string",
+              "minLength": 1
+            },
+            "revision": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "representation": {
+          "type": "string",
+          "minLength": 1
+        },
+        "engine": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "name",
+            "revision"
+          ],
+          "properties": {
+            "name": {
+              "type": "string",
+              "minLength": 1
+            },
+            "revision": {
+              "type": "string",
+              "minLength": 1
+            },
+            "configuration": {
+              "type": "object"
+            }
+          }
+        }
+      }
+    },
+    "calibration": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "dataset",
+          "split"
+        ],
+        "properties": {
+          "dataset": {
+            "type": "string",
+            "minLength": 1
+          },
+          "config": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "revision": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "split": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "benchmarks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "name",
+          "category",
+          "dataset",
+          "revision",
+          "split",
+          "metric",
+          "status"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "category": {
+            "type": "string",
+            "minLength": 1
+          },
+          "dataset": {
+            "type": "string",
+            "minLength": 1
+          },
+          "config": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "revision": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "split": {
+            "type": "string",
+            "minLength": 1
+          },
+          "metric": {
+            "type": "string",
+            "minLength": 1
+          },
+          "status": {
+            "enum": [
+              "measured",
+              "unavailable",
+              "skipped"
+            ]
+          },
+          "reason": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "n": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "minimum": 1
+          },
+          "score": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "minimum": 0,
+            "maximum": 1
+          },
+          "items": {
+            "type": [
+              "array",
+              "null"
+            ],
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "id",
+                "score"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "score": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                }
+              }
+            }
+          },
+          "generation": {
+            "type": "object"
+          }
+        },
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "status": {
+                  "const": "measured"
+                }
+              }
+            },
+            "then": {
+              "required": [
+                "n",
+                "score"
+              ],
+              "properties": {
+                "n": {
+                  "type": "integer"
+                },
+                "score": {
+                  "type": "number"
+                }
+              }
+            },
+            "else": {
+              "required": [
+                "reason"
+              ],
+              "properties": {
+                "reason": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "score": {
+                  "type": "null"
+                },
+                "n": {
+                  "type": "null"
+                },
+                "items": {
+                  "type": "null"
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

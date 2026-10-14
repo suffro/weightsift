@@ -5,7 +5,8 @@ use std::io::Write;
 use std::path::PathBuf;
 use std::sync::Arc;
 
-use weightsift_io::engine::{Engine, EngineConfig, Request, SlotBuffers};
+use weightsift_io::cache::Entry;
+use weightsift_io::engine::{Engine, EngineConfig, Request, Served, SlotBuffers};
 use weightsift_io::{AlignedBuffer, Error, FileTable, PlanConfig, RawBuffer, Segment, Source};
 
 struct Lcg(u64);
@@ -715,4 +716,283 @@ fn prefetching_needs_a_host_cache() {
     let fixture = Fixture::new("prefetch-none", 14);
     let engine = fixture.engine(true, 0, 2);
     assert!(matches!(engine.prefetch(&[all_rows(0, 3)]), Err(Error::Invalid(_))));
+}
+
+// Leases (Phase 7A, decision 0014): rows held in the host cache for a caller that reads them in place.
+
+/// An engine whose host cache holds every row of the fixture in one piece (the block is larger than the longest row).
+fn lease_engine(fixture: &Fixture, cache: u64, workers: usize) -> Engine {
+    fixture.engine_with_blocks(true, cache, workers, 400_000)
+}
+
+fn acquire(engine: &Engine, requests: &[Request], slots: &mut Slots) -> Result<Vec<Arc<Entry>>, Error> {
+    engine.acquire(requests, slots.views()).map(|leased| leased.entries)
+}
+
+fn rows_of(request: &Request, fixture: &Fixture) -> Vec<(u32, u64)> {
+    let s = &fixture.segments[request.segment as usize];
+    let rows: Vec<i64> = request.rows.clone().unwrap_or_else(|| (0..s.rows as i64).collect());
+    rows.iter().map(|&r| (request.segment, r as u64)).collect()
+}
+
+fn one_row(segment: u32, row: i64) -> Request {
+    Request {
+        segment,
+        rows: Some(vec![row]),
+        positions: None,
+    }
+}
+
+#[test]
+fn leased_rows_equal_the_file_and_stay_in_place() {
+    let fixture = Fixture::new("lease-exact", 21);
+    for cache in [64u64 << 20, 1_000_000] {
+        let engine = lease_engine(&fixture, cache, 4);
+        let mut slots = Slots::new(2, 64 << 10);
+        let mut rng = Lcg(cache);
+        let mut held: Vec<(Arc<Entry>, Vec<u8>, usize)> = Vec::new();
+        let mut held_bytes = 0;
+        for round in 0..40 {
+            let segment = rng.below(3) as u32;
+            let mut request = random_request(&mut rng, &fixture, segment);
+            request.positions = None;
+            let wanted = rows_of(&request, &fixture);
+            let bytes: u64 = wanted
+                .iter()
+                .map(|&(s, _)| fixture.segments[s as usize].row_bytes)
+                .sum();
+            if held_bytes + bytes > cache / 2 {
+                continue;
+            }
+            let entries = acquire(&engine, std::slice::from_ref(&request), &mut slots).unwrap();
+            assert_eq!(entries.len(), wanted.len());
+            for (entry, &(s, row)) in entries.iter().zip(&wanted) {
+                let bytes = entry.contiguous().expect("rows no longer than the block are one piece");
+                assert_eq!(bytes, &fixture.row(s as usize, row)[..], "segment {s} row {row}");
+            }
+            // Keep a few leases across later acquires (and their evictions): their bytes never move or change.
+            if round % 3 == 0 {
+                for entry in entries.into_iter().take(2) {
+                    let bytes = entry.contiguous().unwrap().to_vec();
+                    let address = entry.contiguous().unwrap().as_ptr() as usize;
+                    held_bytes += bytes.len() as u64;
+                    held.push((entry, bytes, address));
+                }
+            }
+            for (entry, bytes, address) in &held {
+                assert_eq!(entry.contiguous().unwrap(), &bytes[..]);
+                assert_eq!(entry.contiguous().unwrap().as_ptr() as usize, *address);
+            }
+            let cache = engine.cache().unwrap();
+            assert!(cache.held_bytes() <= cache.capacity() && cache.peak_held_bytes() <= cache.capacity());
+        }
+        let stats = engine.cache_stats().unwrap();
+        assert_eq!(stats.lookups, stats.hits + stats.waits + stats.misses);
+        assert_eq!(stats.misses, stats.inserts + stats.bypassed);
+        assert_eq!((stats.aborted_fills, stats.bypassed), (0, 0), "{stats:?}");
+    }
+}
+
+#[test]
+fn leases_are_never_evicted_and_a_full_cache_refuses() {
+    // A cache of exactly two long rows: two leases fill it; a third row would need evicting a leased one, so the call
+    // fails with Unavailable and holds nothing; once a lease is dropped, the row it held is the one evicted.
+    let fixture = Fixture::new("lease-full", 22);
+    let row_bytes = fixture.segments[1].row_bytes;
+    let engine = lease_engine(&fixture, 2 * row_bytes, 2);
+    let mut slots = Slots::new(2, 64 << 10);
+    let first = acquire(&engine, &[one_row(1, 0)], &mut slots).unwrap();
+    let second = acquire(&engine, &[one_row(1, 1)], &mut slots).unwrap();
+    let error = acquire(&engine, &[one_row(1, 2)], &mut slots).unwrap_err();
+    assert!(matches!(error, Error::Unavailable(_)), "{error:?}");
+    let cache = engine.cache().unwrap();
+    assert_eq!(cache.keys_lru_first(), vec![(1, 0), (1, 1)]);
+    assert_eq!(cache.resident_bytes(), 2 * row_bytes);
+    // A failed call holds nothing: a held row and a row that does not fit fail as a whole.
+    let error = acquire(&engine, &[one_row(1, 0), one_row(1, 2)], &mut slots).unwrap_err();
+    assert!(matches!(error, Error::Unavailable(_)), "{error:?}");
+    assert_eq!(
+        Arc::strong_count(&first[0]),
+        2,
+        "the caller's lease and the cache's entry"
+    );
+    drop(first);
+    let third = acquire(&engine, &[one_row(1, 2)], &mut slots).unwrap();
+    assert_eq!(cache.keys_lru_first(), vec![(1, 1), (1, 2)]);
+    assert_eq!(second[0].contiguous().unwrap(), &fixture.row(1, 1)[..]);
+    assert_eq!(third[0].contiguous().unwrap(), &fixture.row(1, 2)[..]);
+    let stats = cache.stats();
+    assert_eq!((stats.evictions, stats.bypassed, stats.inserts), (1, 2, 3), "{stats:?}");
+    assert!(cache.peak_held_bytes() <= cache.capacity());
+    // A row larger than the cache is never admitted.
+    let small = lease_engine(&fixture, row_bytes - 1, 2);
+    assert!(matches!(
+        acquire(&small, &[one_row(1, 0)], &mut slots),
+        Err(Error::Unavailable(_))
+    ));
+    assert_eq!(small.cache().unwrap().resident_bytes(), 0);
+}
+
+#[test]
+fn an_acquire_reads_each_row_once_and_counts_like_a_request() {
+    let fixture = Fixture::new("lease-count", 23);
+    let engine = lease_engine(&fixture, 64 << 20, 4);
+    let mut slots = Slots::new(2, 64 << 10);
+    let rows = fixture.segments[2].rows;
+    let request = all_rows(2, rows);
+    let logical = rows * fixture.segments[2].row_bytes;
+    // The same row twice in one call is one lookup and one entry.
+    let leased = engine
+        .acquire(&[request.clone(), one_row(2, 3)], slots.views())
+        .unwrap();
+    assert!(leased.served.iter().all(|&s| s == Served::Loaded));
+    let first = leased.entries;
+    assert_eq!(first.len() as u64, rows + 1);
+    assert!(Arc::ptr_eq(&first[3], &first[rows as usize]));
+    let physical = engine.stats().physical_bytes;
+    assert!(physical > 0);
+    drop(first);
+    let leased = engine.acquire(std::slice::from_ref(&request), slots.views()).unwrap();
+    assert!(leased.served.iter().all(|&s| s == Served::Hit));
+    let second = leased.entries;
+    for (entry, row) in second.iter().zip(0..) {
+        assert_eq!(entry.to_vec(), fixture.row(2, row));
+    }
+    let io = engine.stats();
+    assert_eq!(io.physical_bytes, physical, "the second call was all hits");
+    assert_eq!((io.acquires, io.requests, io.rows), (2, 3, 2 * rows + 1));
+    assert_eq!(io.logical_bytes, 2 * logical + fixture.segments[2].row_bytes);
+    let stats = engine.cache_stats().unwrap();
+    assert_eq!(
+        (stats.lookups, stats.hits, stats.misses, stats.inserts),
+        (2 * rows, rows, rows, rows)
+    );
+}
+
+#[test]
+fn concurrent_acquires_load_each_row_once() {
+    // Acquires wait for each other's loads (a lease's load is carried out by the pool), so every row is read once.
+    let fixture = Arc::new(Fixture::new("lease-concurrent", 24));
+    let engine = Arc::new(lease_engine(&fixture, 64 << 20, 8));
+    let rows = fixture.segments[2].rows + fixture.segments[1].rows;
+    std::thread::scope(|scope| {
+        for t in 0..6u64 {
+            let (engine, fixture) = (Arc::clone(&engine), Arc::clone(&fixture));
+            scope.spawn(move || {
+                let mut slots = Slots::new(2, 64 << 10);
+                let mut rng = Lcg(300 + t);
+                for _ in 0..25 {
+                    let mut requests = vec![
+                        random_request(&mut rng, &fixture, 2),
+                        random_request(&mut rng, &fixture, 1),
+                    ];
+                    for request in &mut requests {
+                        request.positions = None;
+                    }
+                    let entries = acquire(&engine, &requests, &mut slots).unwrap();
+                    let wanted: Vec<(u32, u64)> = requests.iter().flat_map(|r| rows_of(r, &fixture)).collect();
+                    for (entry, (s, row)) in entries.iter().zip(wanted) {
+                        assert_eq!(entry.contiguous().unwrap(), &fixture.row(s as usize, row)[..]);
+                    }
+                }
+            });
+        }
+    });
+    let stats = engine.cache_stats().unwrap();
+    assert!(stats.inserts <= rows, "{stats:?}");
+    assert_eq!(
+        (stats.evictions, stats.aborted_fills, stats.bypassed),
+        (0, 0, 0),
+        "{stats:?}"
+    );
+    assert_eq!(stats.lookups, stats.hits + stats.waits + stats.misses);
+    assert_eq!(stats.misses, stats.inserts, "{stats:?}");
+}
+
+#[test]
+fn an_acquire_racing_a_prefetch_waits_for_its_loads() {
+    let fixture = Fixture::new("lease-prefetch", 25);
+    for _ in 0..10 {
+        let engine = lease_engine(&fixture, 64 << 20, 4);
+        let rows = fixture.segments[1].rows;
+        let request = all_rows(1, rows);
+        let mut prefetch = engine.prefetch(std::slice::from_ref(&request)).unwrap();
+        let mut slots = Slots::new(2, 64 << 10);
+        let leased = engine.acquire(std::slice::from_ref(&request), slots.views()).unwrap();
+        // Every row was the prefetch's: waited for, or already in.
+        assert!(leased.served.iter().all(|&s| s != Served::Loaded));
+        for (entry, row) in leased.entries.iter().zip(0..) {
+            assert_eq!(entry.contiguous().unwrap(), &fixture.row(1, row)[..]);
+        }
+        drop(leased);
+        prefetch.wait().unwrap();
+        assert!(prefetch.is_done());
+        prefetch.close();
+        let stats = engine.cache_stats().unwrap();
+        assert_eq!(stats.inserts, rows);
+        assert_eq!(stats.hits + stats.waits + stats.misses, rows);
+        assert_eq!(stats.prefetch_used, stats.prefetch_fills);
+    }
+}
+
+#[test]
+fn a_row_a_transfer_is_loading_is_not_waited_for() {
+    // A transfer's loads progress only as its caller consumes pieces: a lease asking for such a row fails at once with
+    // Unavailable instead of waiting (the waiter could be that caller).
+    let fixture = Fixture::new("lease-busy", 26);
+    let engine = lease_engine(&fixture, 64 << 20, 2);
+    let mut transfer_slots = Slots::new(1, 64 << 10);
+    let job = engine
+        .submit(&[all_rows(1, fixture.segments[1].rows)], transfer_slots.views(), true)
+        .unwrap();
+    let mut slots = Slots::new(2, 64 << 10);
+    let error = acquire(&engine, &[one_row(1, 5)], &mut slots).unwrap_err();
+    assert!(matches!(error, Error::Unavailable(_)), "{error:?}");
+    job.cancel();
+    job.close();
+    drop(job);
+    let entries = acquire(&engine, &[one_row(1, 5)], &mut slots).unwrap();
+    assert_eq!(entries[0].contiguous().unwrap(), &fixture.row(1, 5)[..]);
+}
+
+#[test]
+fn acquire_errors_hold_nothing() {
+    let fixture = Fixture::new("lease-errors", 27);
+    let mut slots = Slots::new(2, 64 << 10);
+    // No host cache: refused.
+    let none = fixture.engine(true, 0, 2);
+    assert!(matches!(
+        acquire(&none, &[all_rows(0, 3)], &mut slots),
+        Err(Error::Invalid(_))
+    ));
+    // Bad requests are refused before any lookup.
+    let engine = lease_engine(&fixture, 64 << 20, 2);
+    let bad = Request {
+        segment: 9,
+        rows: None,
+        positions: None,
+    };
+    assert!(acquire(&engine, &[bad], &mut slots).is_err());
+    assert_eq!(engine.cache_stats().unwrap().lookups, 0);
+    // A read error reaches the caller; nothing half-loaded stays, and other files are still served.
+    std::fs::OpenOptions::new()
+        .write(true)
+        .open(fixture.dir.join("f1.bin"))
+        .unwrap()
+        .set_len(1000)
+        .unwrap();
+    let error = acquire(&engine, &[all_rows(1, 2)], &mut slots).unwrap_err();
+    assert!(matches!(error, Error::ShortRead { .. }), "{error:?}");
+    let cache = engine.cache().unwrap();
+    assert_eq!((cache.resident_bytes(), cache.len()), (0, 0));
+    let entries = acquire(&engine, &[all_rows(0, 4)], &mut slots).unwrap();
+    assert_eq!(entries[3].contiguous().unwrap(), &fixture.row(0, 3)[..]);
+    // A closed engine leases nothing; rows still held stay valid until dropped.
+    engine.close();
+    assert_eq!(
+        acquire(&engine, &[all_rows(0, 1)], &mut slots).err(),
+        Some(Error::Closed)
+    );
+    assert_eq!(entries[0].contiguous().unwrap(), &fixture.row(0, 0)[..]);
+    drop(entries);
 }

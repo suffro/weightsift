@@ -1,0 +1,51 @@
+{
+  "cache_experts": 113,
+  "cache_tokens": 0.29610715352247013,
+  "device": [
+    {
+      "bytes": 0,
+      "name": "dense weights"
+    },
+    {
+      "bytes": 0,
+      "name": "sequence state"
+    },
+    {
+      "bytes": 0,
+      "name": "workspace"
+    }
+  ],
+  "device_budget_bytes": 7465861120,
+  "expert_cache_bytes": 3224758016,
+  "feasible": true,
+  "host": [
+    {
+      "bytes": 15300000000,
+      "name": "dense weights"
+    },
+    {
+      "bytes": 1073741824,
+      "name": "sequence state"
+    },
+    {
+      "bytes": 536870912,
+      "name": "workspace"
+    },
+    {
+      "bytes": 100663296,
+      "name": "store staging"
+    },
+    {
+      "bytes": 3224758016,
+      "name": "expert cache"
+    }
+  ],
+  "host_budget_bytes": 20236034048,
+  "kind": "planning arithmetic on the inputs, not a measurement",
+  "notes": [
+    "the expert cache (3.00 GiB) holds 0.30 of one decode token's routed experts (10.14 GiB): below one token's working set a least-recently-used cache serves almost nothing (decision 0012's measurement), so a decode token reads about 10.14 GiB from storage"
+  ],
+  "resident_fraction": 0.006940011410682894,
+  "store_host_cache_bytes": 3224758016,
+  "working_set_bytes": 10890510336
+}

@@ -117,6 +117,32 @@
   benchmarks are waited for by their completion signal, never by polling (`AGENT-POLICY.md`).
 - Decode graphs and `fill_uninitialized_memory: false` are options of streamed configurations: the reference process
   runs eagerly with PyTorch's defaults, and every option is checked against it in every digest.
+- **Phase 7A** (decision 0014).
+  - **Fetching Colibrì.** `python native/fetch_upstream.py` fetches its pinned files into `native/third_party/`;
+    `--check` verifies without network. `weightsift-colibri`'s C parts and tests need them. Without them its tests are
+    ignored with the reason, and the rest of the workspace builds and tests as before.
+  - **Rust checks** (in `native/`): `cargo fmt --all -- --check`, `cargo clippy --workspace --all-targets -- -D
+    warnings`, `cargo test --workspace`. They build C with the `cc` crate: MSVC here, found automatically.
+  - **The store on real bytes.** `python -m uv run python benchmarks/store_check.py --output experiments/phase7a/<run>
+    --layers 1,2,3,4`, then `cargo run --release -p weightsift-store --example store_check -- <run> [--budget-gib N]`.
+    Keep the trees frozen between the two commands and across compared runs (`prepare.json` records both hashes). The
+    catalog it writes holds this machine's paths and is not committed.
+  - **The planner.** `cargo run -p weightsift-runtime --example plan -- <inputs.json>`, with inputs detected or named
+    by source (see `experiments/phase7a/plan-inkling/`).
+  - **The Quality Budget.** `python -m uv run weightsift quality check` (exit 1 while revisions are unpinned) and
+    `weightsift quality compare --baseline A.json [--baseline B.json] --candidate C.json [--output R.json]`.
+  - **The Colibrì baseline.** `python -m uv run python benchmarks/colibri_baseline.py --dry-run` (the plan, the machine,
+    the blockers; exit 2 while blocked) and `--parse LOG`.
+  - **ApexQuant.** `python research/apexquant/fetch_headers.py` (network; indexes and headers only, never tensor data),
+    `python -m uv run python research/apexquant/feasibility.py`, and its tests with `python -m uv run python -m pytest
+    research/apexquant/tests`.
+- A C ABI of Weightsift's is versioned (an ABI number, `struct_size` on every struct) and hands out handles, never
+  pointers to Rust objects. Every entry point catches panics. Its header is compiled in a test by the platform's C
+  compiler and its layout compared with the Rust structs'. Every `unsafe` block at the boundary states the caller
+  contract it relies on.
+- Upstream C is compiled as upstream wrote it, without Weightsift's warning policy; Weightsift's own C (shims, test
+  clients) compiles with warnings as errors. An upstream modification (an engine patch) is a reviewed patch file next to
+  the pin, applied at fetch time, never an edited copy.
 - Keep a benchmark's peak device memory well under the card, and record it (`peak_device_bytes`). Under
   Windows' WDDM, allocations beyond the GPU's memory do not fail: the driver pages device memory to the host
   and kernels slow down. Phase 5A's first development runs peaked at 8.03 GB on the 8 GB card and ran
@@ -203,6 +229,15 @@
 - Stored representations that are not the reference's bytes (Phase 6B's encoded rows) are restored exactly and audited
   row by row against the reference's digests before a run uses them; codecs live in the streaming layer, never in the
   native core or the storage contract, and a codec that does not detect corruption relies on the pack's hashes.
+- Upstream engines and libraries (decision 0014) are never forked, vendored or committed. Each is pinned by exact commit
+  in a pin file that records its URL, license, provenance and the sha256 of every file used; a fetch script checks it out
+  into a gitignored directory and verifies it before a build uses it; a build without it still works and says what it
+  skipped. A pin changes only through a reviewed edit of the pin file, which states why.
+- Code without a license that permits reuse (ApexQuant, decision 0014) is not copied, vendored, run in Weightsift or made
+  a dependency; independent analysis of a paper or a published design is allowed and is labelled as such.
+- Results say what they are: measured (with hardware, revisions, commands, configuration), extrapolated (with the model
+  and its inputs), or a hypothesis. A microbenchmark is never reported as an end-to-end result, a fixture never as a
+  flagship result, and weight-space error never as model quality: a quantized mode is judged by the Quality Budget.
 - A structural diagnostic (real arithmetic, decision 0009's real tier) is never reported as a certified BF16 result. A set
   of weights "consistent with what is read" is built from a read view whose unread bits are poisoned, and its claimed
   optimum is checked against enumeration on toys and against attained points (witnesses) on real samples.

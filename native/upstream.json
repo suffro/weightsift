@@ -1,0 +1,27 @@
+{
+  "format": "weightsift-upstream-pins",
+  "version": 1,
+  "note": "Upstream sources Weightsift builds against (decision 0014). Never forked, vendored or committed: native/fetch_upstream.py checks out exactly these files at exactly this commit into native/third_party/<name>/ (gitignored) and verifies their sha256 (of the repository's content: LF line endings). Change a pin only by editing this file, with the reason in the commit and the files' new hashes.",
+  "upstreams": [
+    {
+      "name": "colibri",
+      "url": "https://github.com/JustVugg/colibri",
+      "commit": "bf2442915d6e3dd4cdfd2eb9c2a3d2aa44a25850",
+      "date": "2026-10-06",
+      "license": "Apache-2.0",
+      "attribution": "colibri, Copyright 2026 Vincenzo Fornaro (NOTICE); portions adapted from ds4 under the MIT license (THIRD_PARTY_NOTICES.md)",
+      "use": "The expert-store lease contract (c/expert_store.h, c/tensor.h) that weightsift-colibri's shim implements over Weightsift's store; the engine-neutral layer-segment runtime (c/segment_runtime.h, .c) driven from Rust; its dependency-free conformance fixtures (tests only). None of Colibri's model engines is built here: they need gcc and POSIX headers.",
+      "files": {
+        "LICENSE": "fb9b97e1cc193452870025f6cf501003130561681659e265e5fdf6c023f71325",
+        "NOTICE": "c8a3ae98b85c30294ac8adeea94360dc25264dea0786a3d1ab0b48a4bc31b001",
+        "THIRD_PARTY_NOTICES.md": "283fa1a9c27a8930340add500f2f0453dd15568ec38c21a1fff4f3d1f716ebc7",
+        "c/expert_store.h": "e2958ab832cce953448bc458dc6a76df6abb93abf0bfe3ea80fbb99640031f8f",
+        "c/tensor.h": "c49a508a9d2a3661f8d538e8f23a334a0a82ac89f8d01297d9d36cd928a2a147",
+        "c/segment_runtime.h": "2f4a37b5cb0cd4eae22bff875ab8c903e9a42ddff39ec10d827ef41d9c7d288b",
+        "c/segment_runtime.c": "8ad4e1a7f8489e20cf5576dc7d9a1fb59c2cc8e2793d692e95caee1e66831a01",
+        "c/tests/segment_conformance_fixtures.h": "42ea629d815e82875ff9085019e9ad2e1c84298c4f14432e08dd7ec91e4c7d84",
+        "c/tests/segment_conformance_fixtures.c": "008d2e9bef623fe478af7ec3b7551ec68e0749881e593b7798b296cc0f14f9ef"
+      }
+    }
+  ]
+}

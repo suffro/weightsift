@@ -17,6 +17,12 @@
 //! A prefetch (`Engine::prefetch`) loads rows a request will ask for soon into the host cache, at the lowest priority,
 //! through staging of its own that it releases itself; the request then finds them cached, or waits for their load.
 //!
+//! A lease (`Engine::acquire`, Phase 7A, decision 0014) is for callers that read rows in place instead of copying them
+//! to a device (an execution engine on the CPU, through Weightsift's expert store): the call returns the rows' cache
+//! entries, which stay resident and unmoved while the caller holds them. Its misses are loaded like a prefetch's (pieces
+//! that release their slots themselves, through staging the caller owns), at the foreground's priority, and the call
+//! blocks until every row is in.
+//!
 //! Where Phase 6B plugs in (not built): an `Op` is a copy of bytes as stored. A stored representation that is not the
 //! reference's bytes (Phase 5C's bit planes in zstd frames per page) would add an op that names a decoder: the core
 //! reads the frames into the slot and decompresses them on its threads, and the caller launches a device decoder
@@ -37,7 +43,7 @@ use std::thread::JoinHandle;
 use std::time::Instant;
 
 use crate::buffer::RawBuffer;
-use crate::cache::{block_for, CacheStats, Entry, Fill, HostCache, Lookup, Pending, Probe, RowViews};
+use crate::cache::{block_for, CacheStats, Entry, Fill, HostCache, Loader, Lookup, Pending, Probe, RowViews};
 use crate::error::{Error, Result};
 use crate::file::{AlignedBuffer, FileTable, Handles, DIRECT_ALIGNMENT};
 use crate::layout::Segment;
@@ -130,6 +136,9 @@ pub struct IoStats {
     pub submit_cache_ns: u64,
     pub submit_plan_ns: u64,
     pub submit_start_ns: u64,
+    /// Leases (`acquire` calls) started; their requests, rows, logical bytes and the 4 KiB blocks they read are counted
+    /// with every other request's.
+    pub acquires: u64,
     pub ranges: Option<Vec<(u32, u64, u64)>>,
     pub by_segment: BTreeMap<u32, SegmentStats>,
 }
@@ -214,6 +223,24 @@ pub struct Op {
     pub request: u32,
     pub dst: u64,
     pub length: u64,
+}
+
+/// How a leased row was served (`Engine::acquire`).
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub enum Served {
+    /// It was in the cache.
+    Hit,
+    /// A prefetch or another lease was loading it; the call waited for that load.
+    Waited,
+    /// The call read it from storage.
+    Loaded,
+}
+
+/// Rows held for a caller (`Engine::acquire`): one entry per requested row, in order, and how each was served. While an
+/// entry is held its row is neither evicted nor cleared, and its bytes stay where they are.
+pub struct Leased {
+    pub entries: Vec<Arc<Entry>>,
+    pub served: Vec<Served>,
 }
 
 /// A piece ready for the caller.
@@ -565,7 +592,8 @@ impl Engine {
                 outstanding: 0,
             }),
             changed: Condvar::new(),
-            prefetch: false,
+            background: false,
+            detached: false,
         });
         core.start_pieces();
         let mut stats = shared.stats.lock().unwrap();
@@ -708,13 +736,223 @@ impl Engine {
                 outstanding: 0,
             }),
             changed: Condvar::new(),
-            prefetch: true,
+            background: true,
+            detached: true,
         });
         core.start_pieces();
         Ok(Prefetch {
             core: Some(core),
             buffers,
             rows: loaded,
+        })
+    }
+
+    /// Lease the rows of `requests` (positions ignored) from the host cache (Phase 7A, decision 0014), blocking until
+    /// every row is resident: one entry per requested row, in request order (a row asked twice is one entry). While the
+    /// caller holds an entry its row is neither evicted nor cleared and its bytes stay where they are (read them in
+    /// place with `Entry::contiguous`). Cached rows are leased at once; rows a prefetch or another lease is loading are
+    /// waited for; the others are admitted (room reserved by evicting least recently used rows nobody holds), read at
+    /// the foreground's priority into `slots` (staging the caller owns, as for `submit`), and copied into their entries.
+    ///
+    /// A row that cannot be admitted (no room without evicting a leased row, larger than the cache, admission frozen),
+    /// a row a transfer is loading, or a load this call waited for that gave up makes the call fail with
+    /// `Unavailable`; a read error fails it with that error. Nothing is held after a failure. The call returns only
+    /// once none of its tasks touches `slots`. Needs a host cache.
+    pub fn acquire(&self, requests: &[Request], slots: Vec<SlotBuffers>) -> Result<Leased> {
+        let shared = &self.shared;
+        if shared.queue.lock().unwrap().closed {
+            return Err(Error::Closed);
+        }
+        let cache = shared
+            .cache
+            .clone()
+            .ok_or_else(|| Error::invalid("leases need a host cache"))?;
+        let slot_bytes = check_slots(&slots, &shared.config)?;
+        let mut checked = Vec::with_capacity(requests.len());
+        for request in requests {
+            let segment = Arc::clone(self.segment_arc(request.segment)?);
+            let rows = check_rows(&segment, request.rows.as_deref())?.unwrap_or_else(|| (0..segment.rows).collect());
+            checked.push((request.segment, segment, rows));
+        }
+        // One lookup per distinct row, in request order.
+        let mut keys: Vec<(u32, u64, u64)> = Vec::new(); // segment, row, bytes
+        let mut distinct: HashMap<(u32, u64), usize> = HashMap::new();
+        let mut order = Vec::new();
+        for (id, segment, rows) in &checked {
+            for &row in rows {
+                let next = keys.len();
+                let k = *distinct.entry((*id, row)).or_insert(next);
+                if k == next {
+                    keys.push((*id, row, segment.row_bytes));
+                }
+                order.push(k);
+            }
+        }
+        let collector = Collector::new(keys.len());
+        let mut served = vec![Served::Hit; keys.len()];
+        let unavailable = |collector: &Collector, why: String| -> Result<Leased> {
+            collector.abandon();
+            Err(Error::Unavailable(why))
+        };
+        // Every row is probed first (hits leased at once), then the misses are admitted: a miss never evicts a row this
+        // call is about to hold (as `submit`).
+        let mut missed = Vec::new();
+        for (k, &(id, row, nbytes)) in keys.iter().enumerate() {
+            match cache.probe((id, row), nbytes) {
+                Probe::Hit(entry) => collector.set(k, Ok(entry)),
+                Probe::Wait(pending) => {
+                    served[k] = Served::Waited;
+                    collector.wait_for(k, &pending);
+                }
+                Probe::Busy => {
+                    let name = &shared.segments[id as usize].name;
+                    return unavailable(&collector, format!("{name} row {row} is being loaded by a transfer"));
+                }
+                Probe::Miss => missed.push(k),
+            }
+        }
+        let mut fills: BTreeMap<u32, Vec<(u64, Fill)>> = BTreeMap::new();
+        for k in missed {
+            let (id, row, nbytes) = keys[k];
+            match cache.fill_as((id, row), nbytes, Loader::Lease) {
+                Lookup::Fill(fill) => {
+                    served[k] = Served::Loaded;
+                    collector.wait_for(k, &fill.pending());
+                    fills.entry(id).or_default().push((row, fill));
+                }
+                Lookup::Hit(entry) => collector.set(k, Ok(entry)),
+                Lookup::Wait(pending) => {
+                    served[k] = Served::Waited;
+                    collector.wait_for(k, &pending);
+                }
+                Lookup::Bypass => {
+                    // The fills admitted so far are given back as they drop (their waiters are told).
+                    drop(fills);
+                    let name = &shared.segments[id as usize].name;
+                    return unavailable(
+                        &collector,
+                        format!("{name} row {row} ({nbytes} bytes) cannot be admitted: no room without evicting a leased row, larger than the cache, or admission frozen"),
+                    );
+                }
+            }
+        }
+        // The misses this call admitted, planned per segment and read as a prefetch reads them (pieces that release
+        // their slots themselves once copied into the rows' entries), at the foreground's priority.
+        let planned = (|| -> Result<(Vec<PieceSpec>, Vec<PieceWork>, u64)> {
+            let (mut specs, mut works) = (Vec::new(), Vec::new());
+            let mut blocks = 0;
+            for (id, rows_fills) in fills {
+                let segment = &shared.segments[id as usize];
+                let mut buffers: HashMap<u64, Arc<FillBuffer>> = HashMap::new();
+                let mut rows = Vec::with_capacity(rows_fills.len());
+                for (position, (row, fill)) in rows_fills.into_iter().enumerate() {
+                    buffers.insert(position as u64, FillBuffer::new(fill));
+                    rows.push(row);
+                }
+                let positions: Vec<i64> = (0..rows.len() as i64).collect();
+                let plan = plan_reads(segment, Some(&rows), Some(&positions), &shared.config.plan)?;
+                blocks += plan.blocks_4k();
+                for piece in pieces(&plan, slot_bytes) {
+                    let mut reads = Vec::new();
+                    let mut extents = Vec::new();
+                    let mut at = 0;
+                    for extent in &piece.extents {
+                        let file = segment.files[extent.file as usize];
+                        extents.push((file, extent.offset, extent.length));
+                        chunked(extent.length, shared.config.max_read_bytes, |start, length| {
+                            reads.push(ReadCall {
+                                file,
+                                offset: extent.offset + start,
+                                length,
+                                slot_offset: at + start,
+                                segment: id,
+                            });
+                        });
+                        at += extent.length;
+                    }
+                    let admits = admissions(
+                        &piece.parts,
+                        segment.row_bytes,
+                        &buffers,
+                        shared.config.copy_chunk_bytes,
+                    );
+                    specs.push(PieceSpec {
+                        ops: Vec::new(),
+                        gathered_bytes: 0,
+                        extents,
+                    });
+                    works.push(PieceWork {
+                        reads,
+                        admits,
+                        ..PieceWork::default()
+                    });
+                }
+            }
+            Ok((specs, works, blocks))
+        })();
+        let (specs, works, blocks) = match planned {
+            Ok(planned) => planned,
+            Err(error) => {
+                collector.abandon();
+                return Err(error);
+            }
+        };
+        {
+            let mut stats = shared.stats.lock().unwrap();
+            stats.acquires += 1;
+            stats.blocks_4k += blocks;
+            for (id, segment, rows) in &checked {
+                let (rows, logical) = (rows.len() as u64, rows.len() as u64 * segment.row_bytes);
+                stats.requests += 1;
+                stats.rows += rows;
+                stats.logical_bytes += logical;
+                let entry = stats.by_segment.entry(*id).or_default();
+                entry.requests += 1;
+                entry.rows += rows;
+                entry.logical_bytes += logical;
+            }
+        }
+        let core = (!specs.is_empty()).then(|| {
+            let core = Arc::new(JobCore {
+                shared: Arc::clone(shared),
+                slots: slots.clone(),
+                pieces: specs,
+                state: Mutex::new(JobState {
+                    next_start: 0,
+                    free_slots: (0..slots.len()).rev().collect(),
+                    pieces: works
+                        .into_iter()
+                        .map(|work| PieceState {
+                            work: Some(work),
+                            ..PieceState::default()
+                        })
+                        .collect(),
+                    next_deliver: 0,
+                    error: None,
+                    outstanding: 0,
+                }),
+                changed: Condvar::new(),
+                background: false,
+                detached: true,
+            });
+            core.start_pieces();
+            core
+        });
+        let outcome = collector.wait();
+        if let Some(core) = core {
+            if outcome.is_err() {
+                core.fail(Error::Cancelled);
+            }
+            // None of the call's tasks may touch the caller's slots once it returns.
+            let mut state = core.lock();
+            while state.outstanding > 0 || (state.error.is_none() && state.next_start < state.pieces.len()) {
+                state = core.changed.wait(state).unwrap();
+            }
+        }
+        let entries = outcome?;
+        Ok(Leased {
+            entries: order.iter().map(|&k| Arc::clone(&entries[k])).collect(),
+            served: order.iter().map(|&k| served[k]).collect(),
         })
     }
 
@@ -1042,6 +1280,89 @@ impl FillBuffer {
     }
 }
 
+/// The rows an `acquire` waits for, its own loads and those of prefetches and other leases: each outcome arrives on the
+/// thread that settles the load (`Pending::on_done`).
+struct Collector {
+    state: Mutex<Collected>,
+    ready: Condvar,
+}
+
+struct Collected {
+    entries: Vec<Option<Arc<Entry>>>,
+    remaining: usize,
+    error: Option<Error>,
+    /// The call gave up or returned: outcomes that still arrive are dropped (their rows released at once).
+    abandoned: bool,
+}
+
+impl Collector {
+    fn new(count: usize) -> Arc<Self> {
+        Arc::new(Collector {
+            state: Mutex::new(Collected {
+                entries: vec![None; count],
+                remaining: count,
+                error: None,
+                abandoned: false,
+            }),
+            ready: Condvar::new(),
+        })
+    }
+
+    fn set(&self, k: usize, outcome: Result<Arc<Entry>>) {
+        let mut state = self.state.lock().unwrap();
+        if state.abandoned || state.entries[k].is_some() {
+            return;
+        }
+        match outcome {
+            Ok(entry) => {
+                state.entries[k] = Some(entry);
+                state.remaining -= 1;
+            }
+            Err(error) => {
+                state.error.get_or_insert(error);
+            }
+        }
+        drop(state);
+        self.ready.notify_all();
+    }
+
+    fn wait_for(self: &Arc<Self>, k: usize, pending: &Pending) {
+        let collector = Arc::clone(self);
+        pending.on_done(move |outcome| collector.set(k, outcome));
+    }
+
+    /// Drop every row received, and every row still to arrive.
+    fn abandon(&self) {
+        let received = {
+            let mut state = self.state.lock().unwrap();
+            state.abandoned = true;
+            std::mem::take(&mut state.entries)
+        };
+        drop(received);
+    }
+
+    /// Every row's entry, in order, or the first error (and then nothing is held).
+    fn wait(&self) -> Result<Vec<Arc<Entry>>> {
+        let mut state = self.state.lock().unwrap();
+        loop {
+            if let Some(error) = state.error.take() {
+                drop(state);
+                self.abandon();
+                return Err(match error {
+                    Error::Cancelled => Error::Unavailable("a load this call waited for was given up; retry".into()),
+                    error => error,
+                });
+            }
+            if state.remaining == 0 {
+                state.abandoned = true;
+                let entries = std::mem::take(&mut state.entries);
+                return Ok(entries.into_iter().map(|e| e.expect("every row arrived")).collect());
+            }
+            state = self.ready.wait(state).unwrap();
+        }
+    }
+}
+
 // Jobs.
 
 #[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
@@ -1083,8 +1404,10 @@ struct JobCore {
     pieces: Vec<PieceSpec>,
     state: Mutex<JobState>,
     changed: Condvar,
-    /// A prefetch: its reads wait behind every foreground task, and its pieces release their slots themselves.
-    prefetch: bool,
+    /// Its reads wait behind every foreground task (a prefetch).
+    background: bool,
+    /// No caller takes its pieces: each releases its slot itself once its admissions are done (a prefetch, a lease).
+    detached: bool,
 }
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
@@ -1133,7 +1456,7 @@ impl JobCore {
             for task in tasks.into_iter().rev() {
                 queue.tasks.push_front(task);
             }
-        } else if self.prefetch {
+        } else if self.background {
             queue.background.extend(tasks);
         } else {
             queue.tasks.extend(tasks);
@@ -1351,13 +1674,14 @@ impl JobCore {
         let (slot, admits, free) = {
             let mut state = self.lock();
             let p = &mut state.pieces[piece];
-            // A prefetch has no caller to deliver to: its piece is released at once, its slot freed after its admissions.
-            p.phase = if self.prefetch { Phase::Delivered } else { Phase::Ready };
-            p.released = self.prefetch;
+            // A detached job has no caller to deliver to: its piece is released at once, its slot freed after its
+            // admissions.
+            p.phase = if self.detached { Phase::Delivered } else { Phase::Ready };
+            p.released = self.detached;
             let admits: Vec<AdmitCall> = std::mem::take(&mut p.admits);
             p.admits_left = admits.len();
             let slot = p.slot.unwrap();
-            let free = self.prefetch && admits.is_empty();
+            let free = self.detached && admits.is_empty();
             state.outstanding += admits.len();
             if free {
                 state.free_slots.push(slot);
@@ -1674,6 +1998,13 @@ impl Prefetch {
     /// The rows this prefetch loads (the others were cached or being loaded already, or not admitted).
     pub fn rows(&self) -> u64 {
         self.rows
+    }
+
+    /// Whether the prefetch is over (every row in the cache, or failed), without waiting.
+    pub fn is_done(&self) -> bool {
+        let Some(core) = &self.core else { return true };
+        let state = core.lock();
+        state.outstanding == 0 && (state.error.is_some() || state.next_start == state.pieces.len())
     }
 
     /// Wait until every row is in the cache (or the prefetch failed).

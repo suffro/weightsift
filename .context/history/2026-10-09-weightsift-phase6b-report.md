@@ -2,7 +2,8 @@
 
 Date: 2026-10-09 · Follows: `history/2026-10-08-weightsift-phase6a-report.md` (Phase 6A, the runtime it extends) and
 `history/2026-10-08-awpmi-phase5c-report.md` (Phase 5C's exact expert codecs) ·
-Decision: `decisions/0013-phase6b-gpu-execution-compressed-experts.md` · Brief: `state/phase_6B.md` ·
+Decision: `decisions/0013-phase6b-gpu-execution-compressed-experts.md` · Brief: the user's of 2026-10-09 (committed in
+4a70869, since replaced by the Phase 7A brief) ·
 Status: **complete. Every gate passes: every step of every configuration equals the independent reference in every
 digest, in two runs with identical digests; the best configuration decodes a token in 408.9 ms, 0.507 of Phase 6A's 807
 ms (2.45 tokens/s against 1.24).**
@@ -29,7 +30,7 @@ pieces are replayed from CUDA Graphs.
 
 ## 1. Questions and plan
 
-The user's brief (2026-10-09, `state/phase_6B.md`) asks Phase 6B to reduce GPU transfer costs, remove runtime overhead and
+The user's brief (2026-10-09; committed in 4a70869) asks Phase 6B to reduce GPU transfer costs, remove runtime overhead and
 speed up decode while staying bit for bit equal to `BF16_REFERENCE`, in stages measured one at a time:
 
 - **read and profile first**, and reproduce Phase 6A's baseline before changing performance-critical code;

@@ -1,0 +1,47 @@
+{
+ "pack": "packs\\moonlight-16b-a3b-expert-index",
+ "pack_manifest_sha256": "aae0ce05f40678b2834b8f10debd540c62cdcdc5d08cc03e2a2248205a41812d",
+ "model": "moonshotai/Moonlight-16B-A3B",
+ "revision": "476b36a473d4467f94469414bef6cee75c9c8172",
+ "layers": [
+  1,
+  2,
+  3,
+  4
+ ],
+ "experts": 256,
+ "expert_bytes": 17301504,
+ "catalog_sha256": "dd51747a1323ce31e1f75a9b73b2f71e0ff8ab5014192602676d7a152de39813",
+ "reference": "awpmi.storage FileBackedPageStore, direct I/O, sha256 per row",
+ "source_tree_sha256": "136ba4e946022d81ceca44c26c430b67ba97d377ff9af803c681fcce19f6e4c2",
+ "native_tree_sha256": "b6b682422a7a08733fadb0f182283e6e02c2f616cad3aefa4ad90210349ccac4",
+ "machine": {
+  "os": "Windows-11-10.0.26200-SP0",
+  "machine": "AMD64",
+  "processor": "Intel64 Family 6 Model 158 Stepping 10, GenuineIntel",
+  "logical_cpus": 6,
+  "host_memory": {
+   "total_bytes": 34280267776,
+   "available_bytes": 20737773568
+  },
+  "gpus": [
+   {
+    "name": "NVIDIA GeForce RTX 4060 Ti",
+    "memory_total_bytes": 8585740288,
+    "memory_free_bytes": 8001683456,
+    "driver": "610.62",
+    "pcie_generation_current": 1,
+    "pcie_generation_max": 3,
+    "pcie_width_current": 8,
+    "pcie_width_max": 8,
+    "source": "nvidia-smi"
+   }
+  ],
+  "storage": {
+   "path": "C:\\Users\\loren\\.cache\\huggingface\\hub\\models--moonshotai--Moonlight-16B-A3B\\snapshots\\476b36a473d4467f94469414bef6cee75c9c8172\\model-10-of-27.safetensors",
+   "anchor": "C:\\",
+   "total_bytes": 999290826752,
+   "free_bytes": 185495490560
+  }
+ }
+}

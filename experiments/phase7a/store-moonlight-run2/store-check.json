@@ -1,0 +1,142 @@
+{
+  "catalog": "moonshotai/Moonlight-16B-A3B@476b36a473d4467f94469414bef6cee75c9c8172 expert index, layers 1,2,3,4",
+  "expert_bytes": 17301504,
+  "kind": "microbenchmark of the expert store alone (no inference)",
+  "options": {
+    "direct": true,
+    "host_cache_bytes": 6442450944,
+    "staging_sets": 2,
+    "staging_slot_bytes": 8388608,
+    "staging_slots": 2,
+    "workers": 8
+  },
+  "passes": [
+    {
+      "bytes": 4429185024,
+      "experts": 256,
+      "gb_per_second": 2.509780609346329,
+      "lease_latency": {
+        "count": 256,
+        "max_ms": 9.8438,
+        "mean_ms": 6.893323437500005,
+        "p50_ms": 6.5949,
+        "p90_ms": 8.355,
+        "p99_ms": 8.792
+      },
+      "pass": "cold",
+      "seconds": 1.7647698,
+      "store": {
+        "acquire_failures": 0,
+        "blocks_4k": 1081856,
+        "busy_ms": 1425.0797,
+        "cache_block_bytes": 11534336,
+        "cache_bypassed": 0,
+        "cache_capacity_bytes": 6442450944,
+        "cache_evictions": 0,
+        "cache_hits": 0,
+        "cache_inserts": 512,
+        "cache_lookups": 512,
+        "cache_misses": 512,
+        "cache_peak_held_bytes": 4429185024,
+        "cache_resident_bytes": 4429185024,
+        "expert_hits": 0,
+        "expert_misses": 256,
+        "expert_waits": 0,
+        "experts": 256,
+        "extents": 768,
+        "logical_bytes": 4429185024,
+        "peak_leased_bytes": 17301504,
+        "physical_bytes": 4431282176,
+        "read_calls": 4608,
+        "read_ms": 7675.3776,
+        "staging_bytes": 33554432
+      }
+    },
+    {
+      "bytes": 4429185024,
+      "experts": 256,
+      "gb_per_second": 11779.74740425532,
+      "lease_latency": {
+        "count": 256,
+        "max_ms": 0.007,
+        "mean_ms": 0.001371093750000001,
+        "p50_ms": 0.0013,
+        "p90_ms": 0.0015,
+        "p99_ms": 0.0017000000000000001
+      },
+      "pass": "warm",
+      "seconds": 0.000376,
+      "store": {
+        "acquire_failures": 0,
+        "blocks_4k": 0,
+        "busy_ms": 0.0,
+        "cache_block_bytes": 11534336,
+        "cache_bypassed": 0,
+        "cache_capacity_bytes": 6442450944,
+        "cache_evictions": 0,
+        "cache_hits": 512,
+        "cache_inserts": 0,
+        "cache_lookups": 512,
+        "cache_misses": 0,
+        "cache_peak_held_bytes": 4429185024,
+        "cache_resident_bytes": 4429185024,
+        "expert_hits": 256,
+        "expert_misses": 0,
+        "expert_waits": 0,
+        "experts": 256,
+        "extents": 0,
+        "logical_bytes": 4429185024,
+        "peak_leased_bytes": 17301504,
+        "physical_bytes": 0,
+        "read_calls": 0,
+        "read_ms": 0.0,
+        "staging_bytes": 33554432
+      }
+    },
+    {
+      "bytes": 4429185024,
+      "call_latency": {
+        "count": 4,
+        "max_ms": 399.7154,
+        "mean_ms": 367.215125,
+        "p50_ms": 357.98990000000003,
+        "p90_ms": 399.7154,
+        "p99_ms": 399.7154
+      },
+      "experts": 256,
+      "gb_per_second": 3.015339412686254,
+      "pass": "batches",
+      "seconds": 1.4688843999999999,
+      "store": {
+        "acquire_failures": 0,
+        "blocks_4k": 1081856,
+        "busy_ms": 1354.7736,
+        "cache_block_bytes": 11534336,
+        "cache_bypassed": 0,
+        "cache_capacity_bytes": 6442450944,
+        "cache_evictions": 0,
+        "cache_hits": 0,
+        "cache_inserts": 512,
+        "cache_lookups": 512,
+        "cache_misses": 512,
+        "cache_peak_held_bytes": 4429185024,
+        "cache_resident_bytes": 4429185024,
+        "expert_hits": 0,
+        "expert_misses": 256,
+        "expert_waits": 0,
+        "experts": 256,
+        "extents": 768,
+        "logical_bytes": 4429185024,
+        "peak_leased_bytes": 1107296256,
+        "physical_bytes": 4431282176,
+        "read_calls": 4608,
+        "read_ms": 8257.2735,
+        "staging_bytes": 33554432
+      }
+    }
+  ],
+  "verification": {
+    "mismatches": [],
+    "rows": 512
+  }
+}

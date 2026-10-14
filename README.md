@@ -116,6 +116,21 @@ CUDA Graphs. On the same benchmark, every step of every configuration equals the
 the best configuration decodes a token in 409 ms (2.45 tokens/s) instead of 807, with prefills 36% faster. Phase 5C's
 bit planes decode exactly on the GPU too, but merging them costs more than the copy they save.
 
+**Phase 7A — the independent flagship runtime's foundation** turns Weightsift toward MoE models of about a trillion
+parameters (Inkling 975B, then MiMo-V2.6 Pro) on a 32 GB, 8 GB-GPU machine. It reuses Colibrì's engines through narrow
+C ABIs instead of rebuilding them, and never forks or vendors them.
+
+- **The weight storage backend** is a Rust expert store over the native core. Experts are described by a catalog
+  written from checkpoint headers, leased from the host cache in place, and served through a versioned C ABI; a shim
+  presents it as Colibrì's own expert-store contract. Colibrì's segment runtime is driven from Rust; its sources are
+  pinned, fetched and hash-verified, never committed.
+- **On Moonlight's real experts** the store leases 3.02 GB/s from the NVMe, and every row equals the reference.
+- **Also built:** a runtime memory planner, a Quality Budget (specification, results schema, interval-based
+  comparisons) and the Colibrì baseline's specification.
+- **Not run:** no flagship. The checkpoints' download needs approval, and Colibrì's engines need gcc.
+- **ApexQuant is BLOCKED:** it has no license, and its four-bit class would save at most 4.4% of the flagships' native
+  expert bytes.
+
 ## Setup
 
 ```bash
@@ -190,6 +205,14 @@ uv run python benchmarks/moonlight_runtime.py --config configs/phase6b-gpu.yaml 
 uv run python benchmarks/moonlight_profile.py --run experiments/phase6b/my-run --config configs/phase6b-gpu.yaml \
     --configuration encoded-host-12g-freeze-dev1.9g-fast --prompts 7 0 3 5 --warm --output experiments/phase6b/my-run/profile-fast-warm.json
 uv run python benchmarks/gpu_report.py experiments/phase6b/my-run [--compare experiments/phase6b/other-run]
+# Phase 7A: the flagship runtime's foundation (native/README.md for the crates and the C ABI)
+python native/fetch_upstream.py                                         # Colibri's pinned files, for weightsift-colibri
+(cd native && cargo test --workspace)                                   # the store, planner and Colibri bridge
+uv run python benchmarks/store_check.py --output experiments/phase7a/my-store --layers 1,2,3,4
+(cd native && cargo run --release -p weightsift-store --example store_check -- ../experiments/phase7a/my-store)
+uv run weightsift quality check                                         # the Quality Budget (configs/quality-budget.yaml)
+uv run python benchmarks/colibri_baseline.py --dry-run                  # the Colibri baseline's plan and blockers
+uv run python research/apexquant/feasibility.py                         # ApexQuant's byte screening (no ApexQuant code)
 ```
 
 `run.py` writes raw per-input records, validation records, the prompts, the
@@ -253,9 +276,13 @@ src/awpmi/      reference, paging, bounds, state, certificate, schedulers, execu
                 streaming_reference, models/moonlight and models/streamed (Phase 4B),
                 oracle/experts (Phase 5A expert oracle), storage/native (Phase 6A: the native store),
                 storage/encoded, streaming/codec and streaming/nvcomp (Phase 6B: encoded experts decoded on the GPU),
-                models/decode_graphs (Phase 6B: CUDA Graphs of the decode step)
-native/         the Rust I/O core (Phase 6A): core (weightsift-io: plans, direct reads, host-RAM cache,
-                transfer jobs) and python (the PyO3 module weightsift_native); see native/README.md
+                models/decode_graphs (Phase 6B: CUDA Graphs of the decode step),
+                quality, hardware, baseline and models/catalog (Phase 7A)
+native/         the Rust runtime: core (weightsift-io: plans, direct reads, host-RAM cache, transfer jobs,
+                leases) and python (the PyO3 module weightsift_native), Phase 6A; store (the expert store and
+                its C ABI), runtime (the planner) and colibri (the bridge to Colibri), Phase 7A; upstream.json
+                and fetch_upstream.py (pinned upstream sources, fetched into the gitignored third_party/);
+                see native/README.md
 tests/          bound soundness, pages, certificate and ties, reference parity, fallback parity,
                 decomposition exactness, refinement oracle, packing, coarse bounds, runtime,
                 rounding models, operator bounds, enclosure LM head, adaptive suffix,
@@ -263,20 +290,25 @@ tests/          bound soundness, pages, certificate and ties, reference parity, 
                 composed segments and compact expert calls (Phase 4A), chunked expert calls,
                 the streaming reference, the Moonlight adapter and streamed parameters (Phase 4B),
                 the expert oracle (Phase 5A), the native store against the Python one (Phase 6A; the MoE
-                tests run through both backends), encoded rows, the slot cache and decode graphs (Phase 6B)
+                tests run through both backends), encoded rows, the slot cache and decode graphs (Phase 6B),
+                the Quality Budget, the Colibri baseline and expert catalogs (Phase 7A; the native crates' own
+                tests run under cargo)
 benchmarks/     run.py, report.py, prompts.py, oracle.py, refinement_oracle.py, refinement_report.py,
                 refinement_runtime.py, refinement_runtime_report.py, fallback_study.py,
                 suffix_runtime.py, suffix_report.py, storage_runtime.py, storage_report.py,
                 moe_runtime.py, moe_report.py, olmoe_runtime.py, olmoe_profile.py, olmoe_report.py,
                 moonlight_runtime.py, moonlight_reference_check.py, moonlight_profile.py, moonlight_report.py,
                 expert_oracle.py, expert_oracle_report.py, native_trace.py, native_io.py, native_report.py,
-                reference_numerics.py, gpu_codec_probe.py, encoded_io.py, gpu_report.py
+                reference_numerics.py, gpu_codec_probe.py, encoded_io.py, gpu_report.py,
+                colibri_baseline.py, store_check.py
 configs/        smollm2-135m.yaml (pinned model and dataset revisions), phase1b-refinement.yaml,
                 phase1c-runtime.yaml, phase2-suffix.yaml, phase3-storage.yaml, phase3-moe.yaml,
                 phase4a-olmoe.yaml, phase4b-moonlight.yaml, phase5a-expert-oracle.yaml,
-                phase5a2-crown-oracle.yaml, phase5c-expert-deltas.yaml, phase6a-native.yaml, phase6b-gpu.yaml
+                phase5a2-crown-oracle.yaml, phase5c-expert-deltas.yaml, phase6a-native.yaml, phase6b-gpu.yaml,
+                phase7a-baseline.yaml (and its prompts), quality-budget.yaml, quality-results.schema.json
 research/       crown_expert_oracle (Phase 5A2: the auto_LiRPA verifier, its own environment and lockfile),
-                expert_deltas (Phase 5C: exact shared bases, bit-plane deltas, their codecs, replay and progressive oracle)
+                expert_deltas (Phase 5C: exact shared bases, bit-plane deltas, their codecs, replay and progressive oracle),
+                apexquant (Phase 7A: ApexQuant's licensing record and byte screening, from headers only)
 experiments/    raw results per phase and run
 packs/          packs and expert indexes (gitignored; rebuilt by `weightsift pack`)
 ```

@@ -6,6 +6,9 @@
 //! pieces to the device (`engine`). It is model-agnostic: segments are rows of byte spans of files, described by the
 //! caller (the checkpoint index); nothing here knows a model, what a tensor means, how many experts exist or how they
 //! are chosen. It holds no CUDA: the caller (PyTorch) owns pinned memory, streams and device copies.
+//!
+//! Phase 7A (decision 0014) adds leases (`Engine::acquire`): rows held in the host cache for a caller that reads them in
+//! place, the storage half of Weightsift's expert store (`weightsift-store`).
 
 pub mod buffer;
 pub mod cache;
@@ -16,8 +19,10 @@ pub mod layout;
 pub mod plan;
 
 pub use buffer::RawBuffer;
-pub use cache::{block_for, CacheStats, HostCache, MIN_BLOCK_BYTES};
-pub use engine::{Delivered, Engine, EngineConfig, IoStats, Job, Op, Prefetch, Request, SegmentStats, SlotBuffers};
+pub use cache::{block_for, CacheStats, Entry, HostCache, Loader, MIN_BLOCK_BYTES};
+pub use engine::{
+    Delivered, Engine, EngineConfig, IoStats, Job, Leased, Op, Prefetch, Request, SegmentStats, Served, SlotBuffers,
+};
 pub use error::{Error, Result};
 pub use file::{AlignedBuffer, FileTable, DIRECT_ALIGNMENT};
 pub use layout::Segment;

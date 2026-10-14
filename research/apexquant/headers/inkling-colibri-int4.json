@@ -1,0 +1,44 @@
+{
+ "model": "inkling-colibri-int4",
+ "repository": "nbeerbower/Inkling-colibri-int4",
+ "revision": "3981e658ed68ec681554d48a62f9a29dd9e61543",
+ "layer": 10,
+ "tensors": [
+  {
+   "tensor": "model.layers.10.mlp.experts.gate_up_proj",
+   "dtype": "U8",
+   "shape": [
+    4831838208
+   ],
+   "bytes": 4831838208,
+   "file": "out-00060.safetensors"
+  },
+  {
+   "tensor": "model.layers.10.mlp.experts.gate_up_proj.qs",
+   "dtype": "F32",
+   "shape": [
+    1572864
+   ],
+   "bytes": 6291456,
+   "file": "out-00060.safetensors"
+  },
+  {
+   "tensor": "model.layers.10.mlp.experts.down_proj",
+   "dtype": "U8",
+   "shape": [
+    2415919104
+   ],
+   "bytes": 2415919104,
+   "file": "out-00061.safetensors"
+  },
+  {
+   "tensor": "model.layers.10.mlp.experts.down_proj.qs",
+   "dtype": "F32",
+   "shape": [
+    1572864
+   ],
+   "bytes": 6291456,
+   "file": "out-00061.safetensors"
+  }
+ ]
+}

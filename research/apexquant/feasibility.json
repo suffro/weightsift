@@ -1,0 +1,163 @@
+{
+ "kind": "screening arithmetic: bytes from headers and the paper's accounting; no ApexQuant code, no weights",
+ "screening_target": 0.2,
+ "store_rate_bytes_per_second": 3019210431.403221,
+ "store_rate_source": "experiments/phase7a/store-moonlight (Moonlight-16B experts, batched leases, this machine's NVMe): measured there, extrapolated to the flagships' bytes",
+ "models": {
+  "inkling": {
+   "name": "Inkling 975B",
+   "expert_weights": 56623104,
+   "experts_per_token": 384,
+   "matrices": [
+    {
+     "name": "gate",
+     "rows": 3072,
+     "columns": 6144,
+     "whole_groups": true
+    },
+    {
+     "name": "up",
+     "rows": 3072,
+     "columns": 6144,
+     "whole_groups": true
+    },
+    {
+     "name": "down",
+     "rows": 6144,
+     "columns": 3072,
+     "whole_groups": true
+    }
+   ],
+   "groups_fit": true,
+   "formats": {
+    "inkling-colibri-int4": {
+     "bits_per_weight": 4.006944444444445,
+     "expert_bytes": 28360704,
+     "source": "header",
+     "token_bytes_cold": 10890510336,
+     "ratio_to_native": 1.0,
+     "byte_reduction": 0.0,
+     "io_bound_speedup_bound": 1.0,
+     "meets_screening_target": false,
+     "io_seconds_per_token_cold_extrapolated": 3.6070723069602275
+    },
+    "inkling-bf16": {
+     "bits_per_weight": 16.0,
+     "expert_bytes": 113246208,
+     "source": "header",
+     "token_bytes_cold": 43486543872,
+     "ratio_to_native": 3.9930675909878683,
+     "byte_reduction": -2.9930675909878683,
+     "io_bound_speedup_bound": 0.2504340277777778,
+     "meets_screening_target": false,
+     "io_seconds_per_token_cold_extrapolated": 14.403283527272727
+    },
+    "apexquant-p1": {
+     "bits_per_weight": 2.03125,
+     "expert_bytes": 14376960,
+     "source": "the paper's accounting P(b + 16/g), b=2, g=512",
+     "token_bytes_cold": 5520752640,
+     "ratio_to_native": 0.5069324090121318,
+     "byte_reduction": 0.49306759098786823,
+     "io_bound_speedup_bound": 1.9726495726495725,
+     "meets_screening_target": true,
+     "io_seconds_per_token_cold_extrapolated": 1.8285418540482954
+    },
+    "apexquant-p2": {
+     "bits_per_weight": 4.0625,
+     "expert_bytes": 28753920,
+     "source": "the paper's accounting P(b + 16/g), b=2, g=512",
+     "token_bytes_cold": 11041505280,
+     "ratio_to_native": 1.0138648180242635,
+     "byte_reduction": -0.013864818024263537,
+     "io_bound_speedup_bound": 0.9863247863247863,
+     "meets_screening_target": false,
+     "io_seconds_per_token_cold_extrapolated": 3.657083708096591
+    },
+    "apexquant-p3": {
+     "bits_per_weight": 6.09375,
+     "expert_bytes": 43130880,
+     "source": "the paper's accounting P(b + 16/g), b=2, g=512",
+     "token_bytes_cold": 16562257920,
+     "ratio_to_native": 1.5207972270363952,
+     "byte_reduction": -0.5207972270363952,
+     "io_bound_speedup_bound": 0.6575498575498575,
+     "meets_screening_target": false,
+     "io_seconds_per_token_cold_extrapolated": 5.485625562144887
+    }
+   }
+  },
+  "mimo-pro": {
+   "name": "MiMo-V2.6 Pro 1.02T",
+   "expert_weights": 37748736,
+   "experts_per_token": 552,
+   "matrices": [
+    {
+     "name": "gate",
+     "rows": 2048,
+     "columns": 6144,
+     "whole_groups": true
+    },
+    {
+     "name": "up",
+     "rows": 2048,
+     "columns": 6144,
+     "whole_groups": true
+    },
+    {
+     "name": "down",
+     "rows": 6144,
+     "columns": 2048,
+     "whole_groups": true
+    }
+   ],
+   "groups_fit": true,
+   "formats": {
+    "mimo-v2.6-pro": {
+     "bits_per_weight": 4.25,
+     "expert_bytes": 20054016,
+     "source": "header",
+     "token_bytes_cold": 11069816832,
+     "ratio_to_native": 1.0,
+     "byte_reduction": 0.0,
+     "io_bound_speedup_bound": 1.0,
+     "meets_screening_target": false,
+     "io_seconds_per_token_cold_extrapolated": 3.666460845809659
+    },
+    "apexquant-p1": {
+     "bits_per_weight": 2.03125,
+     "expert_bytes": 9584640,
+     "source": "the paper's accounting P(b + 16/g), b=2, g=512",
+     "token_bytes_cold": 5290721280,
+     "ratio_to_native": 0.47794117647058826,
+     "byte_reduction": 0.5220588235294117,
+     "io_bound_speedup_bound": 2.0923076923076924,
+     "meets_screening_target": true,
+     "io_seconds_per_token_cold_extrapolated": 1.7523526101296165
+    },
+    "apexquant-p2": {
+     "bits_per_weight": 4.0625,
+     "expert_bytes": 19169280,
+     "source": "the paper's accounting P(b + 16/g), b=2, g=512",
+     "token_bytes_cold": 10581442560,
+     "ratio_to_native": 0.9558823529411765,
+     "byte_reduction": 0.044117647058823484,
+     "io_bound_speedup_bound": 1.0461538461538462,
+     "meets_screening_target": false,
+     "io_seconds_per_token_cold_extrapolated": 3.504705220259233
+    },
+    "apexquant-p3": {
+     "bits_per_weight": 6.09375,
+     "expert_bytes": 28753920,
+     "source": "the paper's accounting P(b + 16/g), b=2, g=512",
+     "token_bytes_cold": 15872163840,
+     "ratio_to_native": 1.4338235294117647,
+     "byte_reduction": -0.4338235294117647,
+     "io_bound_speedup_bound": 0.6974358974358974,
+     "meets_screening_target": false,
+     "io_seconds_per_token_cold_extrapolated": 5.25705783038885
+    }
+   }
+  }
+ }
+}

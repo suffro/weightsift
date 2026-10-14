@@ -1,0 +1,30 @@
+{
+ "model": "inkling-bf16",
+ "repository": "thinkingmachines/Inkling",
+ "revision": "828496eeae4c243ff1a22f7f28ff83694f2f7bc9",
+ "layer": 10,
+ "tensors": [
+  {
+   "tensor": "model.llm.layers.10.mlp.experts.w13_weight",
+   "dtype": "BF16",
+   "shape": [
+    256,
+    6144,
+    6144
+   ],
+   "bytes": 19327352832,
+   "file": "model-00060-of-00108.safetensors"
+  },
+  {
+   "tensor": "model.llm.layers.10.mlp.experts.w2_weight",
+   "dtype": "BF16",
+   "shape": [
+    256,
+    6144,
+    3072
+   ],
+   "bytes": 9663676416,
+   "file": "model-00061-of-00108.safetensors"
+  }
+ ]
+}
