@@ -6,12 +6,45 @@
 the `pack` command (`lm-head`, `experts`, `expert-index`, `encoded-experts`) and, since Phase 7A, `quality` (`check`,
 `compare`). The Python package is `awpmi`.
 
-## Latest: Phase 7A (the independent flagship runtime's foundation) is complete as a foundation (2026-10-12)
+## Latest: Phase 7B (an independent technical review against Colibrì) is complete (2026-10-15)
+
+**Answer: Weightsift cannot outperform Colibrì as an engine. On this machine any exact gain, by anyone, is capped near
+1.7× for Inkling's int4 experts. The credible advantage is measured quality per byte: making flagship quality
+measurable, then choosing and placing representations under the Quality Budget, inside Colibrì's engines.**
+
+- **Report:** `history/2026-10-15-weightsift-phase7b-review.md`.
+- **Brief:** `state/phase_7B.md` (the user's of 2026-10-14). It forbade code and repository changes, so only `.context`
+  changed; nothing was run or measured.
+- **No decision record:** the review recommends, and the direction is the user's to choose.
+- **Facts that change the picture** [verified in Colibrì at `bf244291` and `dev` `2fc033dc`, and on model cards]:
+  - Colibrì's release v2.0.0 (2026-10-06) ships `inkling.exe` for Windows, built with Vulkan. The Colibrì baseline
+    needs no gcc; only patching its engines does.
+  - Colibrì's Inkling container (per-row int4) has "no quality evals yet beyond greedy smoke tests". The same recipe
+    measured about 9 points below grouped scales on GLM. Colibrì's own benchmark uses 40 items per task.
+  - The publisher's own Inkling NVFP4 release exists (about 592 GB). Inkling's config declares MTP layers, which
+    Colibrì does not load.
+  - Colibrì's Inkling engine is the simplest of its engines on I/O: token-major rounds of `cap` pairs, no prefetch, no
+    overlap on the CPU path, no route records.
+  - Colibrì's decode failure ledger rejects 19 directions on a full-resident 6× RTX 5090 host: shared expert bases,
+    prefetch for resident decode, fused ANS decoding, MTP as a default, among others. The rejections do not transfer
+    automatically to 2% residency.
+- **The model** (§ 5 of the report, not measured):
+  - Inkling on 32 GB with one 3.2 GB/s drive is disk-bound at about 0.3–0.4 tokens/s.
+  - A cold long prompt costs about 145 s of reads.
+  - Neither flagship runs here exactly against its release: both need a lossy dense conversion.
+- **AWPMI:** certification inside experts is closed by information, not by the verifiers (§ 2.9). It reopens only
+  through the one-day oracle E10.
+- **Recommended month** (§ 13 C): quality per byte for routed experts on Moonlight, locally:
+  - a teacher-forced KL scorer;
+  - pinned benchmarks;
+  - mass-weighted bit allocation against uniform at equal bytes, with pre-set continue and abandon gates.
+
+## Previous focus: Phase 7A (the independent flagship runtime's foundation) is complete as a foundation (2026-10-12)
 
 **Answer: the foundation is built and tested; no flagship has run, and ApexQuant is BLOCKED.**
 
-- Report: `history/2026-10-12-weightsift-phase7a-report.md`. Decision: 0014. Brief: `state/phase_7A.md` (the user's of
-  2026-10-12).
+- Report: `history/2026-10-12-weightsift-phase7a-report.md`. Decision: 0014. Brief: the user's of 2026-10-12 (committed
+  in 54c31eb, since replaced by the Phase 7B brief).
 - **Done:** every implementation gate of the brief.
 - **Waiting:** every flagship gate, which the brief makes subsequent. It needs a checkpoint (its download needs the
   user's approval) and a gcc toolchain for Colibrì's engines.
@@ -41,46 +74,22 @@ the `pack` command (`lm-head`, `experts`, `expert-index`, `encoded-experts`) and
 - **Specifications.** The Quality Budget (`awpmi.quality`; dataset revisions not yet pinned) and the Colibrì baseline
   (`configs/phase7a-baseline.yaml`; not run).
 
-## Previous focus: Phase 6B (GPU transfers and decode execution) is complete (2026-10-09)
-
-**Answer: 408.9 ms per decode token, 0.507 of Phase 6A's 807, bit for bit equal to the reference.** The report is
-`history/2026-10-09-weightsift-phase6b-report.md`; the decision is 0013. The brief was the user's of 2026-10-09
-(committed in 4a70869, since replaced by the Phase 7A brief).
-
-- **Baseline first**: Phase 6A's best configuration reproduced on its own tree (810.8 and 806.9 ms; 5,195 launches per
-  token, 524 ms of copies, the GPU idle 39–41%).
-- **6B1, the host cache's submit cost** (native core): rows held in blocks of one size reused across row sizes (the pool
-  inside the budget), readers woken one at a time instead of all per task; 100 → about 1 ms per decode token; BF16
-  host-cache decode 0.964 of the 6A tree's. A latent 6A deadlock (two jobs waiting on each other's loads) fixed: a request
-  reads a row another request is loading itself, unadmitted.
-- **6B2, experts encoded for the GPU**: nvCOMP decodes Phase 5C's zstd frames exactly but too slowly with the plane merge;
-  nvCOMP's rANS over raw BF16 rows (1 MiB chunks) stores 0.6747 and decodes a call in 0.7 ms. The encoded pack
-  (`weightsift pack encoded-experts`, 19.42 GB) is read and cached by the native core as bytes and decoded on the GPU into
-  the experts' buffers: 610.8 against 787.2 ms at the same 12 GB host cache (0.776); every row audited before inference.
-- **6B3-A, a device tier**: `SlotCache`, fixed slots per stored row size (1.9 GB, LRU, prefill admission frozen) under the
-  6 GB cap; it pays only from one token's working set (an LRU cliff at 1.82 GB): 493.7 against 610.8 ms (0.808).
-- **6B3-B, native copy issuing**: measured (−1.3%, then nothing with the fills off), not built.
-- **6B4, decode graphs**: `DecodeGraphs` replays each DeepSeek-V3 layer's static decode pieces from two CUDA Graphs (54 in
-  all, 65–68 MB), the KV cache, attention and routed experts eager between them; and PyTorch's NaN fill of uninitialized
-  memory (deterministic mode's debugging aid: 270 fill kernels per token) is off per configuration: 408.9 against 493.7
-  ms (0.828); 2,344 kernel + 54 graph launches per token.
-- **Correctness**: 1,116 steps per run (10 configurations) equal to the reference in every digest, two runs with
-  identical digests, I/O parity, both cache tiers equal to their replays, the encoded pack's 3,328 rows equal.
-- **What bounds a token now**: the bytes still copied (1.24 GB, 198 ms), the host cache's copies and the drive behind
-  them (124 ms of waits), and the eager remainder of the transformer (about 170 ms of the main thread).
-- **§ 6C (prepared, not started)**: shape-dependent kernels (kept by graph capture), workspace-dependent cuBLAS choices,
-  reduction orders, where PyTorch changes execution without changing values, and the candidates for an explicitly
-  reproducible native reference are in the report's § 12.
-
 ## Earlier
+
+**Phase 6B (GPU transfers and decode execution) is complete (2026-10-09)** (report
+`history/2026-10-09-weightsift-phase6b-report.md`, decision 0013; brief committed in 4a70869): 408.9 ms per decode token,
+0.507 of Phase 6A's 807, bit for bit equal to the reference, through encoded experts decoded on the GPU (nvCOMP rANS,
+0.6747 of BF16), a fixed-slot device tier and CUDA Graphs of the static decode pieces. What bounded a token then: the
+bytes still copied (198 ms), the host cache's waits (124 ms) and the eager remainder (about 170 ms). Phase 6C was
+prepared (its § 12), not started.
 
 **Phase 6A (the native runtime foundation) is complete (2026-10-08)** (report
 `history/2026-10-08-weightsift-phase6a-report.md`, decision 0012): a small, model-agnostic Rust I/O core (`native/`)
 behind the Python storage contract, with a host-RAM expert cache; 807 ms per decode token against 1,157 ms for the best
 Python configuration, bit for bit equal to the independent reference.
 
-Phases 1A, 1B, 1C, 2, 3, 4A, 4B, 5A, 5A2, 5C, 6A and 6B are complete, and 7A as a foundation; their reports are in
-`history/`.
+Phases 1A, 1B, 1C, 2, 3, 4A, 4B, 5A, 5A2, 5C, 6A, 6B and 7B are complete, and 7A as a foundation; their reports are
+in `history/`.
 
 - Phase 4B (decision 0008) runs Moonlight out of VRAM and host RAM, bit for bit equal to an independent reference.
 - Phase 6A (decision 0012) runs it on the native core; Phase 6B (decision 0013) moves encoded experts to the GPU and
@@ -88,6 +97,15 @@ Phases 1A, 1B, 1C, 2, 3, 4A, 4B, 5A, 5A2, 5C, 6A and 6B are complete, and 7A as 
 - Phase 7A (decision 0014) turns the project toward flagships, with a Rust storage backend under Colibrì's engines.
 
 ## Recent relevant changes
+
+**Phase 7B changed only `.context`:**
+
+- the review report;
+- `state/current.md` and `index.md`;
+- the user's brief, committed;
+- references to the replaced 7A brief, which now cite its commit.
+
+**Phase 7A's code changes:**
 
 - **`native/core`** (`cache.rs`, `engine.rs`, `error.rs`): leases.
   - `Engine::acquire`, which returns `Leased`: entries plus how each was served.
@@ -118,22 +136,36 @@ Phases 1A, 1B, 1C, 2, 3, 4A, 4B, 5A, 5A2, 5C, 6A and 6B are complete, and 7A as 
 
 ## Next
 
-The next milestone needs the user's go-ahead. Recommended (report § 10): **Inkling's engine reading its experts through
-Weightsift's store, token-exact on Colibrì's tiny Inkling oracle.** This needs a gcc toolchain but no download:
+The next milestone needs the user's go-ahead. The direction is the user's choice, among the 7B review's
+recommendations.
 
-1. Build Colibrì's `inkling` at the pinned commit.
-2. Write a reviewed patch of `slot_fill` and the slot LRU through `ws_colibri_store_open`, applied at fetch time.
-3. Require identical tokens with and without the store, under eviction.
+**Immediate, with no download** (report § 11):
 
-Then, with the download approved, the Colibrì baseline of `configs/phase7a-baseline.yaml` on the real 975B. Only after
-that, any comparison of the store with Colibrì's own loader. The Phase 6C items (the BF16 reference's semantics, more of
-the decode step in graphs, more experts per device byte) stay recorded in decision 0013 and the Phase 6B report.
+- I1: measure this machine's RAM bandwidth, the second drive and the PCIe topology, and mine Moonlight's routing traces
+  for expert-mass skew, hit-rate curves at 1–5% residency and consecutive-token unions.
+- I2: screen the exact levers: the CPU rANS decode rate, and prefill re-reads on Colibrì's tiny Inkling oracle.
+- I3: shake down Colibrì's Windows release here.
+- I4: pin the Quality Budget's datasets and add a multilingual category.
+
+**The recommended month** (§ 13 C): quality per byte on Moonlight, with its continue and abandon gates.
+
+**Gated on approval:** Colibrì's Inkling baseline (E8, 514 GB) decides whether the 7A store patch is worth building.
+The patch is built only if storage, not the drive, is on the critical path.
+
+The Phase 6C items stay recorded in decision 0013 and the Phase 6B report. The 7B review recommends not pursuing them as
+product work.
 
 Open decisions for the user:
 
-- Approval (or not) to download a flagship artifact: Inkling's int4 container is 514 GB, MiMo-V2.6 Pro 563.6 GB without
-  its unused files. Alternatively, a bounded sample of expert tensors by range requests.
-- A gcc toolchain on this machine (MSYS2 MinGW-w64), or a Linux host, to build Colibrì's engines.
+- **The direction among the 7B review's recommendations** (its § 10 and § 13).
+- **Approval (or not) to download.**
+  - A flagship artifact: Inkling's int4 container is 514 GB, its NVFP4 release about 592 GB, MiMo-V2.6 Pro 563.6 GB
+    without its unused files.
+  - Or a bounded sample of expert tensors by range requests: about 1.8 GB for E4.
+- **A gcc toolchain** (MSYS2's UCRT64 gcc, not the MSYS one), or a Linux host. It is needed only to patch Colibrì's
+  engines; its Windows release runs the baseline.
+- **Hardware, after E1:** a second NVMe on CPU-attached lanes, or 64 GB of RAM. The report's model ranks both above any
+  software change for exact mode.
 - ApexQuant: a license from its authors before any use of its code.
 - The Quality Budget's datasets: confirm and pin their revisions.
 - Weightsift's own license (the repository has none).
@@ -144,6 +176,9 @@ Open decisions for the user:
 
 - **No flagship checkpoint is local**, and downloading one needs the user's approval. Every flagship measurement waits
   for it: the Colibrì baseline, quality, ApexQuant on real experts.
-- **Colibrì's model engines need gcc and POSIX headers** (MSYS2 on Windows). This machine has MSVC only, so only
-  Colibrì's portable C builds here: its headers, segment runtime and conformance fixtures.
+- **Colibrì's model engines need gcc and POSIX headers to be built** (MSYS2's UCRT64 on Windows). This machine has MSVC
+  only, so only Colibrì's portable C builds here: its headers, segment runtime and conformance fixtures.
+  - This blocks patching the engines (the store integration), not running them.
+  - Colibrì's release v2.0.0 ships prebuilt Windows engines, `inkling.exe` included, with Vulkan.
+  - Not yet tried on this machine.
 - **ApexQuant's code has no license.**

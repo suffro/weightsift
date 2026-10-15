@@ -11,7 +11,8 @@ The project is named **Weightsift**. This directory contains its canonical share
 
 - `truth/conventions.md` — repository conventions.
 - `state/Weightsift_Implementation_Guide.md` — principles, architecture and research method (replaced the AWPMI roadmap).
-- `state/phase_7A.md` — the user's brief for the active phase (the independent flagship runtime, decision 0014).
+- `state/phase_7B.md` — the user's brief for the latest phase: an independent technical review of Weightsift against
+  Colibrì (report `history/2026-10-15-weightsift-phase7b-review.md`).
 - `decisions/` — significant technical and architectural decisions.
 
 ## Historical

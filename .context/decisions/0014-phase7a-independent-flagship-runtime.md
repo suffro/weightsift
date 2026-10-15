@@ -9,7 +9,7 @@ VRAM and host RAM bit for bit equal to an independent BF16 reference (decision 0
 host-RAM expert cache (0012), with encoded experts, a device tier and decode graphs at 408.9 ms per decode token (0013).
 Everything so far ran a 16B model in BF16 with PyTorch as the execution engine.
 
-The user's Phase 7A brief (2026-10-12, `state/phase_7A.md`) turns the project toward flagship MoE models of about one
+The user's Phase 7A brief (2026-10-12; committed in 54c31eb, since replaced by the Phase 7B brief) turns the project toward flagship MoE models of about one
 trillion parameters on constrained consumer hardware:
 
 - **Weightsift stays an independent project with its own architecture and a Rust-native systems core.** Colibrì and DS4

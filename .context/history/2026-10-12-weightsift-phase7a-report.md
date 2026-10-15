@@ -1,7 +1,8 @@
 # Weightsift Phase 7A report — an independent flagship runtime's foundation; ApexQuant feasibility
 
 Date: 2026-10-12 · Follows: `history/2026-10-09-weightsift-phase6b-report.md` (Phase 6B) ·
-Decision: `decisions/0014-phase7a-independent-flagship-runtime.md` · Brief: `state/phase_7A.md` ·
+Decision: `decisions/0014-phase7a-independent-flagship-runtime.md` · Brief: the user's of 2026-10-12 (committed in
+54c31eb, since replaced by the Phase 7B brief) ·
 Status: **the foundation is implemented and tested; no flagship was run.** Every flagship measurement waits for a
 checkpoint whose download needs the user's approval, and for a gcc toolchain to build Colibrì's engines. **ApexQuant:
 BLOCKED** (no license; no approved flagship tensors).
