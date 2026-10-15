@@ -1,0 +1,17 @@
+[glm52_int4_row] GPU decode [138.8, 135.5] GB/s
+[glm52_int4_row] granularity {"matrix": 0.7363, "512": 0.7366, "64": 0.7388, "8": 0.7438}
+[glm52_int4_row] random access: read 5.6 ms + decode 128.9 ms vs stored 8.5 ms
+[inkling_int4_row] GPU decode [136.5, 136.8] GB/s
+[inkling_int4_row] granularity {"matrix": 0.732, "512": 0.7322, "64": 0.7339, "8": 0.7378}
+[inkling_int4_row] random access: read 8.9 ms + decode 193.8 ms vs stored 12.7 ms
+[mimo_v26_pro_mxfp4] GPU decode [124.2, 122.7] GB/s
+[mimo_v26_pro_mxfp4] granularity {"matrix": 0.9343, "512": 0.9346, "64": 0.9367, "8": 0.9417}
+[mimo_v26_pro_mxfp4] random access: read 7.9 ms + decode 134.1 ms vs stored 9.1 ms
+[kimi_k2_int4_g32] GPU decode [128.1, 125.6] GB/s
+[kimi_k2_int4_g32] granularity {"matrix": 0.9056, "512": 0.9059, "64": 0.9079, "8": 0.9128}
+[kimi_k2_int4_g32] random access: read 9.3 ms + decode 160.0 ms vs stored 11.2 ms
+[gptoss20b_mxfp4] GPU decode [125.9, 124.0] GB/s
+[gptoss20b_mxfp4] granularity {"matrix": 0.9654, "512": 0.9658, "64": 0.9685, "8": 0.9751}
+[gptoss20b_mxfp4] random access: read 5.2 ms + decode 87.5 ms vs stored 6.0 ms
+[moonlight] random access: read 4.8 ms + decode 42.8 ms vs stored 7.8 ms
+done

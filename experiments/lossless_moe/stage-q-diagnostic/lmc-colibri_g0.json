@@ -1,0 +1,4942 @@
+{
+  "blocks": [
+    {
+      "colibri": {
+        "encode_s": 0.0264086,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1092128
+      },
+      "cols": 2048,
+      "decode_error": null,
+      "decoded_sha256": "93d9b3b62528c07a239be728c7cf6657f5d2febd8f91b4a99acbf233ba01d5fe",
+      "encode_s": 0.0284805,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L1/E1/gate",
+      "original_bytes": 1441792,
+      "original_sha256": "93d9b3b62528c07a239be728c7cf6657f5d2febd8f91b4a99acbf233ba01d5fe",
+      "raw_bytes": 0,
+      "rows": 1408,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1090236,
+        "side": 0,
+        "tables": 33,
+        "total": 1090419
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0265662,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1094064
+      },
+      "cols": 2048,
+      "decode_error": null,
+      "decoded_sha256": "0e0951233b6b32d6b9358307e70b98d023c851861842efad489d1ba6e80e8ab8",
+      "encode_s": 0.0315813,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L1/E1/up",
+      "original_bytes": 1441792,
+      "original_sha256": "0e0951233b6b32d6b9358307e70b98d023c851861842efad489d1ba6e80e8ab8",
+      "raw_bytes": 0,
+      "rows": 1408,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1092202,
+        "side": 0,
+        "tables": 33,
+        "total": 1092385
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0272859,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1110448
+      },
+      "cols": 1408,
+      "decode_error": null,
+      "decoded_sha256": "4516150da8ec1ae662e9995a1c6464f4c073c4bbd0dd7c027ee482f2038eb899",
+      "encode_s": 0.0283031,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L1/E1/down",
+      "original_bytes": 1441792,
+      "original_sha256": "4516150da8ec1ae662e9995a1c6464f4c073c4bbd0dd7c027ee482f2038eb899",
+      "raw_bytes": 0,
+      "rows": 2048,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1108246,
+        "side": 0,
+        "tables": 33,
+        "total": 1108429
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0264973,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1093248
+      },
+      "cols": 2048,
+      "decode_error": null,
+      "decoded_sha256": "478db61632f849fc0afeb758535a8d300f966af651a0de6101c858202085f24e",
+      "encode_s": 0.0276165,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L1/E4/gate",
+      "original_bytes": 1441792,
+      "original_sha256": "478db61632f849fc0afeb758535a8d300f966af651a0de6101c858202085f24e",
+      "raw_bytes": 0,
+      "rows": 1408,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1091379,
+        "side": 0,
+        "tables": 33,
+        "total": 1091562
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0265258,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1093632
+      },
+      "cols": 2048,
+      "decode_error": null,
+      "decoded_sha256": "a31ea065982d9b16f126594ddaefccc055b041f380c1ba9ec0e37d670805e42b",
+      "encode_s": 0.0279291,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L1/E4/up",
+      "original_bytes": 1441792,
+      "original_sha256": "a31ea065982d9b16f126594ddaefccc055b041f380c1ba9ec0e37d670805e42b",
+      "raw_bytes": 0,
+      "rows": 1408,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1091777,
+        "side": 0,
+        "tables": 33,
+        "total": 1091960
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0290974,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1107536
+      },
+      "cols": 1408,
+      "decode_error": null,
+      "decoded_sha256": "be376ca7ba8d9fcbe7aa5d05e6ea8d5b7a2c816eb60d29c1d92531e9e2f073b4",
+      "encode_s": 0.0272715,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L1/E4/down",
+      "original_bytes": 1441792,
+      "original_sha256": "be376ca7ba8d9fcbe7aa5d05e6ea8d5b7a2c816eb60d29c1d92531e9e2f073b4",
+      "raw_bytes": 0,
+      "rows": 2048,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1105449,
+        "side": 0,
+        "tables": 33,
+        "total": 1105632
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0261842,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1093808
+      },
+      "cols": 2048,
+      "decode_error": null,
+      "decoded_sha256": "7b7b52f8aa1ab738a5ac0134f7857ecd786d61e3223447b3654448cd3f9f2219",
+      "encode_s": 0.0273659,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L1/E5/gate",
+      "original_bytes": 1441792,
+      "original_sha256": "7b7b52f8aa1ab738a5ac0134f7857ecd786d61e3223447b3654448cd3f9f2219",
+      "raw_bytes": 0,
+      "rows": 1408,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1091938,
+        "side": 0,
+        "tables": 33,
+        "total": 1092121
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0262717,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1092976
+      },
+      "cols": 2048,
+      "decode_error": null,
+      "decoded_sha256": "b2e25506a6a515279dba98468531d108068ec163d8d3b69d24516765842ffc1f",
+      "encode_s": 0.0271781,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L1/E5/up",
+      "original_bytes": 1441792,
+      "original_sha256": "b2e25506a6a515279dba98468531d108068ec163d8d3b69d24516765842ffc1f",
+      "raw_bytes": 0,
+      "rows": 1408,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1091109,
+        "side": 0,
+        "tables": 33,
+        "total": 1091292
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.030912,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1108368
+      },
+      "cols": 1408,
+      "decode_error": null,
+      "decoded_sha256": "8fe8f35b1faa2cf18acdb7db0020fa9c512156cb15d5fa066931fb79b43cc6f4",
+      "encode_s": 0.0307773,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L1/E5/down",
+      "original_bytes": 1441792,
+      "original_sha256": "8fe8f35b1faa2cf18acdb7db0020fa9c512156cb15d5fa066931fb79b43cc6f4",
+      "raw_bytes": 0,
+      "rows": 2048,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1106273,
+        "side": 0,
+        "tables": 33,
+        "total": 1106456
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0313788,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1092208
+      },
+      "cols": 2048,
+      "decode_error": null,
+      "decoded_sha256": "f0e7aeb136c6ac3da0ce76c9bf2852ed202f6189154bc078637e101836bf5cfb",
+      "encode_s": 0.034674,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L1/E8/gate",
+      "original_bytes": 1441792,
+      "original_sha256": "f0e7aeb136c6ac3da0ce76c9bf2852ed202f6189154bc078637e101836bf5cfb",
+      "raw_bytes": 0,
+      "rows": 1408,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1090324,
+        "side": 0,
+        "tables": 33,
+        "total": 1090507
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0277313,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1093984
+      },
+      "cols": 2048,
+      "decode_error": null,
+      "decoded_sha256": "65a717d692c2294b01ca1fb893a8ce4d4e34d462fc29579f5184bfb6b55e1237",
+      "encode_s": 0.028372,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L1/E8/up",
+      "original_bytes": 1441792,
+      "original_sha256": "65a717d692c2294b01ca1fb893a8ce4d4e34d462fc29579f5184bfb6b55e1237",
+      "raw_bytes": 0,
+      "rows": 1408,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1092123,
+        "side": 0,
+        "tables": 33,
+        "total": 1092306
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0268835,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1108336
+      },
+      "cols": 1408,
+      "decode_error": null,
+      "decoded_sha256": "ba2c216c94d8a4174b30c199695074ed38e5734372888755042c5d52b9d7fef8",
+      "encode_s": 0.030507,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L1/E8/down",
+      "original_bytes": 1441792,
+      "original_sha256": "ba2c216c94d8a4174b30c199695074ed38e5734372888755042c5d52b9d7fef8",
+      "raw_bytes": 0,
+      "rows": 2048,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1106231,
+        "side": 0,
+        "tables": 33,
+        "total": 1106414
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0265493,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1092944
+      },
+      "cols": 2048,
+      "decode_error": null,
+      "decoded_sha256": "08e209e5f5292847fc296f0a92e7f3520da8d0946a7e937a8685dcd8180c5e80",
+      "encode_s": 0.0279544,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L1/E11/gate",
+      "original_bytes": 1441792,
+      "original_sha256": "08e209e5f5292847fc296f0a92e7f3520da8d0946a7e937a8685dcd8180c5e80",
+      "raw_bytes": 0,
+      "rows": 1408,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1091077,
+        "side": 0,
+        "tables": 33,
+        "total": 1091260
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0276922,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1093072
+      },
+      "cols": 2048,
+      "decode_error": null,
+      "decoded_sha256": "c22edb21592b0b4eae6dd2e50723f12ad69b90edf0046c70d2274ed702c60d8f",
+      "encode_s": 0.0274619,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L1/E11/up",
+      "original_bytes": 1441792,
+      "original_sha256": "c22edb21592b0b4eae6dd2e50723f12ad69b90edf0046c70d2274ed702c60d8f",
+      "raw_bytes": 0,
+      "rows": 1408,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1091206,
+        "side": 0,
+        "tables": 33,
+        "total": 1091389
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0262934,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1109040
+      },
+      "cols": 1408,
+      "decode_error": null,
+      "decoded_sha256": "4a9f74ee12ff8cb77e8e6b1765f8ea96715b9c661bf4c8107e5bf0d8495362a7",
+      "encode_s": 0.0294834,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L1/E11/down",
+      "original_bytes": 1441792,
+      "original_sha256": "4a9f74ee12ff8cb77e8e6b1765f8ea96715b9c661bf4c8107e5bf0d8495362a7",
+      "raw_bytes": 0,
+      "rows": 2048,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1106898,
+        "side": 0,
+        "tables": 33,
+        "total": 1107081
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0261438,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1090560
+      },
+      "cols": 2048,
+      "decode_error": null,
+      "decoded_sha256": "9386b94f50f550b60330f2969843020299dbdfffe358ef55329e812cfdaefb51",
+      "encode_s": 0.0268994,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L1/E33/gate",
+      "original_bytes": 1441792,
+      "original_sha256": "9386b94f50f550b60330f2969843020299dbdfffe358ef55329e812cfdaefb51",
+      "raw_bytes": 0,
+      "rows": 1408,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1088642,
+        "side": 0,
+        "tables": 33,
+        "total": 1088825
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0262488,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1092016
+      },
+      "cols": 2048,
+      "decode_error": null,
+      "decoded_sha256": "af516fd4e047819549062f09d143d5d8815a07181368eb7322dfd93342c5b5da",
+      "encode_s": 0.0278072,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L1/E33/up",
+      "original_bytes": 1441792,
+      "original_sha256": "af516fd4e047819549062f09d143d5d8815a07181368eb7322dfd93342c5b5da",
+      "raw_bytes": 0,
+      "rows": 1408,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1090126,
+        "side": 0,
+        "tables": 33,
+        "total": 1090309
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.026622,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1108512
+      },
+      "cols": 1408,
+      "decode_error": null,
+      "decoded_sha256": "5171ee8e1076f2b0f2fba0a1de0fcdb21c2343eaec9c83eec3c3829b9db65b04",
+      "encode_s": 0.0274876,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L1/E33/down",
+      "original_bytes": 1441792,
+      "original_sha256": "5171ee8e1076f2b0f2fba0a1de0fcdb21c2343eaec9c83eec3c3829b9db65b04",
+      "raw_bytes": 0,
+      "rows": 2048,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1106398,
+        "side": 0,
+        "tables": 33,
+        "total": 1106581
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0277162,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1093568
+      },
+      "cols": 2048,
+      "decode_error": null,
+      "decoded_sha256": "fe1170f443c7b8af60977275d750bb05838f6c7da2092cba50ca4218938ff110",
+      "encode_s": 0.0279791,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L1/E45/gate",
+      "original_bytes": 1441792,
+      "original_sha256": "fe1170f443c7b8af60977275d750bb05838f6c7da2092cba50ca4218938ff110",
+      "raw_bytes": 0,
+      "rows": 1408,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1091709,
+        "side": 0,
+        "tables": 33,
+        "total": 1091892
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0262376,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1092176
+      },
+      "cols": 2048,
+      "decode_error": null,
+      "decoded_sha256": "8a140c50bce6952e9703754a69935d9d390fa28b5c168e5829fbaa0a66eec9d7",
+      "encode_s": 0.0276111,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L1/E45/up",
+      "original_bytes": 1441792,
+      "original_sha256": "8a140c50bce6952e9703754a69935d9d390fa28b5c168e5829fbaa0a66eec9d7",
+      "raw_bytes": 0,
+      "rows": 1408,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1090285,
+        "side": 0,
+        "tables": 33,
+        "total": 1090468
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0265335,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1105744
+      },
+      "cols": 1408,
+      "decode_error": null,
+      "decoded_sha256": "bd2c4c63feca17a978f77f2287b8412aca160e8e371a92eb78c81ec76eb993d5",
+      "encode_s": 0.0275239,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L1/E45/down",
+      "original_bytes": 1441792,
+      "original_sha256": "bd2c4c63feca17a978f77f2287b8412aca160e8e371a92eb78c81ec76eb993d5",
+      "raw_bytes": 0,
+      "rows": 2048,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1103744,
+        "side": 0,
+        "tables": 33,
+        "total": 1103927
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0262725,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1093824
+      },
+      "cols": 2048,
+      "decode_error": null,
+      "decoded_sha256": "926b21be93d17b04fd05c3d0b899935314cff1eccbf490be34d901e063f88488",
+      "encode_s": 0.0270985,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L1/E52/gate",
+      "original_bytes": 1441792,
+      "original_sha256": "926b21be93d17b04fd05c3d0b899935314cff1eccbf490be34d901e063f88488",
+      "raw_bytes": 0,
+      "rows": 1408,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1091956,
+        "side": 0,
+        "tables": 33,
+        "total": 1092139
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0265408,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1092544
+      },
+      "cols": 2048,
+      "decode_error": null,
+      "decoded_sha256": "01af42c58540de4e698d5a57d80e73dd6b50016bbaf7117a36884ebbd49dcba8",
+      "encode_s": 0.0271079,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L1/E52/up",
+      "original_bytes": 1441792,
+      "original_sha256": "01af42c58540de4e698d5a57d80e73dd6b50016bbaf7117a36884ebbd49dcba8",
+      "raw_bytes": 0,
+      "rows": 1408,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1090663,
+        "side": 0,
+        "tables": 33,
+        "total": 1090846
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0274643,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1107232
+      },
+      "cols": 1408,
+      "decode_error": null,
+      "decoded_sha256": "3c054d9c4016422ce41b9042a54edca2d4367cb6f771e4103223f6ce29eb9a11",
+      "encode_s": 0.0278043,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L1/E52/down",
+      "original_bytes": 1441792,
+      "original_sha256": "3c054d9c4016422ce41b9042a54edca2d4367cb6f771e4103223f6ce29eb9a11",
+      "raw_bytes": 0,
+      "rows": 2048,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1105185,
+        "side": 0,
+        "tables": 33,
+        "total": 1105368
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0266393,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1093536
+      },
+      "cols": 2048,
+      "decode_error": null,
+      "decoded_sha256": "068e0a4850446afa2e4caf42c8062b5de2ec98d3edd0ff5342d6da6ec9884aa4",
+      "encode_s": 0.0270172,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L6/E0/gate",
+      "original_bytes": 1441792,
+      "original_sha256": "068e0a4850446afa2e4caf42c8062b5de2ec98d3edd0ff5342d6da6ec9884aa4",
+      "raw_bytes": 0,
+      "rows": 1408,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1091676,
+        "side": 0,
+        "tables": 33,
+        "total": 1091859
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0265007,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1095200
+      },
+      "cols": 2048,
+      "decode_error": null,
+      "decoded_sha256": "a54f8a2d6c0d3fbaaf2fcf184c1ba28226800c429e4ba010e3b0e26d384bf9ec",
+      "encode_s": 0.0274014,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L6/E0/up",
+      "original_bytes": 1441792,
+      "original_sha256": "a54f8a2d6c0d3fbaaf2fcf184c1ba28226800c429e4ba010e3b0e26d384bf9ec",
+      "raw_bytes": 0,
+      "rows": 1408,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1093352,
+        "side": 0,
+        "tables": 33,
+        "total": 1093535
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0264433,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1107984
+      },
+      "cols": 1408,
+      "decode_error": null,
+      "decoded_sha256": "95d31865be01114cbd1d8e92361afc4356cd4de82a0fde536f4bad0c5d134690",
+      "encode_s": 0.0284873,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L6/E0/down",
+      "original_bytes": 1441792,
+      "original_sha256": "95d31865be01114cbd1d8e92361afc4356cd4de82a0fde536f4bad0c5d134690",
+      "raw_bytes": 0,
+      "rows": 2048,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1105905,
+        "side": 0,
+        "tables": 33,
+        "total": 1106088
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0272425,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1094208
+      },
+      "cols": 2048,
+      "decode_error": null,
+      "decoded_sha256": "558e054841161384e208f01cfbcef013b4a914f302b2444dac00e40793e3010e",
+      "encode_s": 0.0286939,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L6/E15/gate",
+      "original_bytes": 1441792,
+      "original_sha256": "558e054841161384e208f01cfbcef013b4a914f302b2444dac00e40793e3010e",
+      "raw_bytes": 0,
+      "rows": 1408,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1092348,
+        "side": 0,
+        "tables": 33,
+        "total": 1092531
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0263103,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1094176
+      },
+      "cols": 2048,
+      "decode_error": null,
+      "decoded_sha256": "daea9c6ffc68d9b9ccd1b680c18bf8cf3c359afa85683bc7257ce635be6cad00",
+      "encode_s": 0.0272883,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L6/E15/up",
+      "original_bytes": 1441792,
+      "original_sha256": "daea9c6ffc68d9b9ccd1b680c18bf8cf3c359afa85683bc7257ce635be6cad00",
+      "raw_bytes": 0,
+      "rows": 1408,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1092309,
+        "side": 0,
+        "tables": 33,
+        "total": 1092492
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0263152,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1105744
+      },
+      "cols": 1408,
+      "decode_error": null,
+      "decoded_sha256": "77d186246e4fb9b527720bccfced3ccb92012d53aea74022361db8ca584fdf07",
+      "encode_s": 0.0270841,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L6/E15/down",
+      "original_bytes": 1441792,
+      "original_sha256": "77d186246e4fb9b527720bccfced3ccb92012d53aea74022361db8ca584fdf07",
+      "raw_bytes": 0,
+      "rows": 2048,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1103738,
+        "side": 0,
+        "tables": 33,
+        "total": 1103921
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0259905,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1092096
+      },
+      "cols": 2048,
+      "decode_error": null,
+      "decoded_sha256": "9c7bc6d88a4f7838d01e79db9ab36c1691968e068689db17c9cb48b511b54a15",
+      "encode_s": 0.0274461,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L6/E26/gate",
+      "original_bytes": 1441792,
+      "original_sha256": "9c7bc6d88a4f7838d01e79db9ab36c1691968e068689db17c9cb48b511b54a15",
+      "raw_bytes": 0,
+      "rows": 1408,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1090205,
+        "side": 0,
+        "tables": 33,
+        "total": 1090388
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0284071,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1092416
+      },
+      "cols": 2048,
+      "decode_error": null,
+      "decoded_sha256": "599538cab7f8f85ae482ba05f536fac34b59a1a5c2efb444fc6c038e77cb7a0b",
+      "encode_s": 0.0279711,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L6/E26/up",
+      "original_bytes": 1441792,
+      "original_sha256": "599538cab7f8f85ae482ba05f536fac34b59a1a5c2efb444fc6c038e77cb7a0b",
+      "raw_bytes": 0,
+      "rows": 1408,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1090540,
+        "side": 0,
+        "tables": 33,
+        "total": 1090723
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0264044,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1107840
+      },
+      "cols": 1408,
+      "decode_error": null,
+      "decoded_sha256": "8b97da4838e86466ae7ccdf382c21336dc5982b2db8f75fcba1b1490d78e30d3",
+      "encode_s": 0.0269991,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L6/E26/down",
+      "original_bytes": 1441792,
+      "original_sha256": "8b97da4838e86466ae7ccdf382c21336dc5982b2db8f75fcba1b1490d78e30d3",
+      "raw_bytes": 0,
+      "rows": 2048,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1105749,
+        "side": 0,
+        "tables": 33,
+        "total": 1105932
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.026692,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1093360
+      },
+      "cols": 2048,
+      "decode_error": null,
+      "decoded_sha256": "20d845a0e3b661d925edd51d11095162a72b75b366fd0b201aa38a8a70080834",
+      "encode_s": 0.0270395,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L6/E33/gate",
+      "original_bytes": 1441792,
+      "original_sha256": "20d845a0e3b661d925edd51d11095162a72b75b366fd0b201aa38a8a70080834",
+      "raw_bytes": 0,
+      "rows": 1408,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1091491,
+        "side": 0,
+        "tables": 33,
+        "total": 1091674
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.026279,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1092288
+      },
+      "cols": 2048,
+      "decode_error": null,
+      "decoded_sha256": "99ad431dd6ea5a5d0d996a7fcb0d756f966a88dc60bf7888ea6b5e315fab1930",
+      "encode_s": 0.0269071,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L6/E33/up",
+      "original_bytes": 1441792,
+      "original_sha256": "99ad431dd6ea5a5d0d996a7fcb0d756f966a88dc60bf7888ea6b5e315fab1930",
+      "raw_bytes": 0,
+      "rows": 1408,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1090412,
+        "side": 0,
+        "tables": 33,
+        "total": 1090595
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0267871,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1106416
+      },
+      "cols": 1408,
+      "decode_error": null,
+      "decoded_sha256": "bb3667d549d2a6f05b0a1ee05d39254dde2759af62d0df27f923a27adf63cdca",
+      "encode_s": 0.0276169,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L6/E33/down",
+      "original_bytes": 1441792,
+      "original_sha256": "bb3667d549d2a6f05b0a1ee05d39254dde2759af62d0df27f923a27adf63cdca",
+      "raw_bytes": 0,
+      "rows": 2048,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1104372,
+        "side": 0,
+        "tables": 33,
+        "total": 1104555
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0260629,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1092416
+      },
+      "cols": 2048,
+      "decode_error": null,
+      "decoded_sha256": "32a87734c248fd0315d90a338be2165d4108ed8ca58c77a310fbb87dbfbe8b4c",
+      "encode_s": 0.0281662,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L6/E35/gate",
+      "original_bytes": 1441792,
+      "original_sha256": "32a87734c248fd0315d90a338be2165d4108ed8ca58c77a310fbb87dbfbe8b4c",
+      "raw_bytes": 0,
+      "rows": 1408,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1090536,
+        "side": 0,
+        "tables": 33,
+        "total": 1090719
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0262309,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1092608
+      },
+      "cols": 2048,
+      "decode_error": null,
+      "decoded_sha256": "c439f56b894696b0e1b6120c3f0490be0742d297ae3e75ca26c3c7f177cddd38",
+      "encode_s": 0.027871,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L6/E35/up",
+      "original_bytes": 1441792,
+      "original_sha256": "c439f56b894696b0e1b6120c3f0490be0742d297ae3e75ca26c3c7f177cddd38",
+      "raw_bytes": 0,
+      "rows": 1408,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1090726,
+        "side": 0,
+        "tables": 33,
+        "total": 1090909
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0264389,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1106144
+      },
+      "cols": 1408,
+      "decode_error": null,
+      "decoded_sha256": "e8d493618e1fe98fdf874fdc0093263dffd57eee2c941e603e85289f9d0ecbdd",
+      "encode_s": 0.0270616,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L6/E35/down",
+      "original_bytes": 1441792,
+      "original_sha256": "e8d493618e1fe98fdf874fdc0093263dffd57eee2c941e603e85289f9d0ecbdd",
+      "raw_bytes": 0,
+      "rows": 2048,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1104134,
+        "side": 0,
+        "tables": 33,
+        "total": 1104317
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0261233,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1090768
+      },
+      "cols": 2048,
+      "decode_error": null,
+      "decoded_sha256": "fa26e65e607c6c2c96593f3c3602bb8d8b4d845d9108b6661cd685dabd6a0aea",
+      "encode_s": 0.0273795,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L6/E41/gate",
+      "original_bytes": 1441792,
+      "original_sha256": "fa26e65e607c6c2c96593f3c3602bb8d8b4d845d9108b6661cd685dabd6a0aea",
+      "raw_bytes": 0,
+      "rows": 1408,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1088846,
+        "side": 0,
+        "tables": 33,
+        "total": 1089029
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0268848,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1092400
+      },
+      "cols": 2048,
+      "decode_error": null,
+      "decoded_sha256": "fed2dd3477a5d2652594e188647dc0ddb321014c2a55cfe10e62ae068f7dbc9e",
+      "encode_s": 0.0274651,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L6/E41/up",
+      "original_bytes": 1441792,
+      "original_sha256": "fed2dd3477a5d2652594e188647dc0ddb321014c2a55cfe10e62ae068f7dbc9e",
+      "raw_bytes": 0,
+      "rows": 1408,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1090514,
+        "side": 0,
+        "tables": 33,
+        "total": 1090697
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0262117,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1104848
+      },
+      "cols": 1408,
+      "decode_error": null,
+      "decoded_sha256": "457a51990e214d078ccd30e0321e3cb2c723a6ecbf3833b08dd4709d0e797c58",
+      "encode_s": 0.0272057,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L6/E41/down",
+      "original_bytes": 1441792,
+      "original_sha256": "457a51990e214d078ccd30e0321e3cb2c723a6ecbf3833b08dd4709d0e797c58",
+      "raw_bytes": 0,
+      "rows": 2048,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1102864,
+        "side": 0,
+        "tables": 33,
+        "total": 1103047
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0260823,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1092384
+      },
+      "cols": 2048,
+      "decode_error": null,
+      "decoded_sha256": "ad2464915dd2542c00ed6851c4fc6196bd8c2206ab79ea7d2397acea2e4f7a2c",
+      "encode_s": 0.0272345,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L6/E50/gate",
+      "original_bytes": 1441792,
+      "original_sha256": "ad2464915dd2542c00ed6851c4fc6196bd8c2206ab79ea7d2397acea2e4f7a2c",
+      "raw_bytes": 0,
+      "rows": 1408,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1090508,
+        "side": 0,
+        "tables": 33,
+        "total": 1090691
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0268921,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1093728
+      },
+      "cols": 2048,
+      "decode_error": null,
+      "decoded_sha256": "19b14bba8bb5b6a1e22a67744b6edbbf9823eb158fbd0b3eee2afd93bfc4b29b",
+      "encode_s": 0.0268728,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L6/E50/up",
+      "original_bytes": 1441792,
+      "original_sha256": "19b14bba8bb5b6a1e22a67744b6edbbf9823eb158fbd0b3eee2afd93bfc4b29b",
+      "raw_bytes": 0,
+      "rows": 1408,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1091854,
+        "side": 0,
+        "tables": 33,
+        "total": 1092037
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0269255,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1105296
+      },
+      "cols": 1408,
+      "decode_error": null,
+      "decoded_sha256": "1c3d5fa72b74ed67544b95a1eb5608398f0e04d49754cb89d7b6aa48a782633b",
+      "encode_s": 0.0279162,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L6/E50/down",
+      "original_bytes": 1441792,
+      "original_sha256": "1c3d5fa72b74ed67544b95a1eb5608398f0e04d49754cb89d7b6aa48a782633b",
+      "raw_bytes": 0,
+      "rows": 2048,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1103304,
+        "side": 0,
+        "tables": 33,
+        "total": 1103487
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0278862,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1093392
+      },
+      "cols": 2048,
+      "decode_error": null,
+      "decoded_sha256": "8419791dfec62e3e4fa2aa028a08afab4fb1a07aa38efaf0dbd7fa718f81fcf3",
+      "encode_s": 0.0277491,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L6/E55/gate",
+      "original_bytes": 1441792,
+      "original_sha256": "8419791dfec62e3e4fa2aa028a08afab4fb1a07aa38efaf0dbd7fa718f81fcf3",
+      "raw_bytes": 0,
+      "rows": 1408,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1091513,
+        "side": 0,
+        "tables": 33,
+        "total": 1091696
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0268004,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1094384
+      },
+      "cols": 2048,
+      "decode_error": null,
+      "decoded_sha256": "a91a0323755ad95e72a2cccbc2068c8a70872763a3e35c4e42ef87fe7cad732e",
+      "encode_s": 0.0269608,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L6/E55/up",
+      "original_bytes": 1441792,
+      "original_sha256": "a91a0323755ad95e72a2cccbc2068c8a70872763a3e35c4e42ef87fe7cad732e",
+      "raw_bytes": 0,
+      "rows": 1408,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1092515,
+        "side": 0,
+        "tables": 33,
+        "total": 1092698
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.026266,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1105968
+      },
+      "cols": 1408,
+      "decode_error": null,
+      "decoded_sha256": "6b02e5948f1b667f84cf1f0be400753f43e21603dc34994a7f5737ced238ad89",
+      "encode_s": 0.0272227,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L6/E55/down",
+      "original_bytes": 1441792,
+      "original_sha256": "6b02e5948f1b667f84cf1f0be400753f43e21603dc34994a7f5737ced238ad89",
+      "raw_bytes": 0,
+      "rows": 2048,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1103955,
+        "side": 0,
+        "tables": 33,
+        "total": 1104138
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0270858,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1091008
+      },
+      "cols": 2048,
+      "decode_error": null,
+      "decoded_sha256": "beb76e236361f927e236744e2dafa7b8a8a744dc6b9de1103e516db105a71a79",
+      "encode_s": 0.0271598,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L11/E17/gate",
+      "original_bytes": 1441792,
+      "original_sha256": "beb76e236361f927e236744e2dafa7b8a8a744dc6b9de1103e516db105a71a79",
+      "raw_bytes": 0,
+      "rows": 1408,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1089098,
+        "side": 0,
+        "tables": 33,
+        "total": 1089281
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0273949,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1091104
+      },
+      "cols": 2048,
+      "decode_error": null,
+      "decoded_sha256": "1a4dcb28dd98019b34434fed7682e6dee0bfbe040641ffef2621a0c4e3fd51e5",
+      "encode_s": 0.0292259,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L11/E17/up",
+      "original_bytes": 1441792,
+      "original_sha256": "1a4dcb28dd98019b34434fed7682e6dee0bfbe040641ffef2621a0c4e3fd51e5",
+      "raw_bytes": 0,
+      "rows": 1408,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1089190,
+        "side": 0,
+        "tables": 33,
+        "total": 1089373
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0263332,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1107152
+      },
+      "cols": 1408,
+      "decode_error": null,
+      "decoded_sha256": "ef49597cff7474acae3a560eb34613899107bc3f13ed72eec1a2b89c4e0c7392",
+      "encode_s": 0.0273543,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L11/E17/down",
+      "original_bytes": 1441792,
+      "original_sha256": "ef49597cff7474acae3a560eb34613899107bc3f13ed72eec1a2b89c4e0c7392",
+      "raw_bytes": 0,
+      "rows": 2048,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1105089,
+        "side": 0,
+        "tables": 33,
+        "total": 1105272
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0311383,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1092992
+      },
+      "cols": 2048,
+      "decode_error": null,
+      "decoded_sha256": "b9b8b5c7cc8c7b113e0edc5ebc258d79f35f7cf416c278f109a40e623ae9f460",
+      "encode_s": 0.0298513,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L11/E20/gate",
+      "original_bytes": 1441792,
+      "original_sha256": "b9b8b5c7cc8c7b113e0edc5ebc258d79f35f7cf416c278f109a40e623ae9f460",
+      "raw_bytes": 0,
+      "rows": 1408,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1091122,
+        "side": 0,
+        "tables": 33,
+        "total": 1091305
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0273892,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1091072
+      },
+      "cols": 2048,
+      "decode_error": null,
+      "decoded_sha256": "887a0cb98d78aa5fb01a2a551d1d547d8cf51c97296c544feeca5ecbd6b9fcbf",
+      "encode_s": 0.0293119,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L11/E20/up",
+      "original_bytes": 1441792,
+      "original_sha256": "887a0cb98d78aa5fb01a2a551d1d547d8cf51c97296c544feeca5ecbd6b9fcbf",
+      "raw_bytes": 0,
+      "rows": 1408,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1089160,
+        "side": 0,
+        "tables": 33,
+        "total": 1089343
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0299783,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1104624
+      },
+      "cols": 1408,
+      "decode_error": null,
+      "decoded_sha256": "fd4fe2935953b1baffe35c1eaf15093a7ba3b90f7f2c14549b116a9b484c6279",
+      "encode_s": 0.0277217,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L11/E20/down",
+      "original_bytes": 1441792,
+      "original_sha256": "fd4fe2935953b1baffe35c1eaf15093a7ba3b90f7f2c14549b116a9b484c6279",
+      "raw_bytes": 0,
+      "rows": 2048,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1102654,
+        "side": 0,
+        "tables": 33,
+        "total": 1102837
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0266601,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1091584
+      },
+      "cols": 2048,
+      "decode_error": null,
+      "decoded_sha256": "69b72a672c341f6c109898dcceaa07dfa0a479f55d83646b1f3e222ccb992e3b",
+      "encode_s": 0.027153,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L11/E38/gate",
+      "original_bytes": 1441792,
+      "original_sha256": "69b72a672c341f6c109898dcceaa07dfa0a479f55d83646b1f3e222ccb992e3b",
+      "raw_bytes": 0,
+      "rows": 1408,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1089681,
+        "side": 0,
+        "tables": 33,
+        "total": 1089864
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0262429,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1093760
+      },
+      "cols": 2048,
+      "decode_error": null,
+      "decoded_sha256": "2f648840b8dda98aa9b9660cb0ee8f23574a23106ba499d9967fe9e89cde2151",
+      "encode_s": 0.0270067,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L11/E38/up",
+      "original_bytes": 1441792,
+      "original_sha256": "2f648840b8dda98aa9b9660cb0ee8f23574a23106ba499d9967fe9e89cde2151",
+      "raw_bytes": 0,
+      "rows": 1408,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1091890,
+        "side": 0,
+        "tables": 33,
+        "total": 1092073
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0270723,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1101120
+      },
+      "cols": 1408,
+      "decode_error": null,
+      "decoded_sha256": "7ffbd02caa36cf5447d1f4172ff9fa31492e76051ab82fe5de357ddf2d5b7aad",
+      "encode_s": 0.0295927,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L11/E38/down",
+      "original_bytes": 1441792,
+      "original_sha256": "7ffbd02caa36cf5447d1f4172ff9fa31492e76051ab82fe5de357ddf2d5b7aad",
+      "raw_bytes": 0,
+      "rows": 2048,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1099232,
+        "side": 0,
+        "tables": 33,
+        "total": 1099415
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.026633,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1094656
+      },
+      "cols": 2048,
+      "decode_error": null,
+      "decoded_sha256": "0253ac5993c66602318847c5fc1cf6c59ef86523f0e63ba5381ae35799d68002",
+      "encode_s": 0.0274097,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L11/E39/gate",
+      "original_bytes": 1441792,
+      "original_sha256": "0253ac5993c66602318847c5fc1cf6c59ef86523f0e63ba5381ae35799d68002",
+      "raw_bytes": 0,
+      "rows": 1408,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1092804,
+        "side": 0,
+        "tables": 33,
+        "total": 1092987
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0263684,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1091664
+      },
+      "cols": 2048,
+      "decode_error": null,
+      "decoded_sha256": "47cd96cd51a9e5066b440d7ec6ed9289b1c459ff8778fc69eaa755017b5e9196",
+      "encode_s": 0.0271711,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L11/E39/up",
+      "original_bytes": 1441792,
+      "original_sha256": "47cd96cd51a9e5066b440d7ec6ed9289b1c459ff8778fc69eaa755017b5e9196",
+      "raw_bytes": 0,
+      "rows": 1408,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1089762,
+        "side": 0,
+        "tables": 33,
+        "total": 1089945
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.026445,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1105648
+      },
+      "cols": 1408,
+      "decode_error": null,
+      "decoded_sha256": "fbb1469cc922c1e6d534ba208a58f88a7fa0075ffce857823dbb8c05ca533d83",
+      "encode_s": 0.0270705,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L11/E39/down",
+      "original_bytes": 1441792,
+      "original_sha256": "fbb1469cc922c1e6d534ba208a58f88a7fa0075ffce857823dbb8c05ca533d83",
+      "raw_bytes": 0,
+      "rows": 2048,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1103636,
+        "side": 0,
+        "tables": 33,
+        "total": 1103819
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0268895,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1093520
+      },
+      "cols": 2048,
+      "decode_error": null,
+      "decoded_sha256": "580bfbe6179c9c5fd43fdf48a01e2c1b50e48ab8033ac52f9b8414a3fa600f16",
+      "encode_s": 0.0273136,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L11/E50/gate",
+      "original_bytes": 1441792,
+      "original_sha256": "580bfbe6179c9c5fd43fdf48a01e2c1b50e48ab8033ac52f9b8414a3fa600f16",
+      "raw_bytes": 0,
+      "rows": 1408,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1091646,
+        "side": 0,
+        "tables": 33,
+        "total": 1091829
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0263743,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1091472
+      },
+      "cols": 2048,
+      "decode_error": null,
+      "decoded_sha256": "890b77b5ddb6ea2e7fb260a97b8007db1cce92bc0c9b0781534548de5224becc",
+      "encode_s": 0.0269932,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L11/E50/up",
+      "original_bytes": 1441792,
+      "original_sha256": "890b77b5ddb6ea2e7fb260a97b8007db1cce92bc0c9b0781534548de5224becc",
+      "raw_bytes": 0,
+      "rows": 1408,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1089576,
+        "side": 0,
+        "tables": 33,
+        "total": 1089759
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0273238,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1105168
+      },
+      "cols": 1408,
+      "decode_error": null,
+      "decoded_sha256": "f51fe1af260b1fcb5c83ae0f6211a8a96efee17ab8fc38d0f6a3ae997ad6bfae",
+      "encode_s": 0.0279401,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L11/E50/down",
+      "original_bytes": 1441792,
+      "original_sha256": "f51fe1af260b1fcb5c83ae0f6211a8a96efee17ab8fc38d0f6a3ae997ad6bfae",
+      "raw_bytes": 0,
+      "rows": 2048,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1103189,
+        "side": 0,
+        "tables": 33,
+        "total": 1103372
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0261941,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1093280
+      },
+      "cols": 2048,
+      "decode_error": null,
+      "decoded_sha256": "d3fc080cf991429824a4372e4be93eee0d917cd860d7672b8a5d5f759559a0b0",
+      "encode_s": 0.027025,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L11/E52/gate",
+      "original_bytes": 1441792,
+      "original_sha256": "d3fc080cf991429824a4372e4be93eee0d917cd860d7672b8a5d5f759559a0b0",
+      "raw_bytes": 0,
+      "rows": 1408,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1091408,
+        "side": 0,
+        "tables": 33,
+        "total": 1091591
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0262461,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1092608
+      },
+      "cols": 2048,
+      "decode_error": null,
+      "decoded_sha256": "7921f09d894398f10228578f0e795fb2cb4005f3366904242768c84d4281cc84",
+      "encode_s": 0.027984,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L11/E52/up",
+      "original_bytes": 1441792,
+      "original_sha256": "7921f09d894398f10228578f0e795fb2cb4005f3366904242768c84d4281cc84",
+      "raw_bytes": 0,
+      "rows": 1408,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1090729,
+        "side": 0,
+        "tables": 33,
+        "total": 1090912
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0263425,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1105072
+      },
+      "cols": 1408,
+      "decode_error": null,
+      "decoded_sha256": "d4e942446662dd38eeceb3202495475a0f87b040bade0c4dd87d419716ad07c1",
+      "encode_s": 0.0277372,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L11/E52/down",
+      "original_bytes": 1441792,
+      "original_sha256": "d4e942446662dd38eeceb3202495475a0f87b040bade0c4dd87d419716ad07c1",
+      "raw_bytes": 0,
+      "rows": 2048,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1103081,
+        "side": 0,
+        "tables": 33,
+        "total": 1103264
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0261702,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1092848
+      },
+      "cols": 2048,
+      "decode_error": null,
+      "decoded_sha256": "a56a9553f635757048d883f4b0f677b62caa4d440706b46135989c7466c90b8e",
+      "encode_s": 0.0272423,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L11/E53/gate",
+      "original_bytes": 1441792,
+      "original_sha256": "a56a9553f635757048d883f4b0f677b62caa4d440706b46135989c7466c90b8e",
+      "raw_bytes": 0,
+      "rows": 1408,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1090984,
+        "side": 0,
+        "tables": 33,
+        "total": 1091167
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0260646,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1091600
+      },
+      "cols": 2048,
+      "decode_error": null,
+      "decoded_sha256": "97d70f12882b484f658f9c8d54ce2e4ed52016920afaa72230387d2e023d0f68",
+      "encode_s": 0.0271155,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L11/E53/up",
+      "original_bytes": 1441792,
+      "original_sha256": "97d70f12882b484f658f9c8d54ce2e4ed52016920afaa72230387d2e023d0f68",
+      "raw_bytes": 0,
+      "rows": 1408,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1089716,
+        "side": 0,
+        "tables": 33,
+        "total": 1089899
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0263601,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1103808
+      },
+      "cols": 1408,
+      "decode_error": null,
+      "decoded_sha256": "bff884444ca25e5659d494d650e94286ae3d5f75cb6df41489c45475d688b891",
+      "encode_s": 0.0275255,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L11/E53/down",
+      "original_bytes": 1441792,
+      "original_sha256": "bff884444ca25e5659d494d650e94286ae3d5f75cb6df41489c45475d688b891",
+      "raw_bytes": 0,
+      "rows": 2048,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1101864,
+        "side": 0,
+        "tables": 33,
+        "total": 1102047
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0270138,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1091760
+      },
+      "cols": 2048,
+      "decode_error": null,
+      "decoded_sha256": "68c283c6b5254773aff3379d7f7c3b933e4cf28ce3e16d3a703629dc209aa1b2",
+      "encode_s": 0.0277836,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L11/E54/gate",
+      "original_bytes": 1441792,
+      "original_sha256": "68c283c6b5254773aff3379d7f7c3b933e4cf28ce3e16d3a703629dc209aa1b2",
+      "raw_bytes": 0,
+      "rows": 1408,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1089871,
+        "side": 0,
+        "tables": 33,
+        "total": 1090054
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0264526,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1092304
+      },
+      "cols": 2048,
+      "decode_error": null,
+      "decoded_sha256": "8a67de273a37329a9161f3ba1510150a2148d74ff0d7d9e6267976b3ab361513",
+      "encode_s": 0.0278679,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L11/E54/up",
+      "original_bytes": 1441792,
+      "original_sha256": "8a67de273a37329a9161f3ba1510150a2148d74ff0d7d9e6267976b3ab361513",
+      "raw_bytes": 0,
+      "rows": 1408,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1090427,
+        "side": 0,
+        "tables": 33,
+        "total": 1090610
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0267679,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1108816
+      },
+      "cols": 1408,
+      "decode_error": null,
+      "decoded_sha256": "7752c2536bb073ef2981695488bcce78fbd12f7c0d8c6af742785fa62c605aed",
+      "encode_s": 0.0285233,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L11/E54/down",
+      "original_bytes": 1441792,
+      "original_sha256": "7752c2536bb073ef2981695488bcce78fbd12f7c0d8c6af742785fa62c605aed",
+      "raw_bytes": 0,
+      "rows": 2048,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1106690,
+        "side": 0,
+        "tables": 33,
+        "total": 1106873
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0263011,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1092192
+      },
+      "cols": 2048,
+      "decode_error": null,
+      "decoded_sha256": "754f0a205914cb008e96eceea7ad36774be55b4ff793ad01b5e0888a0e932320",
+      "encode_s": 0.0271821,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L16/E8/gate",
+      "original_bytes": 1441792,
+      "original_sha256": "754f0a205914cb008e96eceea7ad36774be55b4ff793ad01b5e0888a0e932320",
+      "raw_bytes": 0,
+      "rows": 1408,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1090316,
+        "side": 0,
+        "tables": 33,
+        "total": 1090499
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0270415,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1093440
+      },
+      "cols": 2048,
+      "decode_error": null,
+      "decoded_sha256": "f71d5c406f0c0a404c801e72b59f36c1432a4fb7b8dda9e400a662ceed86da0d",
+      "encode_s": 0.0275899,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L16/E8/up",
+      "original_bytes": 1441792,
+      "original_sha256": "f71d5c406f0c0a404c801e72b59f36c1432a4fb7b8dda9e400a662ceed86da0d",
+      "raw_bytes": 0,
+      "rows": 1408,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1091579,
+        "side": 0,
+        "tables": 33,
+        "total": 1091762
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0263914,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1106128
+      },
+      "cols": 1408,
+      "decode_error": null,
+      "decoded_sha256": "f2399aad55d96b8691a09030331d0f0f40eeea316e6c1e79af365d8db51ad371",
+      "encode_s": 0.0271419,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L16/E8/down",
+      "original_bytes": 1441792,
+      "original_sha256": "f2399aad55d96b8691a09030331d0f0f40eeea316e6c1e79af365d8db51ad371",
+      "raw_bytes": 0,
+      "rows": 2048,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1104103,
+        "side": 0,
+        "tables": 33,
+        "total": 1104286
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0275854,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1092800
+      },
+      "cols": 2048,
+      "decode_error": null,
+      "decoded_sha256": "0ce392f980a3d223c1ef786486000ddb1375c940b87719e40690e63f4a136af0",
+      "encode_s": 0.027552,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L16/E11/gate",
+      "original_bytes": 1441792,
+      "original_sha256": "0ce392f980a3d223c1ef786486000ddb1375c940b87719e40690e63f4a136af0",
+      "raw_bytes": 0,
+      "rows": 1408,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1090908,
+        "side": 0,
+        "tables": 33,
+        "total": 1091091
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0261641,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1092880
+      },
+      "cols": 2048,
+      "decode_error": null,
+      "decoded_sha256": "b8766de72a94012171851b33fbfe25d4dc1104b3b5202f7af61d3ed954b5cd7a",
+      "encode_s": 0.0271779,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L16/E11/up",
+      "original_bytes": 1441792,
+      "original_sha256": "b8766de72a94012171851b33fbfe25d4dc1104b3b5202f7af61d3ed954b5cd7a",
+      "raw_bytes": 0,
+      "rows": 1408,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1091000,
+        "side": 0,
+        "tables": 33,
+        "total": 1091183
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0271041,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1105728
+      },
+      "cols": 1408,
+      "decode_error": null,
+      "decoded_sha256": "804bbf5301813e01d146de99321069f7d860591b471195330b6a4c3bbda40abf",
+      "encode_s": 0.0282996,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L16/E11/down",
+      "original_bytes": 1441792,
+      "original_sha256": "804bbf5301813e01d146de99321069f7d860591b471195330b6a4c3bbda40abf",
+      "raw_bytes": 0,
+      "rows": 2048,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1103715,
+        "side": 0,
+        "tables": 33,
+        "total": 1103898
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0271221,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1094256
+      },
+      "cols": 2048,
+      "decode_error": null,
+      "decoded_sha256": "fe125e8f04e7c082d00cb6792f0216f20f046f80cd331184ff883ee8ed264ab3",
+      "encode_s": 0.0274803,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L16/E29/gate",
+      "original_bytes": 1441792,
+      "original_sha256": "fe125e8f04e7c082d00cb6792f0216f20f046f80cd331184ff883ee8ed264ab3",
+      "raw_bytes": 0,
+      "rows": 1408,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1092387,
+        "side": 0,
+        "tables": 33,
+        "total": 1092570
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0263973,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1094192
+      },
+      "cols": 2048,
+      "decode_error": null,
+      "decoded_sha256": "0b0f53feeddd890638d5d0221d69c680e76a8c2abeec3a5df24009916efe95ab",
+      "encode_s": 0.0271086,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L16/E29/up",
+      "original_bytes": 1441792,
+      "original_sha256": "0b0f53feeddd890638d5d0221d69c680e76a8c2abeec3a5df24009916efe95ab",
+      "raw_bytes": 0,
+      "rows": 1408,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1092337,
+        "side": 0,
+        "tables": 33,
+        "total": 1092520
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0268648,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1107520
+      },
+      "cols": 1408,
+      "decode_error": null,
+      "decoded_sha256": "45971b110fde673b864e338143ed155fb07f90a8538c450a058e38c6c109679b",
+      "encode_s": 0.0298441,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L16/E29/down",
+      "original_bytes": 1441792,
+      "original_sha256": "45971b110fde673b864e338143ed155fb07f90a8538c450a058e38c6c109679b",
+      "raw_bytes": 0,
+      "rows": 2048,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1105451,
+        "side": 0,
+        "tables": 33,
+        "total": 1105634
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0271074,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1094128
+      },
+      "cols": 2048,
+      "decode_error": null,
+      "decoded_sha256": "4426ee7b3b904e0cfde5afb82d46dbd21e9d57ddaef80652d149005e7526438b",
+      "encode_s": 0.0269459,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L16/E43/gate",
+      "original_bytes": 1441792,
+      "original_sha256": "4426ee7b3b904e0cfde5afb82d46dbd21e9d57ddaef80652d149005e7526438b",
+      "raw_bytes": 0,
+      "rows": 1408,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1092256,
+        "side": 0,
+        "tables": 33,
+        "total": 1092439
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0262525,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1092624
+      },
+      "cols": 2048,
+      "decode_error": null,
+      "decoded_sha256": "d258978c75ae1924072cad328fddc1d70aeb5e1094dd6872b38a8790953ee81c",
+      "encode_s": 0.0272429,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L16/E43/up",
+      "original_bytes": 1441792,
+      "original_sha256": "d258978c75ae1924072cad328fddc1d70aeb5e1094dd6872b38a8790953ee81c",
+      "raw_bytes": 0,
+      "rows": 1408,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1090740,
+        "side": 0,
+        "tables": 33,
+        "total": 1090923
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0264897,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1104816
+      },
+      "cols": 1408,
+      "decode_error": null,
+      "decoded_sha256": "2f24d2eb98d9f62c2261a1c79b77ede357649369150a86d3d471c62a82a209f4",
+      "encode_s": 0.0273045,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L16/E43/down",
+      "original_bytes": 1441792,
+      "original_sha256": "2f24d2eb98d9f62c2261a1c79b77ede357649369150a86d3d471c62a82a209f4",
+      "raw_bytes": 0,
+      "rows": 2048,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1102842,
+        "side": 0,
+        "tables": 33,
+        "total": 1103025
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0270506,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1091248
+      },
+      "cols": 2048,
+      "decode_error": null,
+      "decoded_sha256": "27e5e82bc12b2ce2a1d242a06f7cfbf190242617a86524b08b82552f43d7baf6",
+      "encode_s": 0.0271981,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L16/E49/gate",
+      "original_bytes": 1441792,
+      "original_sha256": "27e5e82bc12b2ce2a1d242a06f7cfbf190242617a86524b08b82552f43d7baf6",
+      "raw_bytes": 0,
+      "rows": 1408,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1089353,
+        "side": 0,
+        "tables": 33,
+        "total": 1089536
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0272681,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1091488
+      },
+      "cols": 2048,
+      "decode_error": null,
+      "decoded_sha256": "783010509e297635f9abcc1a4b6ffc9299489eb5b486873a49bc27cc99e184e8",
+      "encode_s": 0.0273369,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L16/E49/up",
+      "original_bytes": 1441792,
+      "original_sha256": "783010509e297635f9abcc1a4b6ffc9299489eb5b486873a49bc27cc99e184e8",
+      "raw_bytes": 0,
+      "rows": 1408,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1089591,
+        "side": 0,
+        "tables": 33,
+        "total": 1089774
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0265307,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1106928
+      },
+      "cols": 1408,
+      "decode_error": null,
+      "decoded_sha256": "a0e35528fda971549f7d6b9442d47b8c6b080ccabc48611a25bd8b27145776a4",
+      "encode_s": 0.0272528,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L16/E49/down",
+      "original_bytes": 1441792,
+      "original_sha256": "a0e35528fda971549f7d6b9442d47b8c6b080ccabc48611a25bd8b27145776a4",
+      "raw_bytes": 0,
+      "rows": 2048,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1104881,
+        "side": 0,
+        "tables": 33,
+        "total": 1105064
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0262434,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1090256
+      },
+      "cols": 2048,
+      "decode_error": null,
+      "decoded_sha256": "edbd2ac9609c75feb559ccb5ac1224c45a1928d76e5c16e6d76a8b4d75d662ad",
+      "encode_s": 0.0272624,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L16/E53/gate",
+      "original_bytes": 1441792,
+      "original_sha256": "edbd2ac9609c75feb559ccb5ac1224c45a1928d76e5c16e6d76a8b4d75d662ad",
+      "raw_bytes": 0,
+      "rows": 1408,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1088336,
+        "side": 0,
+        "tables": 33,
+        "total": 1088519
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0261447,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1091312
+      },
+      "cols": 2048,
+      "decode_error": null,
+      "decoded_sha256": "d17b5e8d612b051be17785fb26f957e9047b6b22dd9eef43e3d1fa07b31d19b8",
+      "encode_s": 0.0270647,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L16/E53/up",
+      "original_bytes": 1441792,
+      "original_sha256": "d17b5e8d612b051be17785fb26f957e9047b6b22dd9eef43e3d1fa07b31d19b8",
+      "raw_bytes": 0,
+      "rows": 1408,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1089411,
+        "side": 0,
+        "tables": 33,
+        "total": 1089594
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.026191,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1095856
+      },
+      "cols": 1408,
+      "decode_error": null,
+      "decoded_sha256": "a7af4b584a4e03ad11ef03cfca481b569225d1df4dea940e7e14062b5d93a4bf",
+      "encode_s": 0.0278996,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L16/E53/down",
+      "original_bytes": 1441792,
+      "original_sha256": "a7af4b584a4e03ad11ef03cfca481b569225d1df4dea940e7e14062b5d93a4bf",
+      "raw_bytes": 0,
+      "rows": 2048,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1093982,
+        "side": 0,
+        "tables": 33,
+        "total": 1094165
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0264102,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1095504
+      },
+      "cols": 2048,
+      "decode_error": null,
+      "decoded_sha256": "1ac666f64a9b110d2d27dd5adf4b17f1e264d47fb79b22a38c3521bd6478eefa",
+      "encode_s": 0.0278476,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L16/E57/gate",
+      "original_bytes": 1441792,
+      "original_sha256": "1ac666f64a9b110d2d27dd5adf4b17f1e264d47fb79b22a38c3521bd6478eefa",
+      "raw_bytes": 0,
+      "rows": 1408,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1093645,
+        "side": 0,
+        "tables": 33,
+        "total": 1093828
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0263503,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1094048
+      },
+      "cols": 2048,
+      "decode_error": null,
+      "decoded_sha256": "b18758c98c2e3cdb888744f19fe8c227a7ee388a9007b2dcee47e57f5402e186",
+      "encode_s": 0.0269829,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L16/E57/up",
+      "original_bytes": 1441792,
+      "original_sha256": "b18758c98c2e3cdb888744f19fe8c227a7ee388a9007b2dcee47e57f5402e186",
+      "raw_bytes": 0,
+      "rows": 1408,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1092187,
+        "side": 0,
+        "tables": 33,
+        "total": 1092370
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0263473,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1106848
+      },
+      "cols": 1408,
+      "decode_error": null,
+      "decoded_sha256": "9064ab27231d728957a05a4b6bc58fd36889a76ba7e1b265ad268fa823f95694",
+      "encode_s": 0.0276317,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L16/E57/down",
+      "original_bytes": 1441792,
+      "original_sha256": "9064ab27231d728957a05a4b6bc58fd36889a76ba7e1b265ad268fa823f95694",
+      "raw_bytes": 0,
+      "rows": 2048,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1104797,
+        "side": 0,
+        "tables": 33,
+        "total": 1104980
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.027584,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1093424
+      },
+      "cols": 2048,
+      "decode_error": null,
+      "decoded_sha256": "32009f9168b5713b493ec98d3757758867e3997084c098c2a50a19fe08923f45",
+      "encode_s": 0.0268268,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L16/E62/gate",
+      "original_bytes": 1441792,
+      "original_sha256": "32009f9168b5713b493ec98d3757758867e3997084c098c2a50a19fe08923f45",
+      "raw_bytes": 0,
+      "rows": 1408,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1091558,
+        "side": 0,
+        "tables": 33,
+        "total": 1091741
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0262066,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1094656
+      },
+      "cols": 2048,
+      "decode_error": null,
+      "decoded_sha256": "615c37f655c709d75d4ceea4c174f24bebe9c2de9ebf66819f861535021b4753",
+      "encode_s": 0.0276473,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L16/E62/up",
+      "original_bytes": 1441792,
+      "original_sha256": "615c37f655c709d75d4ceea4c174f24bebe9c2de9ebf66819f861535021b4753",
+      "raw_bytes": 0,
+      "rows": 1408,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1092785,
+        "side": 0,
+        "tables": 33,
+        "total": 1092968
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0266801,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1107376
+      },
+      "cols": 1408,
+      "decode_error": null,
+      "decoded_sha256": "4983dff1a42b509bb9adfc1be881bc2a33592de667841d98847dae0c5fb0b8ac",
+      "encode_s": 0.027911,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L16/E62/down",
+      "original_bytes": 1441792,
+      "original_sha256": "4983dff1a42b509bb9adfc1be881bc2a33592de667841d98847dae0c5fb0b8ac",
+      "raw_bytes": 0,
+      "rows": 2048,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1105309,
+        "side": 0,
+        "tables": 33,
+        "total": 1105492
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0262302,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1093312
+      },
+      "cols": 2048,
+      "decode_error": null,
+      "decoded_sha256": "57be67deae311dc846b1eceb8f54bc8b0483efa162958258e2050505be0d8ad7",
+      "encode_s": 0.0268673,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L21/E2/gate",
+      "original_bytes": 1441792,
+      "original_sha256": "57be67deae311dc846b1eceb8f54bc8b0483efa162958258e2050505be0d8ad7",
+      "raw_bytes": 0,
+      "rows": 1408,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1091438,
+        "side": 0,
+        "tables": 33,
+        "total": 1091621
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.027304,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1092400
+      },
+      "cols": 2048,
+      "decode_error": null,
+      "decoded_sha256": "039a2155abaf503f1ccb6e13fc2c0145ea8bf66bd8d1d8a44c2da9e84f334e80",
+      "encode_s": 0.0277033,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L21/E2/up",
+      "original_bytes": 1441792,
+      "original_sha256": "039a2155abaf503f1ccb6e13fc2c0145ea8bf66bd8d1d8a44c2da9e84f334e80",
+      "raw_bytes": 0,
+      "rows": 1408,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1090515,
+        "side": 0,
+        "tables": 33,
+        "total": 1090698
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0272763,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1108400
+      },
+      "cols": 1408,
+      "decode_error": null,
+      "decoded_sha256": "a709f863ff6878a0d002eca9f8c2d23f2496d2e31d8d1df902af4779d562e632",
+      "encode_s": 0.0277183,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L21/E2/down",
+      "original_bytes": 1441792,
+      "original_sha256": "a709f863ff6878a0d002eca9f8c2d23f2496d2e31d8d1df902af4779d562e632",
+      "raw_bytes": 0,
+      "rows": 2048,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1106281,
+        "side": 0,
+        "tables": 33,
+        "total": 1106464
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0262652,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1090512
+      },
+      "cols": 2048,
+      "decode_error": null,
+      "decoded_sha256": "dd628ef42f27f9b5dc2e16d6b8bb8d80de384c707c7eec8f70a77e9d9a3fff35",
+      "encode_s": 0.0275852,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L21/E3/gate",
+      "original_bytes": 1441792,
+      "original_sha256": "dd628ef42f27f9b5dc2e16d6b8bb8d80de384c707c7eec8f70a77e9d9a3fff35",
+      "raw_bytes": 0,
+      "rows": 1408,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1088595,
+        "side": 0,
+        "tables": 33,
+        "total": 1088778
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0266887,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1092992
+      },
+      "cols": 2048,
+      "decode_error": null,
+      "decoded_sha256": "49d84fe6edd2f681f6009abf482af5a937b7c38f60bfa4b91c3dbf84936418f6",
+      "encode_s": 0.0270414,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L21/E3/up",
+      "original_bytes": 1441792,
+      "original_sha256": "49d84fe6edd2f681f6009abf482af5a937b7c38f60bfa4b91c3dbf84936418f6",
+      "raw_bytes": 0,
+      "rows": 1408,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1091122,
+        "side": 0,
+        "tables": 33,
+        "total": 1091305
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0262595,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1107568
+      },
+      "cols": 1408,
+      "decode_error": null,
+      "decoded_sha256": "b70d10cb73e3874c6a6164798b0bfb2475979bb9d92fbc32a00c45652f07c9e1",
+      "encode_s": 0.027217,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L21/E3/down",
+      "original_bytes": 1441792,
+      "original_sha256": "b70d10cb73e3874c6a6164798b0bfb2475979bb9d92fbc32a00c45652f07c9e1",
+      "raw_bytes": 0,
+      "rows": 2048,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1105491,
+        "side": 0,
+        "tables": 33,
+        "total": 1105674
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0265363,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1093376
+      },
+      "cols": 2048,
+      "decode_error": null,
+      "decoded_sha256": "c2b392f6573ecee6e44778a9786841c57de71516136cf9ffc2c044aa689ea888",
+      "encode_s": 0.0287666,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L21/E18/gate",
+      "original_bytes": 1441792,
+      "original_sha256": "c2b392f6573ecee6e44778a9786841c57de71516136cf9ffc2c044aa689ea888",
+      "raw_bytes": 0,
+      "rows": 1408,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1091506,
+        "side": 0,
+        "tables": 33,
+        "total": 1091689
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0266864,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1092656
+      },
+      "cols": 2048,
+      "decode_error": null,
+      "decoded_sha256": "b24084c07be8e0e1406e38c313260df273e16598b5f875e96f3ad0234a401792",
+      "encode_s": 0.0269213,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L21/E18/up",
+      "original_bytes": 1441792,
+      "original_sha256": "b24084c07be8e0e1406e38c313260df273e16598b5f875e96f3ad0234a401792",
+      "raw_bytes": 0,
+      "rows": 1408,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1090772,
+        "side": 0,
+        "tables": 33,
+        "total": 1090955
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0263178,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1105712
+      },
+      "cols": 1408,
+      "decode_error": null,
+      "decoded_sha256": "82c856e83b5f184bd4da90dc051668c165371c6b64721d33bd7f645eb51cac46",
+      "encode_s": 0.026937,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L21/E18/down",
+      "original_bytes": 1441792,
+      "original_sha256": "82c856e83b5f184bd4da90dc051668c165371c6b64721d33bd7f645eb51cac46",
+      "raw_bytes": 0,
+      "rows": 2048,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1103716,
+        "side": 0,
+        "tables": 33,
+        "total": 1103899
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0271528,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1093024
+      },
+      "cols": 2048,
+      "decode_error": null,
+      "decoded_sha256": "eb2a98ca093fe152e17a59dc27e4785be4909791805d19fb75f2968b61eec43d",
+      "encode_s": 0.0271248,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L21/E35/gate",
+      "original_bytes": 1441792,
+      "original_sha256": "eb2a98ca093fe152e17a59dc27e4785be4909791805d19fb75f2968b61eec43d",
+      "raw_bytes": 0,
+      "rows": 1408,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1091150,
+        "side": 0,
+        "tables": 33,
+        "total": 1091333
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0282755,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1094896
+      },
+      "cols": 2048,
+      "decode_error": null,
+      "decoded_sha256": "ed353f427ed8e9437626879acb1e212d0bf6e29eb6092975e56b76cb7ccb931e",
+      "encode_s": 0.0274734,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L21/E35/up",
+      "original_bytes": 1441792,
+      "original_sha256": "ed353f427ed8e9437626879acb1e212d0bf6e29eb6092975e56b76cb7ccb931e",
+      "raw_bytes": 0,
+      "rows": 1408,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1093031,
+        "side": 0,
+        "tables": 33,
+        "total": 1093214
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0262726,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1107120
+      },
+      "cols": 1408,
+      "decode_error": null,
+      "decoded_sha256": "1eb702300716649d5f502bd3c85fa4e8aadac83ee4abe65f41bc1ceed531d507",
+      "encode_s": 0.0271073,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L21/E35/down",
+      "original_bytes": 1441792,
+      "original_sha256": "1eb702300716649d5f502bd3c85fa4e8aadac83ee4abe65f41bc1ceed531d507",
+      "raw_bytes": 0,
+      "rows": 2048,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1105066,
+        "side": 0,
+        "tables": 33,
+        "total": 1105249
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.027274,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1093184
+      },
+      "cols": 2048,
+      "decode_error": null,
+      "decoded_sha256": "1b14b6f39c17a665953df219c2dce24a74cc76e1db262dec02394b72a6f4c9f8",
+      "encode_s": 0.0269602,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L21/E47/gate",
+      "original_bytes": 1441792,
+      "original_sha256": "1b14b6f39c17a665953df219c2dce24a74cc76e1db262dec02394b72a6f4c9f8",
+      "raw_bytes": 0,
+      "rows": 1408,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1091313,
+        "side": 0,
+        "tables": 33,
+        "total": 1091496
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0261417,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1090944
+      },
+      "cols": 2048,
+      "decode_error": null,
+      "decoded_sha256": "e84d77a82b60c27212dda9f89781ae9a69e309042e1a3f13b920b1b8ed161321",
+      "encode_s": 0.0271372,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L21/E47/up",
+      "original_bytes": 1441792,
+      "original_sha256": "e84d77a82b60c27212dda9f89781ae9a69e309042e1a3f13b920b1b8ed161321",
+      "raw_bytes": 0,
+      "rows": 1408,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1089031,
+        "side": 0,
+        "tables": 33,
+        "total": 1089214
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0266263,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1105824
+      },
+      "cols": 1408,
+      "decode_error": null,
+      "decoded_sha256": "1500fea272786774d561c810b572d824f12276b1b367db58e7e93644051ec019",
+      "encode_s": 0.0272669,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L21/E47/down",
+      "original_bytes": 1441792,
+      "original_sha256": "1500fea272786774d561c810b572d824f12276b1b367db58e7e93644051ec019",
+      "raw_bytes": 0,
+      "rows": 2048,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1103811,
+        "side": 0,
+        "tables": 33,
+        "total": 1103994
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.026401,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1093296
+      },
+      "cols": 2048,
+      "decode_error": null,
+      "decoded_sha256": "f392af25b21b2eb7124c98bef32117ce07c28db3ac6c4183987b0bc8bf3e0018",
+      "encode_s": 0.0280225,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L21/E53/gate",
+      "original_bytes": 1441792,
+      "original_sha256": "f392af25b21b2eb7124c98bef32117ce07c28db3ac6c4183987b0bc8bf3e0018",
+      "raw_bytes": 0,
+      "rows": 1408,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1091415,
+        "side": 0,
+        "tables": 33,
+        "total": 1091598
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0263983,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1092416
+      },
+      "cols": 2048,
+      "decode_error": null,
+      "decoded_sha256": "6ada7e641ff542add3dba833f45682f1e1452b2827e9b31a4db5c39a03a37a70",
+      "encode_s": 0.0271758,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L21/E53/up",
+      "original_bytes": 1441792,
+      "original_sha256": "6ada7e641ff542add3dba833f45682f1e1452b2827e9b31a4db5c39a03a37a70",
+      "raw_bytes": 0,
+      "rows": 1408,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1090533,
+        "side": 0,
+        "tables": 33,
+        "total": 1090716
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0264936,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1108176
+      },
+      "cols": 1408,
+      "decode_error": null,
+      "decoded_sha256": "6edab3ede42e963396e15c88b559c3dee908b808b38ae9d506a8fdd38e310cac",
+      "encode_s": 0.0271758,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L21/E53/down",
+      "original_bytes": 1441792,
+      "original_sha256": "6edab3ede42e963396e15c88b559c3dee908b808b38ae9d506a8fdd38e310cac",
+      "raw_bytes": 0,
+      "rows": 2048,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1106088,
+        "side": 0,
+        "tables": 33,
+        "total": 1106271
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0263332,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1092368
+      },
+      "cols": 2048,
+      "decode_error": null,
+      "decoded_sha256": "be9afcc25c93773b6bfeb639e87a9b1a56eb2b119feb7109d3baa247b3837361",
+      "encode_s": 0.027144,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L21/E59/gate",
+      "original_bytes": 1441792,
+      "original_sha256": "be9afcc25c93773b6bfeb639e87a9b1a56eb2b119feb7109d3baa247b3837361",
+      "raw_bytes": 0,
+      "rows": 1408,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1090493,
+        "side": 0,
+        "tables": 33,
+        "total": 1090676
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0281477,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1093312
+      },
+      "cols": 2048,
+      "decode_error": null,
+      "decoded_sha256": "bb4405b20448ce817ed4a8fd0ba4338695474b0521cc4001c7bd04f4ebebc6d5",
+      "encode_s": 0.0273797,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L21/E59/up",
+      "original_bytes": 1441792,
+      "original_sha256": "bb4405b20448ce817ed4a8fd0ba4338695474b0521cc4001c7bd04f4ebebc6d5",
+      "raw_bytes": 0,
+      "rows": 1408,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1091454,
+        "side": 0,
+        "tables": 33,
+        "total": 1091637
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.026741,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1105536
+      },
+      "cols": 1408,
+      "decode_error": null,
+      "decoded_sha256": "368a069bece062c00affad2270d772ddf2b50fc9a4a43049d93425c1b4d30765",
+      "encode_s": 0.0272269,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L21/E59/down",
+      "original_bytes": 1441792,
+      "original_sha256": "368a069bece062c00affad2270d772ddf2b50fc9a4a43049d93425c1b4d30765",
+      "raw_bytes": 0,
+      "rows": 2048,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1103547,
+        "side": 0,
+        "tables": 33,
+        "total": 1103730
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0270535,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1092192
+      },
+      "cols": 2048,
+      "decode_error": null,
+      "decoded_sha256": "b44c28dfe3e1a20faddbc62ac37ce366cf78d337398a78b0b525c3a09db13793",
+      "encode_s": 0.0269358,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L21/E60/gate",
+      "original_bytes": 1441792,
+      "original_sha256": "b44c28dfe3e1a20faddbc62ac37ce366cf78d337398a78b0b525c3a09db13793",
+      "raw_bytes": 0,
+      "rows": 1408,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1090297,
+        "side": 0,
+        "tables": 33,
+        "total": 1090480
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0262246,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1093824
+      },
+      "cols": 2048,
+      "decode_error": null,
+      "decoded_sha256": "9a3c44b757361e269490fff92864da7b5a3378749975ab7933c59aca60ab10f8",
+      "encode_s": 0.0268745,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L21/E60/up",
+      "original_bytes": 1441792,
+      "original_sha256": "9a3c44b757361e269490fff92864da7b5a3378749975ab7933c59aca60ab10f8",
+      "raw_bytes": 0,
+      "rows": 1408,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1091958,
+        "side": 0,
+        "tables": 33,
+        "total": 1092141
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0264125,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1106400
+      },
+      "cols": 1408,
+      "decode_error": null,
+      "decoded_sha256": "e982a0d6b0790987e379a5bf43e5282403b51cc88578d82ae352dc239629190e",
+      "encode_s": 0.0277447,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L21/E60/down",
+      "original_bytes": 1441792,
+      "original_sha256": "e982a0d6b0790987e379a5bf43e5282403b51cc88578d82ae352dc239629190e",
+      "raw_bytes": 0,
+      "rows": 2048,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1104383,
+        "side": 0,
+        "tables": 33,
+        "total": 1104566
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0261846,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1085280
+      },
+      "cols": 2048,
+      "decode_error": null,
+      "decoded_sha256": "69615b517703266e00f2150bc1f9945d1565a66cf55178f6d288b38b90ea54ae",
+      "encode_s": 0.0276825,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L26/E2/gate",
+      "original_bytes": 1441792,
+      "original_sha256": "69615b517703266e00f2150bc1f9945d1565a66cf55178f6d288b38b90ea54ae",
+      "raw_bytes": 0,
+      "rows": 1408,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1083171,
+        "side": 0,
+        "tables": 33,
+        "total": 1083354
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0263857,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1087936
+      },
+      "cols": 2048,
+      "decode_error": null,
+      "decoded_sha256": "5538e5c480c67adfeb5b1f133279459a1c89a33d61d6266b0b03b5cb2ed789b0",
+      "encode_s": 0.0270219,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L26/E2/up",
+      "original_bytes": 1441792,
+      "original_sha256": "5538e5c480c67adfeb5b1f133279459a1c89a33d61d6266b0b03b5cb2ed789b0",
+      "raw_bytes": 0,
+      "rows": 1408,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1085940,
+        "side": 0,
+        "tables": 33,
+        "total": 1086123
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.026502,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1104864
+      },
+      "cols": 1408,
+      "decode_error": null,
+      "decoded_sha256": "14bac8228154744b522764c8f3816ffd3c5657687b1ac2671f3d882df60c1680",
+      "encode_s": 0.0271375,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L26/E2/down",
+      "original_bytes": 1441792,
+      "original_sha256": "14bac8228154744b522764c8f3816ffd3c5657687b1ac2671f3d882df60c1680",
+      "raw_bytes": 0,
+      "rows": 2048,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1102889,
+        "side": 0,
+        "tables": 33,
+        "total": 1103072
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.026162,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1084320
+      },
+      "cols": 2048,
+      "decode_error": null,
+      "decoded_sha256": "ecad74cf70f500508183d96dad32c76372f9203e98e7e364ac69a136e2f02add",
+      "encode_s": 0.0271075,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L26/E3/gate",
+      "original_bytes": 1441792,
+      "original_sha256": "ecad74cf70f500508183d96dad32c76372f9203e98e7e364ac69a136e2f02add",
+      "raw_bytes": 0,
+      "rows": 1408,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1082165,
+        "side": 0,
+        "tables": 33,
+        "total": 1082348
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0276102,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1086816
+      },
+      "cols": 2048,
+      "decode_error": null,
+      "decoded_sha256": "d29a4697443d3ecb76bf637bed62e45faf9371c6c83762c8b2eb7cf4f48d6680",
+      "encode_s": 0.0271948,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L26/E3/up",
+      "original_bytes": 1441792,
+      "original_sha256": "d29a4697443d3ecb76bf637bed62e45faf9371c6c83762c8b2eb7cf4f48d6680",
+      "raw_bytes": 0,
+      "rows": 1408,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1084790,
+        "side": 0,
+        "tables": 33,
+        "total": 1084973
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0263329,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1104144
+      },
+      "cols": 1408,
+      "decode_error": null,
+      "decoded_sha256": "2355a7cad2ef2b943c4f0855bae89cc32a39a75a25fbac220d23f0710f2dcdbf",
+      "encode_s": 0.0269038,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L26/E3/down",
+      "original_bytes": 1441792,
+      "original_sha256": "2355a7cad2ef2b943c4f0855bae89cc32a39a75a25fbac220d23f0710f2dcdbf",
+      "raw_bytes": 0,
+      "rows": 2048,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1102185,
+        "side": 0,
+        "tables": 33,
+        "total": 1102368
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0262306,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1087776
+      },
+      "cols": 2048,
+      "decode_error": null,
+      "decoded_sha256": "b0299b30190c18a3614b41a02ca01b9a75cec10596b153ff6ce3efece20616eb",
+      "encode_s": 0.0274622,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L26/E13/gate",
+      "original_bytes": 1441792,
+      "original_sha256": "b0299b30190c18a3614b41a02ca01b9a75cec10596b153ff6ce3efece20616eb",
+      "raw_bytes": 0,
+      "rows": 1408,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1085790,
+        "side": 0,
+        "tables": 33,
+        "total": 1085973
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0268858,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1086512
+      },
+      "cols": 2048,
+      "decode_error": null,
+      "decoded_sha256": "8cc3626d38c64a87572d0bfc122da6186c793a1a809e4dc7d6f426e101bf5f80",
+      "encode_s": 0.0271774,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L26/E13/up",
+      "original_bytes": 1441792,
+      "original_sha256": "8cc3626d38c64a87572d0bfc122da6186c793a1a809e4dc7d6f426e101bf5f80",
+      "raw_bytes": 0,
+      "rows": 1408,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1084466,
+        "side": 0,
+        "tables": 33,
+        "total": 1084649
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0263543,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1103936
+      },
+      "cols": 1408,
+      "decode_error": null,
+      "decoded_sha256": "f4ebe4f58a705c0c546c0e1bcb4ad5b7c4b4a3d218394ec8c755a40170f26e40",
+      "encode_s": 0.0270935,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L26/E13/down",
+      "original_bytes": 1441792,
+      "original_sha256": "f4ebe4f58a705c0c546c0e1bcb4ad5b7c4b4a3d218394ec8c755a40170f26e40",
+      "raw_bytes": 0,
+      "rows": 2048,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1101974,
+        "side": 0,
+        "tables": 33,
+        "total": 1102157
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0262156,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1088304
+      },
+      "cols": 2048,
+      "decode_error": null,
+      "decoded_sha256": "e35fb0d0db5d4b97a83247114eab5af2f96fc2382f552baf38b53027ba5c8274",
+      "encode_s": 0.0278572,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L26/E19/gate",
+      "original_bytes": 1441792,
+      "original_sha256": "e35fb0d0db5d4b97a83247114eab5af2f96fc2382f552baf38b53027ba5c8274",
+      "raw_bytes": 0,
+      "rows": 1408,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1086327,
+        "side": 0,
+        "tables": 33,
+        "total": 1086510
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0265214,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1089104
+      },
+      "cols": 2048,
+      "decode_error": null,
+      "decoded_sha256": "5a021c9afd9cdc23e04dbd06090850e6dd7a297f5a952800fd61505ceee20e35",
+      "encode_s": 0.026805,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L26/E19/up",
+      "original_bytes": 1441792,
+      "original_sha256": "5a021c9afd9cdc23e04dbd06090850e6dd7a297f5a952800fd61505ceee20e35",
+      "raw_bytes": 0,
+      "rows": 1408,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1087146,
+        "side": 0,
+        "tables": 33,
+        "total": 1087329
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0265512,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1101248
+      },
+      "cols": 1408,
+      "decode_error": null,
+      "decoded_sha256": "ba97fd089bbfae78cacbe003f00827f9c698f7e145168130472d724f27ecab9e",
+      "encode_s": 0.0272872,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L26/E19/down",
+      "original_bytes": 1441792,
+      "original_sha256": "ba97fd089bbfae78cacbe003f00827f9c698f7e145168130472d724f27ecab9e",
+      "raw_bytes": 0,
+      "rows": 2048,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1099358,
+        "side": 0,
+        "tables": 33,
+        "total": 1099541
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0261065,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1084928
+      },
+      "cols": 2048,
+      "decode_error": null,
+      "decoded_sha256": "fed647eaf98ef26e4729c652f7a038982e0f89231240685a20d46658d7846aad",
+      "encode_s": 0.0279686,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L26/E30/gate",
+      "original_bytes": 1441792,
+      "original_sha256": "fed647eaf98ef26e4729c652f7a038982e0f89231240685a20d46658d7846aad",
+      "raw_bytes": 0,
+      "rows": 1408,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1082800,
+        "side": 0,
+        "tables": 33,
+        "total": 1082983
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0269543,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1082736
+      },
+      "cols": 2048,
+      "decode_error": null,
+      "decoded_sha256": "8531abc159a5b639b3f3b6c6655eced20b504a9edae49d8f7842d2ca61099483",
+      "encode_s": 0.0385364,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L26/E30/up",
+      "original_bytes": 1441792,
+      "original_sha256": "8531abc159a5b639b3f3b6c6655eced20b504a9edae49d8f7842d2ca61099483",
+      "raw_bytes": 0,
+      "rows": 1408,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1080510,
+        "side": 0,
+        "tables": 33,
+        "total": 1080693
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0264484,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1100656
+      },
+      "cols": 1408,
+      "decode_error": null,
+      "decoded_sha256": "3684c77034d7a0a3040bfff524bb0e1069a75b2690164a1a4dc691b4f4c209f6",
+      "encode_s": 0.0270806,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L26/E30/down",
+      "original_bytes": 1441792,
+      "original_sha256": "3684c77034d7a0a3040bfff524bb0e1069a75b2690164a1a4dc691b4f4c209f6",
+      "raw_bytes": 0,
+      "rows": 2048,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1098763,
+        "side": 0,
+        "tables": 33,
+        "total": 1098946
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0268854,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1086320
+      },
+      "cols": 2048,
+      "decode_error": null,
+      "decoded_sha256": "2b92058f6e48e682d589845a64b8ba2f5ef207591a1922670ca7d316789b0292",
+      "encode_s": 0.0268154,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L26/E31/gate",
+      "original_bytes": 1441792,
+      "original_sha256": "2b92058f6e48e682d589845a64b8ba2f5ef207591a1922670ca7d316789b0292",
+      "raw_bytes": 0,
+      "rows": 1408,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1084266,
+        "side": 0,
+        "tables": 33,
+        "total": 1084449
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.026347,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1085200
+      },
+      "cols": 2048,
+      "decode_error": null,
+      "decoded_sha256": "8275fed22507f4b771be046b4b732d54160949aff92eff9648d661801a286878",
+      "encode_s": 0.0270992,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L26/E31/up",
+      "original_bytes": 1441792,
+      "original_sha256": "8275fed22507f4b771be046b4b732d54160949aff92eff9648d661801a286878",
+      "raw_bytes": 0,
+      "rows": 1408,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1083108,
+        "side": 0,
+        "tables": 33,
+        "total": 1083291
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0275331,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1101088
+      },
+      "cols": 1408,
+      "decode_error": null,
+      "decoded_sha256": "7a4d86ec63e6f27de878e13d511588669a0fcc0d0cc27ff02783e29ed186ef20",
+      "encode_s": 0.0283977,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L26/E31/down",
+      "original_bytes": 1441792,
+      "original_sha256": "7a4d86ec63e6f27de878e13d511588669a0fcc0d0cc27ff02783e29ed186ef20",
+      "raw_bytes": 0,
+      "rows": 2048,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1099185,
+        "side": 0,
+        "tables": 33,
+        "total": 1099368
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0263474,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1087504
+      },
+      "cols": 2048,
+      "decode_error": null,
+      "decoded_sha256": "92f7f0c735b9ed07f932eeccfa4b2575408c618f569a37face3ba06af0cfea6e",
+      "encode_s": 0.0269896,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L26/E42/gate",
+      "original_bytes": 1441792,
+      "original_sha256": "92f7f0c735b9ed07f932eeccfa4b2575408c618f569a37face3ba06af0cfea6e",
+      "raw_bytes": 0,
+      "rows": 1408,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1085501,
+        "side": 0,
+        "tables": 33,
+        "total": 1085684
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0265034,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1086352
+      },
+      "cols": 2048,
+      "decode_error": null,
+      "decoded_sha256": "df16e3c9f6e7d062bbf7aca6a221a513e14d9bb7948e365d075abec99d212593",
+      "encode_s": 0.0272651,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L26/E42/up",
+      "original_bytes": 1441792,
+      "original_sha256": "df16e3c9f6e7d062bbf7aca6a221a513e14d9bb7948e365d075abec99d212593",
+      "raw_bytes": 0,
+      "rows": 1408,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1084302,
+        "side": 0,
+        "tables": 33,
+        "total": 1084485
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0271858,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1104688
+      },
+      "cols": 1408,
+      "decode_error": null,
+      "decoded_sha256": "b6ec9781e1cc9368378a7ec31e804632deb5bc4c2c2467ad5bd4183a82ac894b",
+      "encode_s": 0.0270551,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L26/E42/down",
+      "original_bytes": 1441792,
+      "original_sha256": "b6ec9781e1cc9368378a7ec31e804632deb5bc4c2c2467ad5bd4183a82ac894b",
+      "raw_bytes": 0,
+      "rows": 2048,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1102716,
+        "side": 0,
+        "tables": 33,
+        "total": 1102899
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0263433,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1084512
+      },
+      "cols": 2048,
+      "decode_error": null,
+      "decoded_sha256": "4ca8def24c61d98fe0c577899208af38aaec7f49ac7f8e0db764ce622205543e",
+      "encode_s": 0.0271775,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L26/E57/gate",
+      "original_bytes": 1441792,
+      "original_sha256": "4ca8def24c61d98fe0c577899208af38aaec7f49ac7f8e0db764ce622205543e",
+      "raw_bytes": 0,
+      "rows": 1408,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1082386,
+        "side": 0,
+        "tables": 33,
+        "total": 1082569
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0264386,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1085680
+      },
+      "cols": 2048,
+      "decode_error": null,
+      "decoded_sha256": "25967e3b1f2307eeeff74da6209112d16e1dd547dc542292c9133298e8ee623d",
+      "encode_s": 0.0285924,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L26/E57/up",
+      "original_bytes": 1441792,
+      "original_sha256": "25967e3b1f2307eeeff74da6209112d16e1dd547dc542292c9133298e8ee623d",
+      "raw_bytes": 0,
+      "rows": 1408,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1083604,
+        "side": 0,
+        "tables": 33,
+        "total": 1083787
+      },
+      "streams": 32
+    },
+    {
+      "colibri": {
+        "encode_s": 0.0263847,
+        "exact": {
+          "scalar": true,
+          "scalar_bf": true
+        },
+        "record_bytes": 1104064
+      },
+      "cols": 1408,
+      "decode_error": null,
+      "decoded_sha256": "50c6cd2f311dccc86495e9292a43e7aaeda3bfff75f0dbf1386f6ff9f89fc0ce",
+      "encode_s": 0.027329,
+      "exact": true,
+      "external_tables": false,
+      "format": "int4",
+      "kind": 0,
+      "n_contexts": 1,
+      "name": "moonlight_requant_int4/L26/E57/down",
+      "original_bytes": 1441792,
+      "original_sha256": "50c6cd2f311dccc86495e9292a43e7aaeda3bfff75f0dbf1386f6ff9f89fc0ce",
+      "raw_bytes": 0,
+      "rows": 2048,
+      "sizes": {
+        "header": 22,
+        "offsets": 128,
+        "payload": 1102094,
+        "side": 0,
+        "tables": 33,
+        "total": 1102277
+      },
+      "streams": 32
+    }
+  ],
+  "colibri_compiled": true,
+  "peak_working_set_bytes": 549330944,
+  "timing": [
+    {
+      "colibri_scalar": {
+        "best_s": 2.2342359,
+        "cpu_s": [
+          2.25,
+          2.234375,
+          2.234375,
+          2.234375,
+          2.234375
+        ],
+        "median_s": 2.2347345,
+        "threads": 1,
+        "wall_s": [
+          2.2374687,
+          2.2342359,
+          2.2347345,
+          2.2342413,
+          2.2365734
+        ]
+      },
+      "colibri_scalar_bf": {
+        "best_s": 2.5364865,
+        "cpu_s": [
+          2.515625,
+          2.546875,
+          2.53125,
+          2.515625,
+          2.546875
+        ],
+        "median_s": 2.5439113,
+        "threads": 1,
+        "wall_s": [
+          2.5364865,
+          2.5439113,
+          2.5564443,
+          2.5463632,
+          2.5418829
+        ]
+      },
+      "lmc": {
+        "best_s": 1.323363,
+        "cpu_s": [
+          1.390625,
+          1.296875,
+          1.328125,
+          1.328125,
+          1.3125
+        ],
+        "median_s": 1.3262956,
+        "threads": 1,
+        "wall_s": [
+          1.3939438,
+          1.3262956,
+          1.3283954,
+          1.323363,
+          1.3245189
+        ]
+      },
+      "threads": 1
+    },
+    {
+      "colibri_scalar": {
+        "best_s": 0.4057819,
+        "cpu_s": [
+          2.40625,
+          2.390625,
+          2.421875,
+          2.421875,
+          2.421875
+        ],
+        "median_s": 0.4075492,
+        "threads": 6,
+        "wall_s": [
+          0.4100092,
+          0.44482,
+          0.4057819,
+          0.4074147,
+          0.4075492
+        ]
+      },
+      "colibri_scalar_bf": {
+        "best_s": 0.4607629,
+        "cpu_s": [
+          2.71875,
+          2.734375,
+          2.78125,
+          2.71875,
+          2.796875
+        ],
+        "median_s": 0.4618082,
+        "threads": 6,
+        "wall_s": [
+          0.4613662,
+          0.4642556,
+          0.4618082,
+          0.4607629,
+          0.4634713
+        ]
+      },
+      "lmc": {
+        "best_s": 0.2461673,
+        "cpu_s": [
+          1.5,
+          1.5,
+          1.5,
+          1.4375,
+          1.5
+        ],
+        "median_s": 0.2497628,
+        "threads": 6,
+        "wall_s": [
+          0.2461673,
+          0.2497628,
+          0.2502929,
+          0.2546433,
+          0.2483513
+        ]
+      },
+      "threads": 6
+    },
+    {
+      "colibri_scalar": {
+        "best_s": 0.4061023,
+        "cpu_s": [
+          2.375,
+          2.421875,
+          2.421875,
+          2.421875,
+          2.4375
+        ],
+        "median_s": 0.4072316,
+        "threads": 12,
+        "wall_s": [
+          0.406764,
+          0.4112879,
+          0.4093027,
+          0.4072316,
+          0.4061023
+        ]
+      },
+      "colibri_scalar_bf": {
+        "best_s": 0.463925,
+        "cpu_s": [
+          2.78125,
+          2.796875,
+          2.765625,
+          2.796875,
+          2.703125
+        ],
+        "median_s": 0.4698659,
+        "threads": 12,
+        "wall_s": [
+          0.4680398,
+          0.4698659,
+          0.470631,
+          0.4709143,
+          0.463925
+        ]
+      },
+      "lmc": {
+        "best_s": 0.2468608,
+        "cpu_s": [
+          1.5,
+          1.4375,
+          1.40625,
+          1.40625,
+          1.453125
+        ],
+        "median_s": 0.2488725,
+        "threads": 12,
+        "wall_s": [
+          0.2488725,
+          0.2468608,
+          0.2508068,
+          0.250808,
+          0.2484934
+        ]
+      },
+      "threads": 12
+    }
+  ],
+  "total_output_bytes": 207618048,
+  "total_stored_bytes": 157629304
+}

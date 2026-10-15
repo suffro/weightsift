@@ -136,6 +136,13 @@
   - **ApexQuant.** `python research/apexquant/fetch_headers.py` (network; indexes and headers only, never tensor data),
     `python -m uv run python research/apexquant/feasibility.py`, and its tests with `python -m uv run python -m pytest
     research/apexquant/tests`.
+- **The lossless MoE study** (research branch `research/lossless-moe-compression`; `research/lossless_moe/README.md`).
+  - **Fetching and building.** `python research/lossless_moe/fetch_upstream.py` fetches Colibrì's pinned rANS files, then
+    `cargo build --release` in `research/lossless_moe/codec` builds `lmc`.
+  - **Tests.** `python -m uv run python -m pytest research/lossless_moe/tests` and `cargo test --release`.
+  - **Stages.** `stage_a.py` and `stage_b.py` (BF16), `stage_q.py` (quantized samples), `stage_d.py` and `report.py`.
+    Run them twice with different `PYTHONHASHSEED` on a frozen tree, and compare digests.
+  - **Downloads.** Weight samples are fetched only with the user's approval (`fetch_sample.py --plan` reads headers only).
 - A C ABI of Weightsift's is versioned (an ABI number, `struct_size` on every struct) and hands out handles, never
   pointers to Rust objects. Every entry point catches panics. Its header is compiled in a test by the platform's C
   compiler and its layout compared with the Rust structs'. Every `unsafe` block at the boundary states the caller

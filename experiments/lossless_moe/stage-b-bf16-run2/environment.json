@@ -1,0 +1,60 @@
+{
+ "model": {
+  "moonlight": {
+   "repository": "moonshotai/Moonlight-16B-A3B",
+   "revision": "476b36a473d4467f94469414bef6cee75c9c8172"
+  },
+  "olmoe": {
+   "repository": "allenai/OLMoE-1B-7B-0924",
+   "revision": "6d84c48581ece794365f2b8e9cfb043c68ade9c5"
+  },
+  "granite": {
+   "repository": "ibm-granite/granite-3.1-1b-a400m-instruct",
+   "revision": "0da7a48b0276d500ce5922fd2b33944091fc6c09"
+  }
+ },
+ "python": "3.13.3 (tags/v3.13.3:6280bb5, Apr  8 2025, 14:47:33) [MSC v.1943 64 bit (AMD64)]",
+ "os": "Windows-11-10.0.26200-SP0",
+ "packages": {
+  "torch": "2.14.1+cu130",
+  "transformers": "5.18.0",
+  "safetensors": "0.8.0",
+  "numpy": "2.5.3",
+  "huggingface-hub": "1.33.0",
+  "tokenizers": "0.23.2",
+  "pyarrow": "25.0.1"
+ },
+ "cuda_version": "13.0",
+ "cudnn_version": 92400,
+ "gpu": "NVIDIA GeForce RTX 4060 Ti",
+ "numerics": {},
+ "git_commit": "06b7fde499256e0b5cd57297a7884626422c5003",
+ "git_dirty": true,
+ "source_tree_sha256": "136ba4e946022d81ceca44c26c430b67ba97d377ff9af803c681fcce19f6e4c2",
+ "native_tree_sha256": "f0b9f114fb2b96be3682ba2ea2c48f8f68bd0150d4ac14686ca033745fa19a20",
+ "native_extension": "0.1.0",
+ "uv_lock_sha256": "e4c92f66a25bd57f46dec30f8540ea56363650127a30a77663945c403f85b1cf",
+ "codecs": {
+  "zstandard": "0.25.0",
+  "libzstd": "1.5.7",
+  "python_lzma_bz2": "CPython 3.13.3 standard library",
+  "rustc": "rustc 1.95.0 (59807616e 2026-04-14)",
+  "colibri": "bf2442915d6e3dd4cdfd2eb9c2a3d2aa44a25850",
+  "nvcomp": {
+   "version": 5300,
+   "cudart_version": 13030
+  }
+ },
+ "study_tree_sha256": "1edb1ab9427b89dcb2302ef5346f58f90d05b70d708b1fcdb4714f0638841fdb",
+ "python_hash_seed": "2",
+ "cpu_count": 6,
+ "processor": "Intel64 Family 6 Model 158 Stepping 10, GenuineIntel",
+ "started_at": "2026-10-15T17:09:23+0200",
+ "argv": [
+  "research/lossless_moe/stage_b.py",
+  "--output",
+  "experiments/lossless_moe/stage-b-bf16-run2",
+  "--stage-a",
+  "experiments/lossless_moe/stage-a-bf16-run2"
+ ]
+}

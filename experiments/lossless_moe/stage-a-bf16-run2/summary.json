@@ -1,0 +1,1034 @@
+{
+ "models": {
+  "moonlight": {
+   "repository": "moonshotai/Moonlight-16B-A3B",
+   "revision": "476b36a473d4467f94469414bef6cee75c9c8172",
+   "files": {
+    "model-12-of-27.safetensors": {
+     "declared": "486e401d3ebcc14dfb9c6cefdcf958386d6ae87ff2568a0281565d973533fa5b",
+     "actual": "486e401d3ebcc14dfb9c6cefdcf958386d6ae87ff2568a0281565d973533fa5b",
+     "equal": true
+    },
+    "model-17-of-27.safetensors": {
+     "declared": "f52078a3ade9c1d7d26c52a6163ef5a1d8d829d3024c40b2795fb69ace95f250",
+     "actual": "f52078a3ade9c1d7d26c52a6163ef5a1d8d829d3024c40b2795fb69ace95f250",
+     "equal": true
+    },
+    "model-2-of-27.safetensors": {
+     "declared": "7a7872bbb77ff9257bbfc7a2ea9de398e0d5b4db8bfab5bcaffb540623bdd7f8",
+     "actual": "7a7872bbb77ff9257bbfc7a2ea9de398e0d5b4db8bfab5bcaffb540623bdd7f8",
+     "equal": true
+    },
+    "model-22-of-27.safetensors": {
+     "declared": "112858c9136b4ec442851fdfa7da133bbc77d4a2d08145864d0f7d8f80797b66",
+     "actual": "112858c9136b4ec442851fdfa7da133bbc77d4a2d08145864d0f7d8f80797b66",
+     "equal": true
+    },
+    "model-27-of-27.safetensors": {
+     "declared": "dd596f8630bf8c18e286af6f0205d65438e5950e92ee642d04fbf755e323a78e",
+     "actual": "dd596f8630bf8c18e286af6f0205d65438e5950e92ee642d04fbf755e323a78e",
+     "equal": true
+    },
+    "model-7-of-27.safetensors": {
+     "declared": "88bc5ea0a361e973e71a798163d1b154398c348a8bb88572a0c677bb2cdc6d10",
+     "actual": "88bc5ea0a361e973e71a798163d1b154398c348a8bb88572a0c677bb2cdc6d10",
+     "equal": true
+    }
+   },
+   "config": {
+    "model_type": "deepseek_v3",
+    "hidden_size": 2048,
+    "moe_intermediate_size": 1408,
+    "intermediate_size": 11264,
+    "num_hidden_layers": 27,
+    "n_routed_experts": 64,
+    "num_experts_per_tok": 6,
+    "first_k_dense_replace": 1,
+    "torch_dtype": "bfloat16"
+   },
+   "experts": [
+    [
+     1,
+     1
+    ],
+    [
+     1,
+     4
+    ],
+    [
+     1,
+     5
+    ],
+    [
+     1,
+     8
+    ],
+    [
+     1,
+     11
+    ],
+    [
+     1,
+     33
+    ],
+    [
+     1,
+     45
+    ],
+    [
+     1,
+     52
+    ],
+    [
+     6,
+     0
+    ],
+    [
+     6,
+     15
+    ],
+    [
+     6,
+     26
+    ],
+    [
+     6,
+     33
+    ],
+    [
+     6,
+     35
+    ],
+    [
+     6,
+     41
+    ],
+    [
+     6,
+     50
+    ],
+    [
+     6,
+     55
+    ],
+    [
+     11,
+     17
+    ],
+    [
+     11,
+     20
+    ],
+    [
+     11,
+     38
+    ],
+    [
+     11,
+     39
+    ],
+    [
+     11,
+     50
+    ],
+    [
+     11,
+     52
+    ],
+    [
+     11,
+     53
+    ],
+    [
+     11,
+     54
+    ],
+    [
+     16,
+     8
+    ],
+    [
+     16,
+     11
+    ],
+    [
+     16,
+     29
+    ],
+    [
+     16,
+     43
+    ],
+    [
+     16,
+     49
+    ],
+    [
+     16,
+     53
+    ],
+    [
+     16,
+     57
+    ],
+    [
+     16,
+     62
+    ],
+    [
+     21,
+     2
+    ],
+    [
+     21,
+     3
+    ],
+    [
+     21,
+     18
+    ],
+    [
+     21,
+     35
+    ],
+    [
+     21,
+     47
+    ],
+    [
+     21,
+     53
+    ],
+    [
+     21,
+     59
+    ],
+    [
+     21,
+     60
+    ],
+    [
+     26,
+     2
+    ],
+    [
+     26,
+     3
+    ],
+    [
+     26,
+     13
+    ],
+    [
+     26,
+     19
+    ],
+    [
+     26,
+     30
+    ],
+    [
+     26,
+     31
+    ],
+    [
+     26,
+     42
+    ],
+    [
+     26,
+     57
+    ]
+   ]
+  },
+  "olmoe": {
+   "repository": "allenai/OLMoE-1B-7B-0924",
+   "revision": "6d84c48581ece794365f2b8e9cfb043c68ade9c5",
+   "files": {
+    "model-00001-of-00003.safetensors": {
+     "declared": "5e3cff7e367794685c241169072c940d200918617d5e2813f1c387dff52d845e",
+     "actual": "5e3cff7e367794685c241169072c940d200918617d5e2813f1c387dff52d845e",
+     "equal": true
+    },
+    "model-00002-of-00003.safetensors": {
+     "declared": "15ef5c730ee3cfed7199498788cd2faf337203fc74b529625e7502cdd759f4a7",
+     "actual": "15ef5c730ee3cfed7199498788cd2faf337203fc74b529625e7502cdd759f4a7",
+     "equal": true
+    },
+    "model-00003-of-00003.safetensors": {
+     "declared": "a9abac4ac1b55c9adabac721a02fa39971f103eea9a65c310972b1246de76e04",
+     "actual": "a9abac4ac1b55c9adabac721a02fa39971f103eea9a65c310972b1246de76e04",
+     "equal": true
+    }
+   },
+   "config": {
+    "model_type": "olmoe",
+    "hidden_size": 2048,
+    "intermediate_size": 1024,
+    "num_hidden_layers": 16,
+    "num_experts": 64,
+    "num_experts_per_tok": 8,
+    "torch_dtype": "bfloat16"
+   },
+   "experts": [
+    [
+     0,
+     2
+    ],
+    [
+     0,
+     7
+    ],
+    [
+     0,
+     21
+    ],
+    [
+     0,
+     40
+    ],
+    [
+     0,
+     50
+    ],
+    [
+     0,
+     53
+    ],
+    [
+     0,
+     57
+    ],
+    [
+     0,
+     58
+    ],
+    [
+     5,
+     11
+    ],
+    [
+     5,
+     18
+    ],
+    [
+     5,
+     28
+    ],
+    [
+     5,
+     30
+    ],
+    [
+     5,
+     31
+    ],
+    [
+     5,
+     39
+    ],
+    [
+     5,
+     43
+    ],
+    [
+     5,
+     62
+    ],
+    [
+     10,
+     0
+    ],
+    [
+     10,
+     4
+    ],
+    [
+     10,
+     34
+    ],
+    [
+     10,
+     51
+    ],
+    [
+     10,
+     53
+    ],
+    [
+     10,
+     56
+    ],
+    [
+     10,
+     57
+    ],
+    [
+     10,
+     60
+    ],
+    [
+     15,
+     0
+    ],
+    [
+     15,
+     2
+    ],
+    [
+     15,
+     20
+    ],
+    [
+     15,
+     27
+    ],
+    [
+     15,
+     28
+    ],
+    [
+     15,
+     38
+    ],
+    [
+     15,
+     46
+    ],
+    [
+     15,
+     52
+    ]
+   ]
+  },
+  "granite": {
+   "repository": "ibm-granite/granite-3.1-1b-a400m-instruct",
+   "revision": "0da7a48b0276d500ce5922fd2b33944091fc6c09",
+   "files": {
+    "model.safetensors": {
+     "declared": "ac02591061f1344027a7e7b11dbb4143f75f166c47dc09b742f5de3ab1dde1d1",
+     "actual": "ac02591061f1344027a7e7b11dbb4143f75f166c47dc09b742f5de3ab1dde1d1",
+     "equal": true
+    }
+   },
+   "config": {
+    "model_type": "granitemoe",
+    "hidden_size": 1024,
+    "intermediate_size": 512,
+    "num_hidden_layers": 24,
+    "num_local_experts": 32,
+    "num_experts_per_tok": 8,
+    "torch_dtype": "bfloat16"
+   },
+   "experts": [
+    [
+     0,
+     3
+    ],
+    [
+     0,
+     4
+    ],
+    [
+     0,
+     7
+    ],
+    [
+     0,
+     16
+    ],
+    [
+     0,
+     17
+    ],
+    [
+     0,
+     22
+    ],
+    [
+     0,
+     23
+    ],
+    [
+     0,
+     28
+    ],
+    [
+     8,
+     5
+    ],
+    [
+     8,
+     7
+    ],
+    [
+     8,
+     8
+    ],
+    [
+     8,
+     11
+    ],
+    [
+     8,
+     19
+    ],
+    [
+     8,
+     23
+    ],
+    [
+     8,
+     28
+    ],
+    [
+     8,
+     29
+    ],
+    [
+     16,
+     0
+    ],
+    [
+     16,
+     1
+    ],
+    [
+     16,
+     4
+    ],
+    [
+     16,
+     5
+    ],
+    [
+     16,
+     7
+    ],
+    [
+     16,
+     13
+    ],
+    [
+     16,
+     19
+    ],
+    [
+     16,
+     24
+    ],
+    [
+     23,
+     2
+    ],
+    [
+     23,
+     5
+    ],
+    [
+     23,
+     6
+    ],
+    [
+     23,
+     8
+    ],
+    [
+     23,
+     12
+    ],
+    [
+     23,
+     23
+    ],
+    [
+     23,
+     25
+    ],
+    [
+     23,
+     27
+    ]
+   ]
+  }
+ },
+ "trained_tables": {
+  "moonlight_gate": {
+   "table_bits": 4096,
+   "calibration_weights": 69206016
+  },
+  "moonlight_up": {
+   "table_bits": 4096,
+   "calibration_weights": 69206016
+  },
+  "moonlight_down": {
+   "table_bits": 4096,
+   "calibration_weights": 69206016
+  },
+  "olmoe_gate": {
+   "table_bits": 4096,
+   "calibration_weights": 33554432
+  },
+  "olmoe_up": {
+   "table_bits": 4096,
+   "calibration_weights": 33554432
+  },
+  "olmoe_down": {
+   "table_bits": 4096,
+   "calibration_weights": 33554432
+  },
+  "granite_gate": {
+   "table_bits": 4096,
+   "calibration_weights": 8388608
+  },
+  "granite_up": {
+   "table_bits": 4096,
+   "calibration_weights": 8388608
+  },
+  "granite_down": {
+   "table_bits": 4096,
+   "calibration_weights": 8388608
+  }
+ },
+ "lmc": {
+  "order0": {
+   "timing": [
+    {
+     "lmc": {
+      "best_s": 2.5406383999999997,
+      "cpu_s": [
+       2.921875,
+       2.5625,
+       2.546875,
+       2.546875,
+       2.53125
+      ],
+      "median_s": 2.5489167,
+      "threads": 1,
+      "wall_s": [
+       2.9389042,
+       2.5493781,
+       2.5488945,
+       2.5489167,
+       2.5406383999999997
+      ]
+     },
+     "threads": 1
+    },
+    {
+     "lmc": {
+      "best_s": 0.4580201,
+      "cpu_s": [
+       2.734375,
+       2.6875,
+       2.796875,
+       2.671875,
+       2.78125
+      ],
+      "median_s": 0.4598908,
+      "threads": 6,
+      "wall_s": [
+       0.4598908,
+       0.4611254,
+       0.4614104,
+       0.4582195,
+       0.4580201
+      ]
+     },
+     "threads": 6
+    },
+    {
+     "lmc": {
+      "best_s": 0.4585726,
+      "cpu_s": [
+       2.671875,
+       2.796875,
+       2.640625,
+       2.78125,
+       2.703125
+      ],
+      "median_s": 0.461685,
+      "threads": 12,
+      "wall_s": [
+       0.461685,
+       0.4610047,
+       0.4633633,
+       0.4585726,
+       0.4630005
+      ]
+     },
+     "threads": 12
+    }
+   ],
+   "total_output_bytes": 1333788672,
+   "total_stored_bytes": 880131904,
+   "peak_working_set_bytes": 2245537792
+  },
+  "order0_s12": {
+   "timing": [
+    {
+     "lmc": {
+      "best_s": 2.2169689,
+      "cpu_s": [
+       2.609375,
+       2.203125,
+       2.234375,
+       2.1875,
+       2.21875
+      ],
+      "median_s": 2.2260687,
+      "threads": 1,
+      "wall_s": [
+       2.6187547,
+       2.238358,
+       2.2260687,
+       2.2177913,
+       2.2169689
+      ]
+     },
+     "threads": 1
+    },
+    {
+     "lmc": {
+      "best_s": 0.4059745,
+      "cpu_s": [
+       2.421875,
+       2.40625,
+       2.4375,
+       2.4375,
+       2.4375
+      ],
+      "median_s": 0.4061059,
+      "threads": 6,
+      "wall_s": [
+       0.406575,
+       0.4061059,
+       0.4059745,
+       0.4060855,
+       0.4090199
+      ]
+     },
+     "threads": 6
+    },
+    {
+     "lmc": {
+      "best_s": 0.4046328,
+      "cpu_s": [
+       2.375,
+       2.375,
+       2.34375,
+       2.40625,
+       2.453125
+      ],
+      "median_s": 0.4063844,
+      "threads": 12,
+      "wall_s": [
+       0.4068911,
+       0.4063844,
+       0.4046328,
+       0.4056285,
+       0.4084999
+      ]
+     },
+     "threads": 12
+    }
+   ],
+   "total_output_bytes": 1333788672,
+   "total_stored_bytes": 880359782,
+   "peak_working_set_bytes": 2246369280
+  },
+  "left": {
+   "timing": [
+    {
+     "lmc": {
+      "best_s": 3.312792,
+      "cpu_s": [
+       3.734375,
+       3.28125,
+       3.3125,
+       3.296875,
+       3.328125
+      ],
+      "median_s": 3.318193,
+      "threads": 1,
+      "wall_s": [
+       3.751745,
+       3.3128664,
+       3.312792,
+       3.318193,
+       3.3190609
+      ]
+     },
+     "threads": 1
+    },
+    {
+     "lmc": {
+      "best_s": 0.6359174,
+      "cpu_s": [
+       3.765625,
+       3.828125,
+       3.78125,
+       3.75,
+       3.78125
+      ],
+      "median_s": 0.6389987,
+      "threads": 6,
+      "wall_s": [
+       0.644909,
+       0.6389987,
+       0.6378659,
+       0.6464286,
+       0.6359174
+      ]
+     },
+     "threads": 6
+    },
+    {
+     "lmc": {
+      "best_s": 0.6297401,
+      "cpu_s": [
+       3.71875,
+       3.828125,
+       3.734375,
+       3.8125,
+       3.71875
+      ],
+      "median_s": 0.6316689,
+      "threads": 12,
+      "wall_s": [
+       0.6316689,
+       0.6316511,
+       0.6297401,
+       0.6356048,
+       0.6339646
+      ]
+     },
+     "threads": 12
+    }
+   ],
+   "total_output_bytes": 1333788672,
+   "total_stored_bytes": 884510473,
+   "peak_working_set_bytes": 2279038976
+  },
+  "col16": {
+   "timing": [
+    {
+     "lmc": {
+      "best_s": 3.4054048,
+      "cpu_s": [
+       3.8125,
+       3.421875,
+       3.4375,
+       3.40625,
+       3.421875
+      ],
+      "median_s": 3.4136332,
+      "threads": 1,
+      "wall_s": [
+       3.8676672,
+       3.4099624,
+       3.450576,
+       3.4054048,
+       3.4136332
+      ]
+     },
+     "threads": 1
+    },
+    {
+     "lmc": {
+      "best_s": 0.6360204,
+      "cpu_s": [
+       3.8125,
+       3.8125,
+       3.75,
+       3.796875,
+       3.84375
+      ],
+      "median_s": 0.6380141,
+      "threads": 6,
+      "wall_s": [
+       0.6387247,
+       0.6380141,
+       0.6360204,
+       0.6387998,
+       0.6371383
+      ]
+     },
+     "threads": 6
+    },
+    {
+     "lmc": {
+      "best_s": 0.6384926,
+      "cpu_s": [
+       3.828125,
+       3.8125,
+       3.78125,
+       3.75,
+       3.84375
+      ],
+      "median_s": 0.6388151,
+      "threads": 12,
+      "wall_s": [
+       0.6394248,
+       0.6387367,
+       0.6388151,
+       0.6384926,
+       0.6414943
+      ]
+     },
+     "threads": 12
+    }
+   ],
+   "total_output_bytes": 1333788672,
+   "total_stored_bytes": 883111162,
+   "peak_working_set_bytes": 2250588160
+  },
+  "row16": {
+   "timing": [
+    {
+     "lmc": {
+      "best_s": 3.0481566,
+      "cpu_s": [
+       3.484375,
+       3.015625,
+       3.046875,
+       3.078125,
+       3.140625
+      ],
+      "median_s": 3.068685,
+      "threads": 1,
+      "wall_s": [
+       3.4725604,
+       3.0586698,
+       3.0481566,
+       3.068685,
+       3.1429476
+      ]
+     },
+     "threads": 1
+    },
+    {
+     "lmc": {
+      "best_s": 0.559549,
+      "cpu_s": [
+       3.34375,
+       3.328125,
+       3.328125,
+       3.34375,
+       3.34375
+      ],
+      "median_s": 0.5626598,
+      "threads": 6,
+      "wall_s": [
+       0.5626598,
+       0.560118,
+       0.5627975,
+       0.5629521,
+       0.559549
+      ]
+     },
+     "threads": 6
+    },
+    {
+     "lmc": {
+      "best_s": 0.5588917,
+      "cpu_s": [
+       3.328125,
+       3.25,
+       3.34375,
+       3.359375,
+       3.359375
+      ],
+      "median_s": 0.5606216,
+      "threads": 12,
+      "wall_s": [
+       0.5608273,
+       0.5594943,
+       0.5606216,
+       0.5588917,
+       0.5650154
+      ]
+     },
+     "threads": 12
+    }
+   ],
+   "total_output_bytes": 1333788672,
+   "total_stored_bytes": 882702612,
+   "peak_working_set_bytes": 2250207232
+  },
+  "trained": {
+   "timing": [
+    {
+     "lmc": {
+      "best_s": 1.2377395,
+      "cpu_s": [
+       1.453125,
+       1.25,
+       1.234375,
+       1.25,
+       1.234375
+      ],
+      "median_s": 1.2435698,
+      "threads": 1,
+      "wall_s": [
+       1.4576438,
+       1.252507,
+       1.2377395,
+       1.2413574,
+       1.2435698
+      ]
+     },
+     "threads": 1
+    },
+    {
+     "lmc": {
+      "best_s": 0.2293836,
+      "cpu_s": [
+       1.40625,
+       1.40625,
+       1.3125,
+       1.40625,
+       1.40625
+      ],
+      "median_s": 0.2296696,
+      "threads": 6,
+      "wall_s": [
+       0.2297125,
+       0.2294981,
+       0.2296696,
+       0.2293836,
+       0.2308289
+      ]
+     },
+     "threads": 6
+    },
+    {
+     "lmc": {
+      "best_s": 0.233422,
+      "cpu_s": [
+       1.359375,
+       1.375,
+       1.40625,
+       1.328125,
+       1.40625
+      ],
+      "median_s": 0.2347325,
+      "threads": 12,
+      "wall_s": [
+       0.2347325,
+       0.2352161,
+       0.233422,
+       0.2353271,
+       0.2337309
+      ]
+     },
+     "threads": 12
+    }
+   ],
+   "total_output_bytes": 666894336,
+   "total_stored_bytes": 440644278,
+   "peak_working_set_bytes": 1132773376
+  }
+ },
+ "digest": "1c7551b6247d63396c50fbef30fb3a1221e294826fadaa3592a58144cce490b7"
+}

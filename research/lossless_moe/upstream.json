@@ -1,0 +1,24 @@
+{
+  "format": "weightsift-upstream-pins",
+  "version": 1,
+  "note": "Upstream sources this study builds or reads (research only; decision 0014's policy). Never forked, vendored or committed: fetch_upstream.py checks out exactly these files at exactly this commit into research/lossless_moe/third_party/<name>/ (gitignored) and verifies their sha256 (LF line endings). The same files are identical on Colibri's dev at 37127ed (2026-10-15).",
+  "upstreams": [
+    {
+      "name": "colibri",
+      "url": "https://github.com/JustVugg/colibri",
+      "commit": "bf2442915d6e3dd4cdfd2eb9c2a3d2aa44a25850",
+      "date": "2026-10-06",
+      "license": "Apache-2.0",
+      "attribution": "colibri, Copyright 2026 Vincenzo Fornaro (NOTICE)",
+      "use": "The int4-rans256-g0 codec as published: c/rans.h (header-only C99 rANS, its scalar and branch-free decode arms) through its own ctypes bridge c/tools/rans_ctypes.c, compiled by the codec crate's build script; c/tools/rans_format.py's frequency quantizer and table builder, run unmodified to make Colibri's tables; c/tools/analyze_split_entropy.py read as the method of its 2.91-bit measurement. Nothing else of Colibri is built.",
+      "files": {
+        "LICENSE": "fb9b97e1cc193452870025f6cf501003130561681659e265e5fdf6c023f71325",
+        "NOTICE": "c8a3ae98b85c30294ac8adeea94360dc25264dea0786a3d1ab0b48a4bc31b001",
+        "c/rans.h": "2b98f88976de30de23fd767819b321df14e3e9811531619e2f4ed130cad8cd6e",
+        "c/tools/rans_ctypes.c": "5612512ded8462383dd9254a4f2611e85f492940bd28d29b5ab6b9d4b6c68ba2",
+        "c/tools/rans_format.py": "184d9969dbd063780879fca573dc66c8e14219b520104f4e295bab0ab6b22dfc",
+        "c/tools/analyze_split_entropy.py": "e80964a6e3951d71a690aeb76077921d9eda2247324f134b143f31d62f467f2b"
+      }
+    }
+  ]
+}

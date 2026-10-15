@@ -1,0 +1,65 @@
+# Lossless MoE weight compression: feasibility study (research/lossless_moe). Brief of 2026-10-15.
+# Everything that selects data, splits it or judges it is fixed here, before any measurement.
+format: lossless-moe-config
+version: 1
+seed: 20261015
+
+# Pre-registered from the brief (§ 6 and § 9); never changed after results.
+gates:
+  # The reference is the strongest practical static rANS coder on the same bytes: order-0 tables per tensor (per field
+  # for BF16: the exponent coded, sign and mantissa stored), every header, table and stream byte counted.
+  reference: strongest-static-rans
+  # Reductions of total compressed bytes against that reference, on held-out real MoE int4 data.
+  strong_success: 0.25
+  exceptional: 0.40
+  partial: 0.10          # 0.10-0.25: scientifically interesting, insufficient for a pivot; below 0.10: negative
+  # Stage B feasibility gate on the best achievable held-out code length of any context model, costs included:
+  stage_b_plausible: 0.25          # >= 0.25: plausible
+  stage_b_limited_prototype: 0.10  # 0.10-0.25: uncertain, worth a limited prototype; < 0.10: unsupported -> stop
+
+corpus:
+  # Local BF16 checkpoints (the Hugging Face cache; nothing downloaded). One sample per model: `layers`, and per layer
+  # `experts_per_layer` experts drawn by a seeded permutation (corpus.sample_experts).
+  bf16:
+    moonlight:
+      repository: moonshotai/Moonlight-16B-A3B
+      revision: 476b36a473d4467f94469414bef6cee75c9c8172
+      layout: per_expert
+      layers: [1, 6, 11, 16, 21, 26]   # MoE layers are 1..26 (first_k_dense_replace = 1)
+      experts_per_layer: 8
+    olmoe:
+      repository: allenai/OLMoE-1B-7B-0924
+      revision: 6d84c48581ece794365f2b8e9cfb043c68ade9c5
+      layout: per_expert
+      layers: [0, 5, 10, 15]
+      experts_per_layer: 8
+    granite:
+      repository: ibm-granite/granite-3.1-1b-a400m-instruct
+      revision: 0da7a48b0276d500ce5922fd2b33944091fc6c09
+      layout: fused_granite
+      layers: [0, 8, 16, 23]
+      experts_per_layer: 8
+
+splits:
+  # Calibration (tables are trained there) and evaluation (scored there) never share a matrix.
+  # held_out_experts: within each sampled layer, the sampled experts in ascending order alternate calibration (even
+  #   position) and evaluation (odd position).
+  # held_out_layers: the first half of a model's sampled layers calibrate, the second half evaluate.
+  kinds: [held_out_experts, held_out_layers]
+
+# Labelled diagnostic, never a principal result (the brief forbids principal int4 results from re-quantized BF16):
+# Moonlight's sampled experts quantized with Colibri's per-row recipe (c/tools/convert_inkling_int4.py at bf244291:
+# scale = absmax/7 per row, rint, clip to [-8, 7], offset 8, low nibble = even column). It shows what a per-row int4
+# container does to the structure measured in BF16, on the same weights.
+diagnostic_requantized_int4:
+  model: moonlight
+  recipe: colibri-per-row-int4
+
+codec:
+  rans_scale_bits_int4: 14       # Colibri's int4-rans256-g0 value
+  rans_scale_bits_exponent: 15
+  interleave: 32                 # streams per block in the prototype (Colibri: 256)
+  frequency_bits_charged: 16     # bits charged per transmitted table entry in estimates
+
+timing:
+  repeats: 5                     # best and median of repeats; nothing else runs on the machine meanwhile

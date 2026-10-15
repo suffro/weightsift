@@ -6,7 +6,29 @@
 the `pack` command (`lm-head`, `experts`, `expert-index`, `encoded-experts`) and, since Phase 7A, `quality` (`check`,
 `compare`). The Python package is `awpmi`.
 
-## Latest: Phase 7B (an independent technical review against Colibrì) is complete (2026-10-15)
+## Latest: a lossless MoE compression feasibility study, NO-GO (2026-10-15, research branch)
+
+**Answer: no substantially better lossless codec is supported by the data. Keep the runtime roadmap.** On held-out real
+experts, every context model measured stays within **0.24–0.31%** of the strongest static rANS coder on per-row int4
+(Colibrì's GLM-5.2 and Inkling containers). It stays within **1.4%** on group int4 (Kimi-K2), **3.1–3.3%** on MXFP4
+(MiMo-V2.6 Pro, gpt-oss-20b) and **0.5%** on BF16 (Moonlight, OLMoE, Granite-MoE). The brief's target was 25%.
+
+- **Report:** `history/2026-10-15-weightsift-lossless-moe-compression-feasibility.md`.
+- **Brief:** `state/lossless_moe_brief.md` (the user's of 2026-10-15).
+- **Branch:** `research/lossless-moe-compression`, not merged. No decision record: the brief asked for none.
+- **Code:** `research/lossless_moe/`, research only. Nothing in `src/`, `benchmarks/`, `configs/` or `native/` changed.
+- **Results:** `experiments/lossless_moe/`. Two runs of each stage have identical digests.
+- **Sample:** 1.685 GB of quantized experts fetched by range requests, with the user's approval (gitignored; its manifest
+  is committed).
+- **Facts this adds** [measured]:
+  - Colibrì's own rANS codec, built from its pinned C, reproduces its 0.7376 on GLM-5.2's container.
+  - A static coder with tables per matrix sits within 0.01% of order-0 entropy. Coding the scales of group formats saves
+    4.7–6.5% against Colibrì's format.
+  - CPU rANS decoding on this i7-8700K reaches 0.16–0.35 GB/s per thread (Colibrì's arms 0.09), 0.8–1.9 GB/s on all
+    cores: slower than the drive bytes it saves.
+  - nvCOMP's ANS decodes int4 at 122–139 GB/s on the RTX 4060 Ti.
+
+## Previous: Phase 7B (an independent technical review against Colibrì) is complete (2026-10-15)
 
 **Answer: Weightsift cannot outperform Colibrì as an engine. On this machine any exact gain, by anyone, is capped near
 1.7× for Inkling's int4 experts. The credible advantage is measured quality per byte: making flagship quality

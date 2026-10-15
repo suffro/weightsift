@@ -1,0 +1,78 @@
+{
+ "model": {
+  "glm52_int4_row": {
+   "repository": "jlnsrk/GLM-5.2-colibri-int4",
+   "revision": "cce7e760eab7eeba0a93b7074b64651ff3830928",
+   "derived_from": null,
+   "recipe": null
+  },
+  "inkling_int4_row": {
+   "repository": "nbeerbower/Inkling-colibri-int4",
+   "revision": "3981e658ed68ec681554d48a62f9a29dd9e61543",
+   "derived_from": null,
+   "recipe": null
+  },
+  "mimo_v26_pro_mxfp4": {
+   "repository": "XiaomiMiMo/MiMo-V2.6-Pro-MOPD",
+   "revision": "6a7f202e8dbd0e57b3fe1da03917d08d75abc4b8",
+   "derived_from": null,
+   "recipe": null
+  },
+  "kimi_k2_int4_g32": {
+   "repository": "moonshotai/Kimi-K2-Thinking",
+   "revision": "a51ccc050d73dab088bf7b0e2dd9b30ae85a4e55",
+   "derived_from": null,
+   "recipe": null
+  },
+  "gptoss20b_mxfp4": {
+   "repository": "openai/gpt-oss-20b",
+   "revision": "6cee5e81ee83917806bbde320786a8fb61efebee",
+   "derived_from": null,
+   "recipe": null
+  }
+ },
+ "python": "3.13.3 (tags/v3.13.3:6280bb5, Apr  8 2025, 14:47:33) [MSC v.1943 64 bit (AMD64)]",
+ "os": "Windows-11-10.0.26200-SP0",
+ "packages": {
+  "torch": "2.14.1+cu130",
+  "transformers": "5.18.0",
+  "safetensors": "0.8.0",
+  "numpy": "2.5.3",
+  "huggingface-hub": "1.33.0",
+  "tokenizers": "0.23.2",
+  "pyarrow": "25.0.1"
+ },
+ "cuda_version": "13.0",
+ "cudnn_version": 92400,
+ "gpu": "NVIDIA GeForce RTX 4060 Ti",
+ "numerics": {},
+ "git_commit": "06b7fde499256e0b5cd57297a7884626422c5003",
+ "git_dirty": true,
+ "source_tree_sha256": "136ba4e946022d81ceca44c26c430b67ba97d377ff9af803c681fcce19f6e4c2",
+ "native_tree_sha256": "f0b9f114fb2b96be3682ba2ea2c48f8f68bd0150d4ac14686ca033745fa19a20",
+ "native_extension": "0.1.0",
+ "uv_lock_sha256": "e4c92f66a25bd57f46dec30f8540ea56363650127a30a77663945c403f85b1cf",
+ "codecs": {
+  "zstandard": "0.25.0",
+  "libzstd": "1.5.7",
+  "python_lzma_bz2": "CPython 3.13.3 standard library",
+  "rustc": "rustc 1.95.0 (59807616e 2026-04-14)",
+  "colibri": "bf2442915d6e3dd4cdfd2eb9c2a3d2aa44a25850",
+  "nvcomp": {
+   "version": 5300,
+   "cudart_version": 13030
+  }
+ },
+ "study_tree_sha256": "e2ca83337e939c78bb74cc6d5064cd9add1bc3dec5e7681f0e855e43c3fc6486",
+ "python_hash_seed": "2",
+ "cpu_count": 6,
+ "processor": "Intel64 Family 6 Model 158 Stepping 10, GenuineIntel",
+ "started_at": "2026-10-15T21:55:39+0200",
+ "argv": [
+  "research/lossless_moe/stage_q.py",
+  "--output",
+  "experiments/lossless_moe/stage-q-run2",
+  "--manifest",
+  "experiments/lossless_moe/sample-manifest.json"
+ ]
+}

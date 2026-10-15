@@ -273,6 +273,15 @@ Phase 7A adds:
   - `feasibility.py`: the screening, written to `feasibility.json`;
   - its tests, and the study in its README.
 
+The lossless MoE study (2026-10-15, research branch `research/lossless-moe-compression`, NO-GO) adds
+`research/lossless_moe/`. It runs in the Weightsift environment with no new dependency; nothing in `src/` imports it.
+
+- **Python:** estimators, context models, format readers and the stage drivers.
+- **`codec/`:** `lmc`, a Rust static-rANS prototype with context-selected tables. It also builds Colibrì's int4-rans256-g0
+  codec from pinned C (`upstream.json`, fetched into a gitignored `third_party/`).
+- **Results and samples:** results in `experiments/lossless_moe/`. Fetched weight samples go in
+  `experiments/lossless_moe/samples/` (gitignored, rebuilt from the committed manifest).
+
 ## Data flow (one input)
 
 1. `ReferenceRunner.next_token(ids)` returns the reference token, its BF16 logits, and the

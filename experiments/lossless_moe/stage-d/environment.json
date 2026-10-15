@@ -1,0 +1,47 @@
+{
+ "model": {},
+ "python": "3.13.3 (tags/v3.13.3:6280bb5, Apr  8 2025, 14:47:33) [MSC v.1943 64 bit (AMD64)]",
+ "os": "Windows-11-10.0.26200-SP0",
+ "packages": {
+  "torch": "2.14.1+cu130",
+  "transformers": "5.18.0",
+  "safetensors": "0.8.0",
+  "numpy": "2.5.3",
+  "huggingface-hub": "1.33.0",
+  "tokenizers": "0.23.2",
+  "pyarrow": "25.0.1"
+ },
+ "cuda_version": "13.0",
+ "cudnn_version": 92400,
+ "gpu": "NVIDIA GeForce RTX 4060 Ti",
+ "numerics": {},
+ "git_commit": "06b7fde499256e0b5cd57297a7884626422c5003",
+ "git_dirty": true,
+ "source_tree_sha256": "136ba4e946022d81ceca44c26c430b67ba97d377ff9af803c681fcce19f6e4c2",
+ "native_tree_sha256": "f0b9f114fb2b96be3682ba2ea2c48f8f68bd0150d4ac14686ca033745fa19a20",
+ "native_extension": "0.1.0",
+ "uv_lock_sha256": "e4c92f66a25bd57f46dec30f8540ea56363650127a30a77663945c403f85b1cf",
+ "codecs": {
+  "zstandard": "0.25.0",
+  "libzstd": "1.5.7",
+  "python_lzma_bz2": "CPython 3.13.3 standard library",
+  "rustc": "rustc 1.95.0 (59807616e 2026-04-14)",
+  "colibri": "bf2442915d6e3dd4cdfd2eb9c2a3d2aa44a25850",
+  "nvcomp": {
+   "version": 5300,
+   "cudart_version": 13030
+  }
+ },
+ "study_tree_sha256": "e2ca83337e939c78bb74cc6d5064cd9add1bc3dec5e7681f0e855e43c3fc6486",
+ "python_hash_seed": "1",
+ "cpu_count": 6,
+ "processor": "Intel64 Family 6 Model 158 Stepping 10, GenuineIntel",
+ "started_at": "2026-10-15T23:09:06+0200",
+ "argv": [
+  "research/lossless_moe/stage_d.py",
+  "--output",
+  "experiments/lossless_moe/stage-d",
+  "--manifest",
+  "experiments/lossless_moe/sample-manifest.json"
+ ]
+}
